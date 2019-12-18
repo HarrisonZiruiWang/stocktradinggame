@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>My Chart.js chart</title>
+    <link rel="stylesheet" href="stylesheets/popupcss.css"/>
+    <style type="text/css">
+        .top{background-color:#253a89;color:white;line-height:3;margin-bottom:10px;font-weight:bold}
+        .flex{display:flex;justify-content:space-between;line-height:2.4;font-weight:bold;color:#34407c;background:#d8d7e7;border-bottom:2px solid #34407c;border-right:2px solid #34407c}
+        .flex:last-child{border-right:none}
+        .btns{display:flex;justify-content:center;align-items:center;height:142px;}
+        table{font-weight:bold}
+        thead,tfoot{color:#34407c}
+        .table>tbody>tr>td{border: none;padding: 6px;}
+        .blue{background:#253a89}
+        .t1{color:#2473ae}
+        .t2{color:#8d34a2}
+        .t3{color:#d5bd35}
+        .t4{color:#888888}
+        .t5{color:#37665c}
+        .t6{color:#cb8464}
+        .alert{margin-bottom: 10px;}
+    </style>
+</head>
+<body>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+
+        <div class="col-xs-4 flex ">
+            <div>Previous Assets:</div>
+            <div>$<span id="prevAssets">10000</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>New Assets:</div>
+            <div>$<span id="newAssets">10000</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>Change in Assets:</div>
+            <div>$<span id="changeAssets">10000</span></div>
+        </div>
+        <div style = "text-align: center">
+            <button class="btn btn-primary btn-lg blue" id = "confirm">Confirm</button>
+        </div>
+    </div>
+
+</div>
+<div class="text-center top">Stock trading game        Trading Period：<span id="period"></span> of 14</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 ">
+            <strong>Note</strong>
+            <div>Your cannot trade during the first three periods. Once you have made your trading decisions, please click on "Next Period" to proceed and receive the share prices in the new period.</div>
+            <div class="alert alert-info">
+                <strong>Remember：</strong><br />
+                Your goal is to accumulate $11,000 by the end of the 14th trading period.
+            </div>
+        </div>
+        <div class="col-xs-4 btns">
+            <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Period</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 flex ">
+            <div>Cash:</div>
+            <div>$<span id="Cash">10000</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>Shares:</div>
+            <div>$<span id="Shares">0</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>Total Assets:</div>
+            <div>$<span id="TotalAssets">10000</span></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 ">
+            <canvas id="myChart" style="height: 330px;"></canvas>
+        </div>
+        <div class="col-xs-6 ">
+            <canvas id="myChart2" style="height: 330px;"></canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="10%">Share</th>
+                    <th width="12.5%">Buy</th>
+                    <th width="12.5%">Sell</th>
+                    <th width="12.5%">Current Price</th>
+                    <th width="12.5%">Shares Owned</th>
+                    <th width="15%">Weighted Average Purchase Price</th>
+                    <th width="12.5%">Realized Gain / Loss</th>
+                    <th width="12.5%">Unrealized Gain / Loss</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="t1">Share A</td>
+                    <td><button class="btn btn-success btn-sm" onclick="buy(0)">Buy</button></td>
+                    <td><button class="btn btn-danger btn-sm" onclick="sell(0)">Sell</button></td>
+                    <td>$<span class="CurrentPrice">0</span></td>
+                    <td><span class="SharesOwned">0</span></td>
+                    <td>$<span class="AveragePrice">0</span></td>
+                    <td>$<span class="RealizedGL">0</span></td>
+                    <td>$<span class="UnrealizedGL">0</span></td>
+                </tr>
+                <tr>
+                    <td class="t2">Share B</td>
+                    <td><button class="btn btn-success btn-sm" onclick="buy(1)">Buy</button></td>
+                    <td><button class="btn btn-danger btn-sm" onclick="sell(1)">Sell</button></td>
+                    <td>$<span class="CurrentPrice">0</span></td>
+                    <td><span class="SharesOwned">0</span></td>
+                    <td>$<span class="AveragePrice">0</span></td>
+                    <td>$<span class="RealizedGL">0</span></td>
+                    <td>$<span class="UnrealizedGL">0</span></td>
+                </tr>
+                <tr>
+                    <td class="t3">Share C</td>
+                    <td><button class="btn btn-success btn-sm" onclick="buy(2)">Buy</button></td>
+                    <td><button class="btn btn-danger btn-sm" onclick="sell(2)">Sell</button></td>
+                    <td>$<span class="CurrentPrice">0</span></td>
+                    <td><span class="SharesOwned">0</span></td>
+                    <td>$<span class="AveragePrice">0</span></td>
+                    <td>$<span class="RealizedGL">0</span></td>
+                    <td>$<span class="UnrealizedGL">0</span></td>
+                </tr>
+                <tr>
+                    <td class="t4">Share D</td>
+                    <td><button class="btn btn-success btn-sm" onclick="buy(3)">Buy</button></td>
+                    <td><button class="btn btn-danger btn-sm" onclick="sell(3)">Sell</button></td>
+                    <td>$<span class="CurrentPrice">0</span></td>
+                    <td><span class="SharesOwned">0</span></td>
+                    <td>$<span class="AveragePrice">0</span></td>
+                    <td>$<span class="RealizedGL">0</span></td>
+                    <td>$<span class="UnrealizedGL">0</span></td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>Total:</td>
+                <td>$<span id="RealizedTotle">0</span></td>
+                <td>$<span id="UnrealizedTotle">0</span></td>
+                </tfoot>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+
+<script type="text/javascript" src = "javascripts/index.js"></script>
+<script type="text/javascript" src = "javascripts/popupmodal.js"></script>
+</html>
