@@ -8,6 +8,7 @@
     <title>My Chart.js chart</title>
     <link rel="stylesheet" href="stylesheets/popupcss.css"/>
     <style type="text/css">
+
         .top{background-color:#253a89;color:white;line-height:3;margin-bottom:10px;font-weight:bold}
         .flex{display:flex;justify-content:space-between;line-height:2.4;font-weight:bold;color:#34407c;background:#d8d7e7;border-bottom:2px solid #34407c;border-right:2px solid #34407c}
         .flex:last-child{border-right:none}
@@ -20,8 +21,6 @@
         .t2{color:#8d34a2}
         .t3{color:#d5bd35}
         .t4{color:#888888}
-        .t5{color:#37665c}
-        .t6{color:#cb8464}
         .alert{margin-bottom: 10px;}
     </style>
 </head>
@@ -42,6 +41,21 @@
         <div class="col-xs-4 flex ">
             <div>Change in Assets:</div>
             <div>$<span id="changeAssets">10000</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>Previous Stock:</div>
+            <div>$<span id="prevTotal">10000</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>Current Stock:</div>
+            <div>$<span id="currentTotal">10000</span></div>
+        </div>
+        <div class="col-xs-4 flex ">
+            <div>Change in Stock:</div>
+            <div>$<span id="changeTotal">10000</span></div>
+        </div>
+        <div style="text-align: center">
+            <p id="message"></p>
         </div>
         <div style = "text-align: center">
             <button class="btn btn-primary btn-lg blue" id = "confirm">Confirm</button>

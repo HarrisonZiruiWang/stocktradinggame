@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bccde65e-7d43-4d01-8e36-cbbad2f47abb" name="Default Changelist" comment="" />
+    <list default="true" id="bccde65e-7d43-4d01-8e36-cbbad2f47abb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Stocktradinggame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Stocktradinggame.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/gameinterface.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/gameinterface.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/popupcss.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/popupcss.css" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,15 +20,20 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1V7bJKEsa7bsVK1x0aQcxV19jRr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="9.11.1" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/WebStorm Projects/reactApp" />
@@ -27,6 +41,11 @@
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -50,11 +69,72 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1576607007072</updated>
-      <workItem from="1576607020367" duration="12817000" />
+      <workItem from="1576607020367" duration="26462000" />
+      <workItem from="1576778048584" duration="12041000" />
+      <workItem from="1576865182478" duration="12167000" />
+      <workItem from="1577124758974" duration="7690000" />
+      <workItem from="1578593766763" duration="21749000" />
+      <workItem from="1578688835326" duration="3803000" />
+      <workItem from="1578924063366" duration="11170000" />
+      <workItem from="1579019344431" duration="5994000" />
+      <workItem from="1579893849787" duration="7561000" />
+      <workItem from="1580764335093" duration="117000" />
+      <workItem from="1580847638546" duration="9827000" />
+      <workItem from="1581020307285" duration="4742000" />
+      <workItem from="1581361987152" duration="317000" />
+      <workItem from="1581454397167" duration="6837000" />
+      <workItem from="1581543095437" duration="279000" />
+      <workItem from="1581801965980" duration="3129000" />
+      <workItem from="1581977747413" duration="1198000" />
+      <workItem from="1582052227749" duration="390000" />
+      <workItem from="1582059146656" duration="2320000" />
+      <workItem from="1582061522184" duration="1575000" />
+      <workItem from="1582226116045" duration="2363000" />
+      <workItem from="1582327799828" duration="810000" />
+      <workItem from="1582579188332" duration="568000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/test.html</url>
+          <line>583</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/test.html</url>
+          <line>580</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/test.html</url>
+          <line>581</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/public/test.html</url>
+          <line>926</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

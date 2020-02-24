@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) { // to get the index page of the project running on the browser
-  res.sendFile(path.join(__dirname+'/public/intro.html'));
+  res.sendFile(path.join(__dirname + '/public/test.html'));
 });
 app.use('/users', usersRouter);
 

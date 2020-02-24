@@ -9,12 +9,14 @@ var _totalAssets = new Array(18);
 //Total six stocks
 var _sharePrices = new Array(4);
 //The shares of each stock
-var _sharesOwned = [0,0,0,0,0,0];
+var _sharesOwned = [0, 0, 0, 0];
 //current period, from -3 to 14
 var _currentPeriodIndex = 0;
 //The upside probability of each stock
 var _probabilities = [0.5,0.65,0.35,0.55];
 var _pricechange = [1,3,5];
+var _weightedaverageprice = [0, 0, 0, 0];
+var unrealisedGain = new Array(18);
 //initialization
 function initialization(){
     this._currentPeriodIndex = 0;
@@ -22,6 +24,9 @@ function initialization(){
         this._sharePrices[i] = new Array(18);
         //initialization of the six stocks。an integer from 60-150 randomly
         this._sharePrices[i][0] = Math.floor(Math.random() * 90 + 60);
+    }
+    for (i = 0; i < unrealisedGain.length; i++) {
+        unrealisedGain[i] = 0;
     }
     this._totalAssets[0] = _cash + _shares;
 }
@@ -44,7 +49,43 @@ function initializationHtml(){
 function populateModal(){
     document.getElementById("prevAssets").innerHTML = _totalAssets[_currentPeriodIndex-1];
     document.getElementById("newAssets").innerHTML = _totalAssets[_currentPeriodIndex];
-    document.getElementById("changeAssets").innerHTML = _totalAssets[_currentPeriodIndex] - _totalAssets[_currentPeriodIndex-1];
+    document.getElementById("changeAssets").innerHTML = _totalAssets[_currentPeriodIndex]
+        - _totalAssets[_currentPeriodIndex - 1];
+    updateStockPrice();
+}
+
+function updateStockPrice() {
+    // var prevStockList = document.getElementsByClassName("OldPrice1");
+    // var currentStockList = document.getElementsByClassName("CurrentPrice1");
+    // var changeStockList = document.getElementsByClassName("ChangeinPrice1");
+    // var sharesOwnedList = document.getElementsByClassName("SharesOwned1");
+    // var averagePriceList = document.getElementsByClassName("AveragePrice1");
+    // for(i=0;i<prevStockList.length;i++){
+    //     prevStockList[i].innerHTML = _sharePrices[i][_currentPeriodIndex-1];
+    // }
+    // for(i=0;i<currentStockList.length;i++){
+    //     console.log(_sharePrices[i][_currentPeriodIndex]);
+    //     currentStockList[i].innerHTML = _sharePrices[i][_currentPeriodIndex];
+    // }
+    // for(i=0;i<changeStockList.length;i++){
+    //     changeStockList[i].innerHTML = _sharePrices[i][_currentPeriodIndex]-_sharePrices[i][_currentPeriodIndex-1];
+    // }
+    // for(i=0;i<sharesOwnedList.length;i++){
+    //     sharesOwnedList[i].innerHTML = _sharesOwned[i];
+    // }
+    // for(i=0;i<averagePriceList.length;i++){
+    //     averagePriceList[i].innerHTML = _weightedaverageprice[i];
+    // }
+    var message = document.getElementById("message");
+    var prevTotal;
+    var currentTotal;
+    prevTotal = unrealisedGain[_currentPeriodIndex - 1];
+    currentTotal = unrealisedGain[_currentPeriodIndex];
+    console.log(unrealisedGain);
+    document.getElementById("prevTotal").innerHTML = prevTotal;
+    document.getElementById("currentTotal").innerHTML = currentTotal;
+    document.getElementById("changeTotal").innerHTML = currentTotal - prevTotal;
+
 }
 //count the total assets，cash+share value
 function countingAssets() {
@@ -58,7 +99,8 @@ function countingAssets() {
         shares += (Number(sharesOwned[i].innerHTML)*Number(currentPrices[i].innerHTML));
         //When the current average stock price and the number of shares held are not 0, the unrealized gain and loss are recalculated.
         if(averagePrices[i].innerHTML != "0" && sharesOwned[i].innerHTML != "0"){
-            var ugl = (Number(sharesOwned[i].innerHTML)*Number(currentPrices[i].innerHTML)) - (Number(sharesOwned[i].innerHTML)*Number(averagePrices[i].innerHTML));
+            var ugl = (Number(sharesOwned[i].innerHTML) * Number(currentPrices[i].innerHTML))
+                - (Number(sharesOwned[i].innerHTML) * Number(averagePrices[i].innerHTML));
             unrealizedGL[i].innerHTML = ugl;
             unrealizedTotal += ugl;
         }
@@ -68,13 +110,13 @@ function countingAssets() {
     _totalAssets[_currentPeriodIndex] = _cash + _shares;
     document.getElementById("Shares").innerHTML = _shares;
     document.getElementById("TotalAssets").innerHTML = _totalAssets[_currentPeriodIndex];
+    unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
     document.getElementById("UnrealizedTotle").innerHTML = unrealizedTotal;
 }
 //generate new stock prices
 function newPrices(period){
     for(var i=0; i<_sharePrices.length; i++){
         var decision = probability(_probabilities[i]);
-        console.log(decision);
         var price_change = _pricechange[Math.floor(Math.random()*3)];
         if(decision)
             this._sharePrices[i][period] = this._sharePrices[i][period-1] + price_change;
@@ -121,11 +163,15 @@ function buy(index) {
     _cash = _cash - price;
     _shares = _shares + price;
     var averagePrices = document.getElementsByClassName("AveragePrice");
-    if (averagePrices[index].innerHTML == "0")
+    if (averagePrices[index].innerHTML === "0") {
         averagePrices[index].innerHTML = price;
+        _weightedaverageprice[index] = price;
+    }
     else {
         var ap = Number(averagePrices[index].innerHTML);
         averagePrices[index].innerHTML = (ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index];
+        _weightedaverageprice[index] = (ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index];
+
     }
     //Cash, Shares, Shares Owned, Average Price has been changed.
     initializationHtml();
@@ -164,6 +210,7 @@ function freshUnrealizedTotle() {
     var unrealizedTotal = 0;
     for (var i = 0; i < unrealizedGLs.length; i++)
         unrealizedTotal += Number(unrealizedGLs[i].innerHTML);
+    unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
     document.getElementById("UnrealizedTotle").innerHTML = unrealizedTotal;
 }
 

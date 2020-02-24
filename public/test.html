@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Welcome to StockTrading Game</title>
+    <style type="text/css">
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0); /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #intro {
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        #thankyou {
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        .portfolio {
+            font-family: Comic Sans MS, serif;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        hr {
+            display: block;
+            height: 2px;
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 1em 0;
+            padding: 0;
+        }
+
+        #survey {
+            max-width: 1000px;
+            margin: 30px auto 0;
+        }
+
+        .header {
+            max-width: 1000px;
+        }
+
+        .span {
+            margin-left: 13px;
+        }
+
+        .optionsdivions {
+            height: 50px;
+        }
+
+        .top {
+            background-color: #253a89;
+            color: white;
+            line-height: 3;
+            margin-bottom: 10px;
+            font-weight: bold
+        }
+
+        .top1 {
+            background-color: #000000;
+            color: white;
+            line-height: 3;
+            margin-bottom: 10px;
+            font-weight: bold
+        }
+
+        .buy-button {
+            background-color: #7d7270;
+            color: #f2f2f2
+        }
+
+        .sell-button {
+            background-color: #301e1a;
+            color: #f2f2f2
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            line-height: 2.4;
+            font-weight: bold;
+            color: #34407c;
+            background: #d8d7e7;
+            border-bottom: 2px solid #34407c;
+            border-right: 2px solid #34407c
+        }
+
+        .flex:last-child {
+            border-right: none
+        }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 142px;
+        }
+
+        table {
+            font-weight: bold
+        }
+
+        thead, tfoot {
+            color: #34407c
+        }
+
+        .table > tbody > tr > td {
+            border: none;
+            padding: 6px;
+        }
+
+        .blue {
+            background: #253a89
+        }
+
+        .t1 {
+            color: #2473ae
+        }
+
+        .t2 {
+            color: #8d34a2
+        }
+
+        .t3 {
+            color: #d5bd35
+        }
+
+        .t4 {
+            color: #888888
+        }
+
+        .alert {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="intro">
+    <H2> Instructions </H2>
+    <p> This HIT will involve buying and selling fictitious stocks and will take
+        approximately 20 minutes. You will be given $1,000 of experiment cash
+        that you may use to trade stocks. Your final compensation will depend upon the
+        total value of your stocks and cash at the end of the experiment.</p>
+    <p>There will be four stocks – Stock A, Stock B, Stock C and Stock D – and 12
+        rounds. In the first two rounds, you will just observe the stock prices and not
+        be able to trade.</p>
+    <p>In Rounds 3 through 12 you may use your cash to trade any of the stocks by using the
+        <button class="btn buy-button btn-sm" onclick="buy(1)">Buy</button>
+        and
+        <button class="btn sell-button btn-sm" onclick="sell(1)">Sell</button>
+        buttons at the bottom of your
+        screen.
+    </p>
+    <br>
+    <p> <H4><u>Stock Price Development</u></H4> </p>
+    Stock prices change each round according to the following two processes.
+    <p>
+        <b>First</b>, it will be determined whether a stock will exhibit a price increase or decrease.
+        The probabilities of increases or decreases are different for each stock and do not
+        change over time. <strong>You do not know which Stock is associated with which of
+        the following probabilities:</strong></p>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Number of Stocks</th>
+                    <th>Probabilty of Increase</th>
+                    <th>Probability of Decrease</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">1</td>
+                    <td style="text-align: center; vertical-align: middle;">60%</td>
+                    <td style="text-align: center; vertical-align: middle;">40%</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">1</td>
+                    <td style="text-align: center; vertical-align: middle;">55%</td>
+                    <td style="text-align: center; vertical-align: middle;">45%</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">1</td>
+                    <td style="text-align: center; vertical-align: middle;">45%</td>
+                    <td style="text-align: center; vertical-align: middle;">55%</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; vertical-align: middle;">1</td>
+                    <td style="text-align: center; vertical-align: middle;">40%</td>
+                    <td style="text-align: center; vertical-align: middle;">60%</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--    <img src = "https://i.ibb.co/f9s7hZ8/probabilities.png" alt = "Probabilities" class = "center"/>-->
+
+    <p>
+        <b>Second</b>, the magnitude of the price increase or decrease will be determined. Prices either change by $1,
+        $3, or
+        $5 with the same probability. The magnitude of the price changes is completely independent of whether the price
+        is
+        increasing or decreasing. </p>
+    <br>
+    <p> <H4><u>Trading</u></H4>
+    <p>
+        Once you start the experiment you will be shown a screen with information, graphs and a trading interface.
+    <p> At the top of the page, the current round will be displayed along with an indication of whether the round is an
+        Observation Round or a Trading Round. Remember, the first two rounds are Observation Rounds and you cannot trade
+        during these rounds. Rounds 3 – 12 are Trading Rounds.</p>
+    <p> Your total portfolio will be held in cash and stocks. No interest will be paid on the amount you hold in cash.
+        The left graph entitled “Graph of Stock Prices in Each Round” displays the price development of all stocks.
+        Using your mouse cursor, you can investigate each stock’s price in more detail. The right graph entitled “Your
+        Total Trading Gains/Losses to Date” displays your total portfolio gain or loss. A total portfolio gain means the
+        value of your portfolio is now above the $1,000 you started with. A total portfolio loss means the value of your
+        portfolio is now below the $1,000 you started with. </p>
+    <br>
+    <p> <H4><u>Buying Shares</u></H4>
+    <p> At the bottom of your screen will see a row for each stock. If you click on the “buy” button, you will receive
+        one
+        share of the respective stock and its current price will be deducted from your cash balance.
+        You cannot buy any shares if you do not have the appropriate cash balance –– i.e., borrowing money is not
+        possible
+        in this experiment.</p>
+    <br>
+    <p> <H4><u>Selling Shares</u></H4>
+    <p> If you click on “sell,” you will sell one share of stock at the current price and the proceedings will be added
+        to your
+        cash balance.You cannot sell shares you do not own — i.e., short-selling is not allowed in this experiment.</p>
+    <p> When you are content with all your trading decisions for the current round, you can click on the “Next Round”
+        button to
+        receive new prices. In period 12, the button’s label will change to “Continue.” If you click on it you will be
+        redirected to a
+        short questionnaire.</p>
+    <br>
+    <p> <H4><u>Compensation</u></H4>
+    <p>The total score you earned in this trading game will count as one of the assignments. You will participate in
+        five iterations of these 12 trading rounds, and one of the five iterations will be randomly chosen to determine
+        your total score. Your score will depend on the quality of decisions you make during the randomly chosen
+        iteration. In each iteration, you will initially be endowed with $1,000. At the end of the experiment,
+        your payoff will amount to 6 points plus 0.40% of your total assets in the randomly chosen iteration.
+        For example, if the total value of your portfolio at the end of the randomly chosen iteration is $1,100 you
+        will receive 6 points plus 4.40 ($1,100 x .40% = 4.40) points.</p>
+    <br>
+    <p>Hence, your total score for this assignment is 10.4 (out of 10).</p><br>
+    <p>Note that the score is not capped. If you do well, you can get a score higher than 10.</p>
+    <br>
+    <p>
+        Please also note that the probabilities for each of the stocks going up/down are randomly changed after each 12
+        round iteration. That is, if a certain stock has a 60% probability of going up in one round, it will have that
+        same 60% probability for each of the 12 rounds in that iteration. However, in the next iteration, it will be
+        just as likely to become the stock that has a 40% likelihood of going up each round as the stock that has a
+        45% (55%, 60%) likelihood of going up each round.</p>
+    <!--    <p> You will participate in five iterations of these 12 trading rounds, and one of the five iterations will be-->
+    <!--        randomly chosen to determine your compensation. Your compensation will depend on the quality of decisions-->
+    <!--        you make during the randomly chosen iteration. In each iteration, you will initially be endowed with $1,000.-->
+    <!--        At the end of the experiment, your payoff will amount to $3 plus 0.40% of your total assets in the randomly-->
+    <!--        chosen iteration, i.e., if the total value of your portfolio at the end of the randomly chosen iteration is-->
+    <!--        $1,100 you will receive a flat fee of $3 plus $4.40 ($1,100 x .40% = $4.40).  </p>-->
+    <!--    <p> Hence, you would receive $7.40 in total.</p>-->
+    <br>
+    <div style="text-align: center">
+        <button class="btn btn-primary btn-lg blue" id="start" disabled>Start Experiment</button>
+    </div>
+
+    <br>
+    <p style="font-size:10px"><u>Consent to Participate in Research</u></p>
+    <p style="font-size: 10px">By answering the following questions, you are participating in a study on the cognitive
+        processes of
+        investors. By participating you are confirming that you are over 18 years of age. If you have questions about
+        this research,
+        or if you would like to receive a report of this research when it is completed please contact Joseph Engelberg
+        at
+        jengelberg@ucsd.edu. Your participation in this research is voluntary. You may decline to answer any or all of
+        the
+        following questions. You may decline further participation, at any time, without adverse consequences.
+        Your anonymity is assured; the researchers who have requested your participation will not receive any personal
+        information about you. By continuing, you are confirming that you understand these instructions and conditions
+        of participation.</p>
+    <script type="text/javascript">
+        var button = document.getElementById("start");
+        button.onclick = function () {
+            start();
+            document.getElementById("experiment").style.display = "block";
+            document.getElementById("intro").style.display = "none";
+        };
+    </script>
+</div>
+<div id="thankyou" style="display: none">
+    <h2 style="align:center; vertical-align:middle"> Thank you for the playing game. Please reload if you wanna play
+        again</h2>
+</div>
+<div id="survey" style="display: none">
+    <h2>Question 1</h2>
+    <hr>
+    <div class="header">
+        <p style="font-size: 15px"><b>Please evaluate the following statements</b></p>
+
+
+    </div>
+    <form action="" name="formquestion1">
+        <div id="question1">
+
+            <table style="border-collapse: collapse">
+                <tr>
+                    <td style="width:5%"></td>
+                    <td style="width:5%"></td>
+                    <td style="width:5%"></td>
+                    <td style="width:150px; padding-left: 4px"><label for="q11">1</label></td>
+                    <td style="width:150px; padding-left: 4px"><label for="q12">2</label></td>
+                    <td style="width:150px; padding-left: 4px"><label for="q13">3</label></td>
+                    <td style="width:150px; padding-left: 4px"><label for="q14">4</label></td>
+                    <td style="width:150px; padding-left: 4px"><label for="q15">5</label></td>
+                </tr>
+                <tr style="height: 10px"></tr>
+                <tr>
+                    <td style="width:35%; padding: 8px">How do you assess your investment knowledge? (1 = I have very
+                        small knowledge; 5 =
+                        I have a lot of knowledge)
+                    </td>
+                    <td style="width:5%"></td>
+                    <td style="width:5%"></td>
+
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q11"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q12"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q13"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q14"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q15"/></td>
+                </tr>
+                <tr style="height: 10px"></tr>
+                <tr style="background-color: #f2f2f2;">
+                    <td style="width:35%; padding: 8px">Please evaluate to what extent you have already gained
+                        investment experience
+                        (1 = I am very inexperienced; 5 = I am very experienced)
+                    </td>
+                    <td style="width:5%"></td>
+                    <td style="width:5%"></td>
+
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q21"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q22"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q23"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q24"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q25"/></td>
+                </tr>
+                <tr style="height: 10px"></tr>
+                <tr>
+                    <td style="width:35%; padding: 8px">I know a lot about investing money (1 = fully disagree; 5 = I
+                        fully agree)
+                    </td>
+                    <td style="width:5%"></td>
+                    <td style="width:5%"></td>
+
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q31"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q32"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q33"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q34"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q35"/></td>
+                </tr>
+                <tr style="height: 10px"></tr>
+                <tr style="background-color:#f2f2f2">
+                    <td style="width:35%; padding: 8px">I am very inexperienced with investing money 1 = I fully
+                        disagree; 5 = I fully
+                        agree)
+                    </td>
+                    <td style="width:5%"></td>
+                    <td style="width:5%"></td>
+
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q41"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q42"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q43"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q44"/></td>
+                    <td style="width:150px"><input type="radio" name="q11" value="1" id="q45"/></td>
+                </tr>
+
+            </table>
+        </div>
+        <br>
+        <div id="question2">
+            <h2>Question 2</h2>
+            <hr>
+            <p style="font-size: 15px"><b>Suppose you had $100 in a savings account and the interest rate was 2 percent
+                per
+                year. After 5 years, how much do you think you would have in the account if you left the money to
+                grow</b></p>
+            <div class="optionsdivions">
+
+                <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt21" value="opt21"><span
+                    class="span">More than $102</span>
+
+            </div>
+            <div class="optionsdivions" style="background-color: #f2f2f2">
+
+                <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt22" value="opt22"><span
+                    class="span">Exactly $102</span>
+            </div>
+            <div class="optionsdivions">
+
+                <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt23" value="opt23"><span
+                    class="span">Do not know</span>
+            </div>
+            <div class="optionsdivions" style="background-color: #f2f2f2">
+
+                <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt24" value="opt24"><span
+                    class="span">less than $102</span>
+            </div>
+            <div class="optionsdivions">
+
+                <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt25" value="opt25"><span
+                    class="span">Refuse to answer</span>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+<div id="experiment" style="display: none">
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+
+            <div class="text-center top">Round <span id="round"></span> of 12</div>
+            <br>
+            <div class="portfolio" style="text-align: center;display:none">
+                Your portfolio has <span id="changeType"></span> from the last round.
+            </div>
+            <div id="gainlossdiv" class="portfolio" style="text-align: center">
+                Your now have an unrealised <span id="a"></span><span id="gainlossType"></span><span
+                    id="gainloss">10000</span>
+            </div>
+            <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
+                Your portfolio had no change
+            </div>
+            <div style="text-align: center">
+                <button class="btn btn-primary btn-lg blue" id="confirm">Ok</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="myEndOfExperimentModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="text-center top">Attempt <span id="attempt"></span> of <span id="totalAttempts">2</span>
+            </div>
+            <div class="portfolio" style="text-align: center">
+                You have total cash of $<span id="totalCash"></span>
+            </div>
+            <div class="portfolio" style="text-align: center">
+                You have total shares of $<span id="totalShare"></span>
+            </div>
+            <div style="text-align: center">
+                <button class="btn btn-primary btn-lg blue" id="proceed">Proceed</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="text-center top1" style="width:30%;float:left;">Attempt <span id="attempt_label"></span> of 5</div>
+        <div class="text-center top" style="width:30%;float:left;">Round <span id="period"></span> of 12</div>
+        <div class="text-center top1" style="width:40%;float:right;"><span id="roundtype"></span></div>
+
+        <div class="row">
+            <div class="col-xs-8">
+                <p> <H4><u>Note</u></H4> </p>
+                <div><span id="note">You are now in an Observation Round.  You may only watch the stock prices.  You may begin trading in Round 3. Click the Next Round button 	to proceed to the next round.</span>
+                </div>
+            </div>
+            <div class="col-xs-4 btns">
+                <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 flex ">
+                <div>Cash:</div>
+                <div>$<span id="Cash">10000</span></div>
+            </div>
+            <div class="col-xs-6 flex ">
+                <div>Shares:</div>
+                <div>$<span id="Shares">0</span></div>
+            </div>
+            <div class="col-xs-4 flex " style="display: none">
+                <div>Total Assets:</div>
+                <div>$<span id="TotalAssets">10000</span></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <canvas id="myChart" style="height: 330px;"></canvas>
+            </div>
+
+            <div class="col-xs-6">
+                <canvas id="myChart2" style="height: 330px;"></canvas>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th width="10%">Stock</th>
+                        <th width="12.5%">Buy</th>
+                        <th width="12.5%">Sell</th>
+                        <th width="12.5%">Current Price</th>
+
+                        <th width="15%">Average Purchase Price</th>
+                        <th width="12.5%">Shares from last round</th>
+                        <th width="12.5%">Shares this round</th>
+                        <th width="12.5%">Change in shares</th>
+
+                        <!--                        <th width="12.5%">Realized Gain / Loss</th>-->
+                        <th width="12.5%">Unrealized Gain / Loss</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="t1">Stock A</td>
+                        <td>
+                            <button class="btn buy-button btn-sm" onclick="buy(0)">Buy</button>
+                        </td>
+                        <td>
+                            <button class="btn sell-button btn-sm" onclick="sell(0)">Sell</button>
+                        </td>
+                        <td>$<span class="CurrentPrice">0</span></td>
+                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="previousShares">0</span></td>
+                        <td><span class="currentShares">0</span></td>
+                        <td><span class="changeInShares">0</span></td>
+
+                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
+                        <td><span class="UnrealizedGL">0</span></td>
+                    </tr>
+                    <tr>
+                        <td class="t2">Stock B</td>
+                        <td>
+                            <button class="btn buy-button btn-sm" onclick="buy(1)">Buy</button>
+                        </td>
+                        <td>
+                            <button class="btn sell-button btn-sm" onclick="sell(1)">Sell</button>
+                        </td>
+                        <td>$<span class="CurrentPrice">0</span></td>
+                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="previousShares">0</span></td>
+                        <td><span class="currentShares">0</span></td>
+                        <td><span class="changeInShares">0</span></td>
+                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
+                        <td><span class="UnrealizedGL">0</span></td>
+                    </tr>
+                    <tr>
+                        <td class="t3">Stock C</td>
+                        <td>
+                            <button class="btn buy-button btn-sm" onclick="buy(2)">Buy</button>
+                        </td>
+                        <td>
+                            <button class="btn sell-button btn-sm" onclick="sell(2)">Sell</button>
+                        </td>
+                        <td>$<span class="CurrentPrice">0</span></td>
+                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="previousShares">0</span></td>
+                        <td><span class="currentShares">0</span></td>
+                        <td><span class="changeInShares">0</span></td>
+                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
+                        <td><span class="UnrealizedGL">0</span></td>
+                    </tr>
+                    <tr>
+                        <td class="t4">Stock D</td>
+                        <td>
+                            <button class="btn buy-button btn-sm" onclick="buy(3)">Buy</button>
+                        </td>
+                        <td>
+                            <button class="btn sell-button btn-sm" onclick="sell(3)">Sell</button>
+                        </td>
+                        <td>$<span class="CurrentPrice">0</span></td>
+                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="previousShares">0</span></td>
+                        <td><span class="currentShares">0</span></td>
+                        <td><span class="changeInShares">0</span></td>
+                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
+                        <td><span class="UnrealizedGL">0</span></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total:</td>
+                    <!--                    <td>$<span id="RealizedTotle">0</span></td>-->
+                    <td><span id="UnrealizedTotle">0</span></td>
+                    </tfoot>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var _periods = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    //Current cash
+    var _cash = 1000;
+    var time_spent;
+    //Current share value
+    var _shares = 0;
+    var urlg = "https://stock-trading-game.herokuapp.com/";
+
+    const PROCEED_KEY = "Proceed";
+    const NEXT_PERIOD_KEY = "Next Period";
+    const NOTE_TRADING_KEY = "You are now in a Trading Round. You may now trade stocks using the buttons below.  " +
+        "Click the Next Round button to proceed to the next round.";
+    const NOTE_OBSERVATION_KEY = "You are now in an Observation Round.  You may only watch the stock prices. " +
+        " You may begin trading in Round 3. Click the Next Round button to proceed to the next round.";
+    const ROUND_TRADING = "Trading Round";
+    const ROUND_OBSERVATION = "Observation Round";
+    const END_EXPERIMENT_KEY = "End Experiment";
+    //Total assets, it will change over  time
+    var _totalAssets = new Array(18);
+    var _unrealisedListGlobal = new Array(4);
+    //Total six stocks
+    var _sharePrices = new Array(4);
+    var _sharesOwnedRound = new Array(4);
+    var uid = 0;
+    //The shares of each stock
+    var _sharesOwned = [0, 0, 0, 0];
+    //current period, from 0 to 12
+    var _currentPeriodIndex = 0;
+    //The upside probability of each stock
+    var _probabilities = [0.4, 0.45, 0.55, 0.60];
+    var _pricechange = [1, 3, 5];
+    var _weightedaverageprice = [0, 0, 0, 0];
+    var unrealisedGain = new Array(18);
+    var changeInAssests = new Array(12);
+    var currentAttempt = 1;
+    var totalAttempts = 5;
+    var startTime, endTime;
+    var round_played_at = "";
+    //initialization
+    document.getElementById("roundtype").innerHTML = "Observation Round";
+    assignUID();
+
+    function initialization() {
+        this._currentPeriodIndex = 0;
+        shuffle(_probabilities);
+        for (var i = 0; i < _sharePrices.length; i++) {
+
+            this._sharePrices[i] = new Array(18);
+            //initialization of the six stocks。an integer from 60-120 randomly
+            this._sharePrices[i][0] = Math.floor(Math.random() * 60 + 60);
+        }
+        for (i = 0; i < unrealisedGain.length; i++) {
+            unrealisedGain[i] = 0;
+
+        }
+        for (i = 0; i < _sharesOwnedRound.length; i++) {
+            this._sharesOwnedRound[i] = new Array(18);
+            for (var j = 0; j < 13; j++) {
+
+                _sharesOwnedRound[i][j] = 0;
+            }
+        }
+        this._totalAssets[0] = _cash + _shares;
+    }
+
+    function assignUID() {
+        let xhr = new XMLHttpRequest();
+        let url = urlg + "getServerID";
+        xhr.open('GET', url, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send('');
+        xhr.onload = function () {
+            let jsonResponse = JSON.parse(xhr.response);
+            if (xhr.status === 200) {
+                let uid_temp = jsonResponse.serverCount;
+                let currentDate = new Date();
+                let month = currentDate.getMonth() + 1;
+                uid = currentDate.getDate() + "" + month + "" + currentDate.getFullYear() + "" + currentDate.getHours()
+                    + "" + currentDate.getMinutes() + "" + uid_temp;
+                if (uid !== undefined)
+                    button.disabled = false;
+                console.log(uid);
+            }
+        };
+
+
+    }
+
+    //refresh
+    function initializationHtml(isBuyOrSell) {
+        var list = document.getElementsByClassName("CurrentPrice");
+        for (var i = 0; i < list.length; i++) {
+            list[i].innerHTML = _sharePrices[i][_currentPeriodIndex];
+        }
+        var numlist = document.getElementsByClassName("currentShares");
+
+        var changeInShares = document.getElementsByClassName("changeInShares");
+        for (var i = 0; i < numlist.length; i++) {
+            if (isBuyOrSell)
+                numlist[i].innerHTML = _sharesOwnedRound[i][_currentPeriodIndex];
+            if (_currentPeriodIndex === 0) {
+                changeInShares[i].innerHTML = 0;
+            } else {
+                changeInShares[i].innerHTML = _sharesOwnedRound[i][_currentPeriodIndex] - _sharesOwnedRound[i][_currentPeriodIndex - 1];
+            }
+        }
+        _totalAssets[_currentPeriodIndex] = _cash + _shares;
+        document.getElementById("attempt_label").innerHTML = currentAttempt;
+        if (_currentPeriodIndex <= 3)
+            document.getElementById("period").innerHTML = _periods[_currentPeriodIndex];
+        document.getElementById("Cash").innerHTML = _cash;
+        document.getElementById("Shares").innerHTML = _shares;
+        document.getElementById("TotalAssets").innerHTML = _totalAssets[_currentPeriodIndex];
+    }
+
+    function populateModal() {
+        var change = _totalAssets[_currentPeriodIndex] - _totalAssets[_currentPeriodIndex - 1];
+        //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
+        var printIndex = _currentPeriodIndex;
+        if (_currentPeriodIndex === 13) {
+            printIndex = _currentPeriodIndex - 1;
+        }
+        if (_currentPeriodIndex > 2)
+            printIndex = _currentPeriodIndex - 1;
+        document.getElementById("round").innerHTML = printIndex;
+        if (change > 0) {
+            $('#changeType').css('color', '#c45850').text("increased");
+        } else if (change < 0) {
+            $('#changeType').css('color', '#3cba9f').text("decreased");
+        } else {
+            $('#changeType').css('color', '#000000').text("not changed");
+            $('#changeAssets').text("");
+        }
+        document.getElementById("gainlossdiv").style.display = "block";
+        document.getElementById("nochangediv").style.display = "none";
+        changeInAssests[0] = unrealisedGain[_currentPeriodIndex];
+        document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
+
+        //document.getElementById("a").innerHTML = " a ";
+        if (changeInAssests[0] > 0) {
+            $('#gainlossType').css('color', '#c45850').text("gain");
+        } else if (changeInAssests[0] < 0) {
+            $('#gainlossType').css('color', '#3cba9f').text("loss");
+        } else {
+            document.getElementById("gainlossdiv").style.display = "none";
+            document.getElementById("nochangediv").style.display = "block";
+        }
+        var chartData = myChart2.data.datasets[0];
+        if (changeInAssests[0] < 0) {
+            backgroundColors[0] = "#3cba9f";
+            chartData.label = "Loss";
+
+        } else {
+            backgroundColors[0] = "#c45850";
+            chartData.label = "Gain";
+        }
+        myChart2.update();
+        updateStockPrice();
+    }
+
+    function updateStockPrice() {
+        // var prevStockList = document.getElementsByClassName("OldPrice1");
+        // var currentStockList = document.getElementsByClassName("CurrentPrice1");
+        // var changeStockList = document.getElementsByClassName("ChangeinPrice1");
+        // var sharesOwnedList = document.getElementsByClassName("SharesOwned1");
+        // var averagePriceList = document.getElementsByClassName("AveragePrice1");
+        // for(i=0;i<prevStockList.length;i++){
+        //     prevStockList[i].innerHTML = _sharePrices[i][_currentPeriodIndex-1];
+        // }
+        // for(i=0;i<currentStockList.length;i++){
+        //     console.log(_sharePrices[i][_currentPeriodIndex]);
+        //     currentStockList[i].innerHTML = _sharePrices[i][_currentPeriodIndex];
+        // }
+        // for(i=0;i<changeStockList.length;i++){
+        //     changeStockList[i].innerHTML = _sharePrices[i][_currentPeriodIndex]-_sharePrices[i][_currentPeriodIndex-1];
+        // }
+        // for(i=0;i<sharesOwnedList.length;i++){
+        //     sharesOwnedList[i].innerHTML = _sharesOwned[i];
+        // }
+        // for(i=0;i<averagePriceList.length;i++){
+        //     averagePriceList[i].innerHTML = _weightedaverageprice[i];
+        // }
+        // var message = document.getElementById("message");
+        // var prevTotal =0;
+        // var currentTotal = 0;
+        // prevTotal = unrealisedGain[_currentPeriodIndex-1];
+        // currentTotal = unrealisedGain[_currentPeriodIndex];
+        // //console.log(changeInAssests);
+        // document.getElementById("prevTotal").innerHTML = prevTotal;
+        // document.getElementById("currentTotal").innerHTML = currentTotal;
+        // document.getElementById("changeTotal").innerHTML = currentTotal-prevTotal;
+
+    }
+
+    //count the total assets，cash+share value
+    function countingAssets() {
+        var sharesOwned = document.getElementsByClassName("currentShares");
+        var currentPrices = document.getElementsByClassName("CurrentPrice");
+        var unrealizedGL = document.getElementsByClassName("UnrealizedGL");
+        var averagePrices = document.getElementsByClassName("AveragePrice");
+        var shares = 0;
+        var unrealizedTotal = 0;
+        for (var i = 0; i < sharesOwned.length; i++) {
+            shares += (Number(sharesOwned[i].innerHTML) * Number(currentPrices[i].innerHTML));
+            //When the current average stock price and the number of shares held are not 0, the unrealized gain and loss are recalculated.
+            if (averagePrices[i].innerHTML !== "0" && sharesOwned[i].innerHTML !== "0") {
+                var ugl = (Number(sharesOwned[i].innerHTML) * Number(currentPrices[i].innerHTML))
+                    - (Number(sharesOwned[i].innerHTML) * Number(averagePrices[i].innerHTML));
+
+                var toWrite1;
+                if (ugl.toFixed(2) > 0)
+                    toWrite1 = "<span style = 'color:#c45850'>$" + ugl.toFixed(2) + "</span>";
+                else if (ugl.toFixed(2) < 0)
+                    toWrite1 = "<span style = 'color:#3cba9f'>$" + ugl.toFixed(2) + "</span>";
+                else
+                    toWrite1 = "$" + ugl.toFixed(2);
+                unrealizedGL[i].innerHTML = toWrite1;
+                unrealizedTotal += ugl;
+            } else {
+                unrealizedGL[i].innerHTML = 0;
+            }
+        }
+        _shares = shares;
+        //Recalcault total assets for current period
+        _totalAssets[_currentPeriodIndex] = _cash + _shares;
+        document.getElementById("Shares").innerHTML = _shares;
+        document.getElementById("TotalAssets").innerHTML = _totalAssets[_currentPeriodIndex];
+        unrealisedGain[_currentPeriodIndex] = unrealizedTotal.toFixed(2);
+        var toWrite;
+        if (unrealizedTotal.toFixed(2) > 0)
+            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal + "</span>";
+        else if (unrealizedTotal.toFixed(2) < 0)
+            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal + "</span>";
+        else
+            toWrite = "$" + unrealizedTotal.toFixed(2);
+
+        document.getElementById("UnrealizedTotle").innerHTML = toWrite;
+    }
+
+    function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
+
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        //console.log(array);
+
+
+        return array;
+    }
+
+    //generate new stock prices
+    function newPrices(period) {
+        for (var i = 0; i < _sharePrices.length; i++) {
+            var decision = probability(_probabilities[i]);
+            var price_change = _pricechange[Math.floor(Math.random() * 3)];
+            if (decision)
+                this._sharePrices[i][period] = this._sharePrices[i][period - 1] + price_change;
+            else
+                this._sharePrices[i][period] = this._sharePrices[i][period - 1] - price_change;
+        }
+        initializationHtml(false);
+    }
+
+    var probability = function (n) {
+        return !!n && Math.random() <= n;
+    };
+    initialization();
+    initializationHtml(false);
+
+    //call this function when click the Next Period
+    function updatePreviousShares(index) {
+        var previousShares = document.getElementsByClassName("previousShares");
+        //console.log(index);
+        //console.log(_sharesOwnedRound);
+        for (var i = 0; i < previousShares.length; i++) {
+            previousShares[i].innerHTML = _sharesOwnedRound[i][index];
+        }
+    }
+
+    function initializeShareCount(index) {
+        var currentShares = document.getElementsByClassName("currentShares");
+        //console.log(index);
+        //console.log(_sharesOwnedRound);
+        for (var i = 0; i < currentShares.length; i++) {
+            _sharesOwnedRound[i][index] = _sharesOwnedRound[i][index - 1];
+            currentShares[i].innerHTML = _sharesOwnedRound[i][index - 1];
+        }
+    }
+
+    function proceedToNextAttempt() {
+        end();
+        populateEOEModel();
+        openEOEModalBox();
+    }
+
+    function populateEOEModel() {
+        document.getElementById("attempt").innerHTML = currentAttempt + "";
+        document.getElementById("totalAttempts").innerHTML = totalAttempts + "";
+        $("#totalCash").text(_cash);
+        $("#totalShare").text(_shares);
+    }
+
+    function proceedToSurvey() {
+        document.getElementById("survey").style.display = "block";
+        document.getElementById("experiment").style.display = "none";
+    }
+
+    function proceedToThankyou() {
+        document.getElementById("thankyou").style.display = "block";
+        document.getElementById("experiment").style.display = "none";
+    }
+
+    function saveData() {
+        let experiment_number = currentAttempt;
+        let round = _currentPeriodIndex;
+        let price_of_stockA = _sharePrices[0][_currentPeriodIndex];
+        let price_of_stockB = _sharePrices[1][_currentPeriodIndex];
+        let price_of_stockC = _sharePrices[2][_currentPeriodIndex];
+        let price_of_stockD = _sharePrices[3][_currentPeriodIndex];
+        var choices;
+        choices = [];
+        getDate();
+        let changeInShares = document.getElementsByClassName("changeInShares");
+        var i = 0, j = 0;
+        let b_stockA = 0;
+        let b_stockB = 0;
+        let b_stockC = 0;
+        let b_stockD = 0;
+        let s_stockA = 0;
+        let s_stockB = 0;
+        let s_stockC = 0;
+        let s_stockD = 0;
+        for (i = 0; i < changeInShares.length; i++) {
+            if (changeInShares[i].innerHTML > 0) {
+                if (i === 0) {
+                    b_stockA = changeInShares[i].innerHTML;
+                    choices[j] = "b_stockA";
+                    j++
+                } else if (i === 1) {
+                    b_stockB = changeInShares[i].innerHTML;
+                    choices[j] = "b_stockB";
+                    j++
+                } else if (i === 2) {
+                    b_stockC = changeInShares[i].innerHTML;
+                    choices[j] = "b_stockC";
+                    j++
+                } else if (i === 3) {
+                    b_stockD = changeInShares[i].innerHTML;
+                    choices[j] = "b_stockD";
+                    j++
+                }
+            } else if (changeInShares[i].innerHTML < 0) {
+                if (i === 0) {
+                    s_stockA = Math.abs(changeInShares[i].innerHTML);
+                    choices[j] = "s_stockA";
+                    j++
+                } else if (i === 1) {
+                    s_stockB = Math.abs(changeInShares[i].innerHTML);
+                    choices[j] = "s_stockB";
+                    j++
+                } else if (i === 2) {
+                    s_stockC = Math.abs(changeInShares[i].innerHTML);
+                    choices[j] = "s_stockC";
+                    j++
+                } else if (i === 3) {
+                    s_stockD = Math.abs(changeInShares[i].innerHTML);
+                    choices[j] = "s_stockD";
+                    j++
+                }
+            }
+        }
+        var json =
+            {
+                "uid": uid,
+                "experiment_number": experiment_number,
+                "round": round,
+                "price_of_stockA": price_of_stockA,
+                "price_of_stockB": price_of_stockB,
+                "price_of_stockC": price_of_stockC,
+                "price_of_stockD": price_of_stockD,
+                "choices": choices,
+                "b_stockA": b_stockA,
+                "b_stockB": b_stockB,
+                "b_stockC": b_stockC,
+                "b_stockD": b_stockD,
+                "s_stockA": s_stockA,
+                "s_stockB": s_stockB,
+                "s_stockC": s_stockC,
+                "s_stockD": s_stockD,
+                "time_spent": time_spent,
+                "round_played_at": round_played_at
+            };
+        let xhr = new XMLHttpRequest();
+        let url = urlg + "postSavedData";
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        //console.log(JSON.stringify(json));
+        xhr.send(JSON.stringify(json));
+        xhr.onload = function (e) {
+            //console.log(xhr.status);
+        };
+
+    }
+
+    function start() {
+        startTime = new Date();
+    }
+
+    function end() {
+        endTime = new Date();
+        var diff = endTime - startTime;
+        diff /= 1000;
+        time_spent = Math.round(diff);
+        start();
+    }
+
+    function getDate() {
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+        const date = new Date();
+        var monthName = monthNames[date.getMonth()];
+        var minutes = date.getMinutes();
+        if (minutes < 10)
+            minutes = "0" + minutes;
+
+        round_played_at = monthName + " " + date.getDate() + " " + date.getHours() + ":" + minutes + " " +
+            abbreviateWord(date.toString().match(/\((.*)\)/).pop());
+
+
+    }
+
+    function abbreviateWord(str) {
+        if (str !== null) {
+            var matches = str.match(/\b(\w)/g);
+            return matches.join('');
+        } else {
+            return str;
+        }
+    }
+
+    function nextPeriod() {
+        if (document.getElementById("next_period").innerHTML === PROCEED_KEY) {
+            proceedToNextAttempt();
+        }
+        if (document.getElementById("next_period").innerHTML === END_EXPERIMENT_KEY) {
+            //proceedToSurvey();
+            //window.location.reload();
+            proceedToThankyou();
+        }
+        calcAveragePrice();
+        updatePreviousShares(_currentPeriodIndex);
+        freshUnrealizedTotle();
+        if (_currentPeriodIndex <= 2)
+            end();                           //to calculate time_spent during obs round
+        if (_currentPeriodIndex < 14)
+            saveData();
+        _currentPeriodIndex++;
+        initializeShareCount(_currentPeriodIndex);
+        if (_currentPeriodIndex < 14) {
+            newPrices(_currentPeriodIndex);
+            myChart.data.datasets[0].data = _sharePrices[0];
+            myChart.data.datasets[1].data = _sharePrices[1];
+            myChart.data.datasets[2].data = _sharePrices[2];
+            myChart.data.datasets[3].data = _sharePrices[3];
+            myChart.update();
+
+        }
+
+        if (_currentPeriodIndex === 3) {
+            updateNextPeriodButton(ROUND_TRADING, NOTE_TRADING_KEY);
+        }
+        freshAveragePrice();
+        countingAssets();
+        //freshTotalAssetsChart();
+        if (_currentPeriodIndex > 3 && _currentPeriodIndex < 14) {
+            populateModal();
+            openModalBox();
+        }
+
+    }
+
+    function resetDataForNextAttempt() {
+        _cash = 1000;
+        _shares = 0;
+        _totalAssets = [];
+        //_unrealisedListGlobal=[];
+        // _sharePrices=[];
+        //_sharesOwnedRound=[];
+        _currentPeriodIndex = 0;
+        _weightedaverageprice = [0, 0, 0, 0];
+        //unrealisedGain=[];
+        //changeInAssests=[];
+        for (var i = 0; i < 4; i++) {
+            for (var j = 0; j < 13; j++) {
+                _sharePrices[i][j] = 0;
+                _sharesOwnedRound[i][j] = 0;
+            }
+        }
+        for (var j = 0; j < 13; j++) {
+            _sharesOwned[j] = 0;
+        }
+        myChart.update();
+        changeInAssests[0] = 0;
+        myChart2.update();
+        var averagePrice = document.getElementsByClassName("AveragePrice");
+        var previousShares = document.getElementsByClassName("previousShares");
+        var changeInShares = document.getElementsByClassName("changeInShares");
+        var currentShares = document.getElementsByClassName("currentShares");
+        var UnrealizedGL = document.getElementsByClassName("UnrealizedGL");
+        document.getElementById("UnrealizedTotle").innerHTML = 0;
+        for (var i = 0; i < 4; i++) {
+            averagePrice[i].innerHTML = 0;
+            previousShares[i].innerHTML = 0;
+            changeInShares[i].innerHTML = 0;
+            currentShares[i].innerHTML = 0;
+            UnrealizedGL[i].innerHTML = 0;
+        }
+        currentAttempt++;
+        document.getElementById("next_period").innerHTML = NEXT_PERIOD_KEY;
+        updateNextPeriodButton(ROUND_OBSERVATION, NOTE_OBSERVATION_KEY);
+    }
+
+    function updateNextPeriodButton(ROUND_KEY, NOTE_KEY) {
+        document.getElementById("roundtype").innerHTML = ROUND_KEY;
+        const note = document.getElementById("note");
+        note.innerHTML = "";
+        note.innerHTML = NOTE_KEY;
+    }
+
+    function openEOEModalBox() {
+        finalModal.style.display = "block";
+    }
+
+    function openModalBox() {
+        modal.style.display = "block";
+    }
+
+    //call this function when click the buy button
+    function buy(index) {
+        if (_currentPeriodIndex < 3) {
+            alert("You can't buy during observation round. Click next round to proceed");
+            return;
+        }
+        if (_currentPeriodIndex > 12) {
+            alert("End of Experiment");
+            return;
+        }
+        var price = _sharePrices[index][_currentPeriodIndex];
+        if (_cash < price) {
+            alert("The balance of account is insufficient.");
+            return;
+        }
+        _sharesOwned[index]++;
+        _cash = _cash - price;
+        _shares = _shares + price;
+        _sharesOwnedRound[index][_currentPeriodIndex] = _sharesOwned[index];
+
+        var averagePrices = document.getElementsByClassName("AveragePrice");
+        if (averagePrices[index].innerHTML === "0") {
+            //averagePrices[index].innerHTML = price.toFixed(2);
+            _weightedaverageprice[index] = price.toFixed(2);
+        } else {
+            var ap = Number(averagePrices[index].innerHTML);
+            //averagePrices[index].innerHTML = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
+            //calcAveragePrice();
+            _weightedaverageprice[index] = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
+
+        }
+        //Cash, Shares, Shares Owned, Average Price has been changed.
+        initializationHtml(true);
+    }
+
+    function calcAveragePrice() {
+        var sumOfAmount = 0;
+        var sumOfShares = 0;
+        var diffInShares = 0;
+        for (var i = 0; i < _sharePrices.length; i++) {
+            for (var j = 3; j <= _currentPeriodIndex; j++) {
+
+
+                diffInShares = _sharesOwnedRound[i][j] - _sharesOwnedRound[i][j - 1];
+                //console.log(_sharePrices[i][j] * diffInShares+ "   "+ _sharePrices[i][j]+ " "+ diffInShares);
+                if (diffInShares > 0) {
+                    sumOfAmount += _sharePrices[i][j] * diffInShares;
+                    sumOfShares += diffInShares;
+                }
+                if (_sharesOwnedRound[i][j] === 0) {
+                    sumOfAmount = 0;
+                    sumOfShares = 0;
+                }
+            }
+            if (sumOfShares === 0) {
+                _weightedaverageprice[i] = 0;
+            } else {
+                _weightedaverageprice[i] = (sumOfAmount / sumOfShares);
+            }
+        }
+
+
+    }
+
+    //call this function when click the Sell button
+    function sell(index) {
+        if (_currentPeriodIndex < 3) {
+            alert("You can't sell during observation round. Click next round to proceed");
+        }
+        if (_currentPeriodIndex > 12) {
+            alert("End of Experiment");
+            return;
+        } else if (_sharesOwned[index] <= 0) {
+            alert("You don't have any shares to sell");
+            return;
+        }
+
+        var price = _sharePrices[index][_currentPeriodIndex];
+        _cash = _cash + price;
+        _shares = _shares - price;
+        _sharesOwned[index]--;
+        _sharesOwnedRound[index][_currentPeriodIndex] = _sharesOwned[index];
+        var averagePrices = document.getElementsByClassName("AveragePrice");
+        //var realizedGLs = document.getElementsByClassName("RealizedGL");
+        var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+        //var rgl = Number(realizedGLs[index].innerHTML) + (price - Number(averagePrices[index].innerHTML));
+        var ugl = (_sharesOwned[index] * price) - (_sharesOwned[index] * Number(averagePrices[index].innerHTML));
+        var modal = document.getElementById("myModal");
+        //realizedGLs[index].innerHTML = rgl.toFixed(2);
+        _unrealisedListGlobal[index] = ugl.toFixed(2);
+        //freshRealizedTotle();
+        //freshUnrealizedTotle();
+        initializationHtml(true);
+    }
+
+    //refresh realized gain and Loss
+    // function freshRealizedTotle() {
+    //     var realizedGLs = document.getElementsByClassName("RealizedGL");
+    //     var realizedTotal = 0;
+    //     for( var i=0; i<realizedGLs.length; i++)
+    //         realizedTotal += Number(realizedGLs[i].innerHTML);
+    //     document.getElementById("RealizedTotle").innerHTML = realizedTotal.toFixed(2);
+    // }
+    //refresh unrealized gain and Los
+    function freshUnrealizedTotle() {
+        var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+        for (i = 0; i < _unrealisedListGlobal.length; i++) {
+            unrealizedGLs.innerHTML = _unrealisedListGlobal[i];
+        }
+        var unrealizedTotal = 0;
+        for (var i = 0; i < unrealizedGLs.length; i++)
+            unrealizedTotal += Number(unrealizedGLs[i].innerHTML);
+        unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
+        var toWrite;
+        if (unrealizedTotal.toFixed(2) < 0)
+            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal + "</span>";
+        else if (unrealizedTotal.toFixed(2) > 0)
+            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal + "</span>";
+        else
+            toWrite = "$" + unrealizedTotal.toFixed(2);
+
+        document.getElementById("UnrealizedTotle").innerHTML = toWrite;
+    }
+
+    function freshAveragePrice() {
+        var averagePrices = document.getElementsByClassName("AveragePrice");
+        for (var i = 0; i < _weightedaverageprice.length; i++) {
+            averagePrices[i].innerHTML = _weightedaverageprice[i].toFixed(2);
+        }
+        for (var i = 0; i < averagePrices.length; i++) {
+            //console.log("shares = "+i+" "+_sharesOwned[i]);
+            if (_sharesOwned[i] === 0) {
+                averagePrices[i].innerHTML = 0;
+            }
+        }
+        //console.log(_weightedaverageprice);
+
+
+    }
+
+    //refresh the total assets Chart
+    function freshTotalAssetsChart() {
+        myChart2.update();
+    }
+
+    var ctx = document.getElementById("myChart").getContext('2d');
+    ctx.height = 800;
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            datasets: [{
+                data: _sharePrices[0],
+                label: "Stock A",
+                borderColor: "#2473ae",
+                fill: false
+            }, {
+                data: _sharePrices[1],
+                label: "Stock B",
+                borderColor: "#8d34a2",
+                fill: false
+            }, {
+                data: _sharePrices[2],
+                label: "Stock C",
+                borderColor: "#d5bd35",
+                fill: false
+            }, {
+                data: _sharePrices[3],
+                label: "Stock D",
+                borderColor: "#888888",
+                fill: false
+            }]
+        },
+        options: {
+            maintainAspectRatio: true,
+            title: {
+                display: true,
+                text: 'Graph of Stock Prices in Each Round'
+            }
+        }
+    });
+
+    var ctx2 = document.getElementById("myChart2").getContext('2d');
+    var backgroundColors = [];
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: [""],
+            datasets: [
+                {
+                    label: "",
+                    backgroundColor: backgroundColors,
+                    data: changeInAssests,
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            legend: {display: false},
+            scales: {
+                yAxes: [{
+                    display: true,
+                    ticks: {
+                        suggestedMin: -50,
+                        suggestedMax: 50,
+                        steps: 10
+                    }
+                }]
+            },
+            title: {
+                display: true,
+                text: 'Your Stock Portfolio Gains/Losses'
+            }
+        }
+    });
+    // for(i=0;i<chartData.data.length;i++){
+    //     if(chartData.data[i] >= 0){
+    //         backgroundColors.push("#3cba9f");
+    //         chartData.label = "Gain";
+    //     }
+    //     else{
+    //         backgroundColors.push("#c45850");
+    //         chartData.label = "Loss";
+    //     }
+    //     myChart2.update();
+    // }
+
+</script>
+<script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
+    var confirmButton = document.getElementById("confirm");
+    // When the user clicks on the button, open the modal
+    // btn.onclick = function() {
+    //     modal.style.display = "block";
+    // }
+
+    // When the user clicks on <span> (x), close the modal
+    confirmButton.onclick = function () {
+        handleModal();
+    };
+
+    function handleModal() {
+        if (_currentPeriodIndex >= 3) {
+            var printPeriod = _periods[_currentPeriodIndex];
+            if (_currentPeriodIndex === 13)
+                printPeriod = 12;
+            document.getElementById("period").innerHTML = printPeriod;
+        }
+        if (_currentPeriodIndex === 13)
+            document.getElementById("next_period").innerHTML = PROCEED_KEY;
+        end();
+        modal.style.display = "none";
+
+    }
+
+    // span.onclick = function() {
+    //     modal.style.display = "none";
+    // };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            handleModal();
+        }
+        if (event.target === finalModal) {
+
+            //finalModal.style.display = "none";
+        }
+    }
+</script>
+<script type="text/javascript">
+    // Get the modal
+    var finalModal = document.getElementById("myEndOfExperimentModal");
+
+    // Get the button that opens the modal
+    // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("close")[0];
+    var proceedButton = document.getElementById("proceed");
+    // When the user clicks on the button, open the modal
+    // btn.onclick = function() {
+    //     modal.style.display = "block";
+    // }
+
+    // When the user clicks on <span> (x), close the modal
+    proceedButton.onclick = function () {
+        if (currentAttempt === totalAttempts)
+            document.getElementById("next_period").innerHTML = END_EXPERIMENT_KEY;
+        else {
+            resetDataForNextAttempt();
+            initialization();
+            initializationHtml(false);
+        }
+        finalModal.style.display = "none";
+
+    };
+    // span.onclick = function() {
+    //     modal.style.display = "none";
+    // };
+
+    // When the user clicks anywhere outside of the modal, close it
+
+</script>
+</html>
