@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bccde65e-7d43-4d01-8e36-cbbad2f47abb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Stocktradinggame.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Stocktradinggame.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/gameinterface.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/gameinterface.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/popupcss.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/popupcss.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/gameinterface.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/gaminginterface.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/probabilities.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/intro.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/javascripts/popupmodal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/popupcss.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/test.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +37,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="9.11.1" />
+    <property name="javascript.nodejs.core.library.configured.version" value="9.11.2" />
     <property name="last_opened_file_path" value="$USER_HOME$/Documents/WebStorm Projects/reactApp" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path" value="node" />
@@ -58,6 +60,16 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager" selected="Node.js.bin/www">
+    <configuration name="test.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/Stocktradinggame/public/test.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.test.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -92,6 +104,16 @@
       <workItem from="1582226116045" duration="2363000" />
       <workItem from="1582327799828" duration="810000" />
       <workItem from="1582579188332" duration="568000" />
+      <workItem from="1582587732564" duration="2144000" />
+      <workItem from="1582599656690" duration="1320000" />
+      <workItem from="1582663748519" duration="5529000" />
+      <workItem from="1582840754398" duration="2548000" />
+      <workItem from="1582845559193" duration="2596000" />
+      <workItem from="1582920602749" duration="1053000" />
+      <workItem from="1583165399605" duration="3372000" />
+      <workItem from="1583693949319" duration="266000" />
+      <workItem from="1583697718056" duration="768000" />
+      <workItem from="1584719220920" duration="298000" />
     </task>
     <servers />
   </component>
@@ -116,22 +138,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>583</line>
+          <line>590</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>580</line>
+          <line>587</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>581</line>
+          <line>588</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>926</line>
+          <line>957</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>

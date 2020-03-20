@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Welcome to StockTrading Game</title>
@@ -330,6 +330,11 @@
         var button = document.getElementById("start");
         button.onclick = function () {
             start();
+            uid = prompt("Please enter your student ID", "");
+            console.log(!(/^\d+$/.test(uid)));
+            if(uid === undefined || uid ==="" || uid === null || !(/^\d+$/.test(uid))){
+                uid = defaultUid;
+            }
             document.getElementById("experiment").style.display = "block";
             document.getElementById("intro").style.display = "none";
         };
@@ -337,7 +342,7 @@
 </div>
 <div id="thankyou" style="display: none">
     <h2 style="align:center; vertical-align:middle"> Thank you for the playing game. Please reload if you wanna play
-        again</h2>
+        again(but it will no longer affect your score)</h2>
 </div>
 <div id="survey" style="display: none">
     <h2>Question 1</h2>
@@ -439,7 +444,7 @@
             </div>
             <div class="optionsdivions" style="background-color: #f2f2f2">
 
-                <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt22" value="opt22"><span
+                <img src="images/gaminginterface.png" height="541" width="814"/><input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt22" value="opt22"><span
                     class="span">Exactly $102</span>
             </div>
             <div class="optionsdivions">
@@ -468,7 +473,8 @@
         <!-- Modal content -->
         <div class="modal-content">
 
-            <div class="text-center top">Round <span id="round"></span> of 12</div>
+            <div class="text-center top"><span id = "roundModalLabel">Round</span> <span id="round">
+        </span><span id = "totalModalLabel">of 12</span></div>
             <br>
             <div class="portfolio" style="text-align: center;display:none">
                 Your portfolio has <span id="changeType"></span> from the last round.
@@ -478,7 +484,7 @@
                     id="gainloss">10000</span>
             </div>
             <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
-                Your portfolio had no change
+                Your stock portfolio is breaking even
             </div>
             <div style="text-align: center">
                 <button class="btn btn-primary btn-lg blue" id="confirm">Ok</button>
@@ -505,12 +511,13 @@
 
     <div class="container">
         <div class="text-center top1" style="width:30%;float:left;">Attempt <span id="attempt_label"></span> of 5</div>
-        <div class="text-center top" style="width:30%;float:left;">Round <span id="period"></span> of 12</div>
+        <div class="text-center top" style="width:30%;float:left;"><span id = "roundLabel">Round</span> <span id="period">
+        </span><span id = "totalLabel">of 12</span></div>
         <div class="text-center top1" style="width:40%;float:right;"><span id="roundtype"></span></div>
 
         <div class="row">
             <div class="col-xs-8">
-                <p> <H4><u>Note</u></H4> </p>
+                <p> <H4 id = "note_label"><u>Note</u></H4> </p>
                 <div><span id="note">You are now in an Observation Round.  You may only watch the stock prices.  You may begin trading in Round 3. Click the Next Round button 	to proceed to the next round.</span>
                 </div>
             </div>
@@ -635,9 +642,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>Total:</td>
+                    <td style="font-size: 20px">Total:</td>
                     <!--                    <td>$<span id="RealizedTotle">0</span></td>-->
-                    <td><span id="UnrealizedTotle">0</span></td>
+                    <td style="font-size: 20px"><span id="UnrealizedTotle">0</span></td>
                     </tfoot>
 
                 </table>
@@ -646,7 +653,7 @@
     </div>
 </div>
 </body>
-<script type="text/javascript">
+<script type="text/javascript"> 
     var _periods = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
     //Current cash
     var _cash = 1000;
@@ -670,7 +677,7 @@
     //Total six stocks
     var _sharePrices = new Array(4);
     var _sharesOwnedRound = new Array(4);
-    var uid = 0;
+    var uid, defaultUid = 0;
     //The shares of each stock
     var _sharesOwned = [0, 0, 0, 0];
     //current period, from 0 to 12
@@ -690,6 +697,12 @@
     assignUID();
 
     function initialization() {
+        document.getElementById("roundLabel").innerHTML = "Round";
+        document.getElementById("roundModalLabel").innerHTML = "Round";
+        document.getElementById("totalLabel").innerHTML = " of 12";
+        document.getElementById("totalModalLabel").innerHTML = " of 12";
+
+
         this._currentPeriodIndex = 0;
         shuffle(_probabilities);
         for (var i = 0; i < _sharePrices.length; i++) {
@@ -728,6 +741,7 @@
                     + "" + currentDate.getMinutes() + "" + uid_temp;
                 if (uid !== undefined)
                     button.disabled = false;
+                defaultUid = uid;
                 console.log(uid);
             }
         };
@@ -755,7 +769,13 @@
         }
         _totalAssets[_currentPeriodIndex] = _cash + _shares;
         document.getElementById("attempt_label").innerHTML = currentAttempt;
-        if (_currentPeriodIndex <= 3)
+        if(_currentPeriodIndex>12) {
+            document.getElementById("period").innerHTML = "Last Round";
+            document.getElementById("roundLabel").innerHTML = "";
+            document.getElementById("totalLabel").innerHTML = "";
+
+        }
+        else
             document.getElementById("period").innerHTML = _periods[_currentPeriodIndex];
         document.getElementById("Cash").innerHTML = _cash;
         document.getElementById("Shares").innerHTML = _shares;
@@ -767,18 +787,26 @@
         //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
         var printIndex = _currentPeriodIndex;
         if (_currentPeriodIndex === 13) {
-            printIndex = _currentPeriodIndex - 1;
+            printIndex = "Last Round";
+            document.getElementById("roundModalLabel").innerHTML = "";
+            document.getElementById("totalModalLabel").innerHTML = "";
         }
-        if (_currentPeriodIndex > 2)
-            printIndex = _currentPeriodIndex - 1;
+        // if (_currentPeriodIndex > 2)
+        //     printIndex = _currentPeriodIndex - 1;
         document.getElementById("round").innerHTML = printIndex;
+        let changeType = document.getElementById("changeType");
         if (change > 0) {
-            $('#changeType').css('color', '#c45850').text("increased");
+            changeType.innerHTML = "<span style='color: #c45850'>increased</span>";
+            //$('#changeType').css('color', '#c45850').text("increased");
         } else if (change < 0) {
-            $('#changeType').css('color', '#3cba9f').text("decreased");
+            changeType.innerHTML = "<span style='color: #3cba9f'>decreased</span>";
+
+            //$('#changeType').css('color', '#3cba9f').text("decreased");
         } else {
-            $('#changeType').css('color', '#000000').text("not changed");
-            $('#changeAssets').text("");
+            changeType.innerHTML = "<span style='color: #000000'>not changed</span>";
+            //document.getElementById("changeAssets").innerHTML="";
+          //  $('#changeType').css('color', '#000000').text("not changed");
+           // $('#changeAssets').text("");
         }
         document.getElementById("gainlossdiv").style.display = "block";
         document.getElementById("nochangediv").style.display = "none";
@@ -786,10 +814,13 @@
         document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
 
         //document.getElementById("a").innerHTML = " a ";
+        let gainlossType = document.getElementById("gainlossType");
         if (changeInAssests[0] > 0) {
-            $('#gainlossType').css('color', '#c45850').text("gain");
+            gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
+            //$('#gainlossType').css('color', '#c45850').text("gain");
         } else if (changeInAssests[0] < 0) {
-            $('#gainlossType').css('color', '#3cba9f').text("loss");
+            gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
+           // $('#gainlossType').css('color', '#3cba9f').text("loss");
         } else {
             document.getElementById("gainlossdiv").style.display = "none";
             document.getElementById("nochangediv").style.display = "block";
@@ -877,9 +908,9 @@
         unrealisedGain[_currentPeriodIndex] = unrealizedTotal.toFixed(2);
         var toWrite;
         if (unrealizedTotal.toFixed(2) > 0)
-            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal + "</span>";
+            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2) + "</span>";
         else if (unrealizedTotal.toFixed(2) < 0)
-            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal + "</span>";
+            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
         else
             toWrite = "$" + unrealizedTotal.toFixed(2);
 
@@ -955,8 +986,10 @@
     function populateEOEModel() {
         document.getElementById("attempt").innerHTML = currentAttempt + "";
         document.getElementById("totalAttempts").innerHTML = totalAttempts + "";
-        $("#totalCash").text(_cash);
-        $("#totalShare").text(_shares);
+        document.getElementById("totalCash").innerHTML = _cash;
+        document.getElementById("totalShare").innerHTML =  _shares;
+        // $("#totalCash").text(_cash);
+        // $("#totalShare").text(_shares);
     }
 
     function proceedToSurvey() {
@@ -965,6 +998,7 @@
     }
 
     function proceedToThankyou() {
+
         document.getElementById("thankyou").style.display = "block";
         document.getElementById("experiment").style.display = "none";
     }
@@ -1084,19 +1118,19 @@
             minutes = "0" + minutes;
 
         round_played_at = monthName + " " + date.getDate() + " " + date.getHours() + ":" + minutes + " " +
-            abbreviateWord(date.toString().match(/\((.*)\)/).pop());
+            date.toString().match(/\((.*)\)/).pop();
 
 
     }
 
-    function abbreviateWord(str) {
-        if (str !== null) {
-            var matches = str.match(/\b(\w)/g);
-            return matches.join('');
-        } else {
-            return str;
-        }
-    }
+    // function abbreviateWord(str) {
+    //     if (str !== null) {
+    //         var matches = str.match(/\b(\w)/g);
+    //         return matches.join('');
+    //     } else {
+    //         return str;
+    //     }
+    // }
 
     function nextPeriod() {
         if (document.getElementById("next_period").innerHTML === PROCEED_KEY) {
@@ -1150,8 +1184,12 @@
         _weightedaverageprice = [0, 0, 0, 0];
         //unrealisedGain=[];
         //changeInAssests=[];
+        _sharePrices[0][15] = _sharePrices[0][0];
+        _sharePrices[1][15] = _sharePrices[1][0];
+        _sharePrices[2][15] = _sharePrices[2][0];
+        _sharePrices[3][15] = _sharePrices[3][0];
         for (var i = 0; i < 4; i++) {
-            for (var j = 0; j < 13; j++) {
+            for (var j = 0; j < 14; j++) {
                 _sharePrices[i][j] = 0;
                 _sharesOwnedRound[i][j] = 0;
             }
@@ -1216,16 +1254,16 @@
         _sharesOwnedRound[index][_currentPeriodIndex] = _sharesOwned[index];
 
         var averagePrices = document.getElementsByClassName("AveragePrice");
-        if (averagePrices[index].innerHTML === "0") {
-            //averagePrices[index].innerHTML = price.toFixed(2);
-            _weightedaverageprice[index] = price.toFixed(2);
-        } else {
-            var ap = Number(averagePrices[index].innerHTML);
-            //averagePrices[index].innerHTML = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
-            //calcAveragePrice();
-            _weightedaverageprice[index] = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
-
-        }
+        // if (averagePrices[index].innerHTML === "0") {
+        //     //averagePrices[index].innerHTML = price.toFixed(2);
+        //     _weightedaverageprice[index] = price.toFixed(2);
+        // } else {
+        //     var ap = Number(averagePrices[index].innerHTML);
+        //     //averagePrices[index].innerHTML = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
+        //     //calcAveragePrice();
+        //     _weightedaverageprice[index] = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
+        //
+        // }
         //Cash, Shares, Shares Owned, Average Price has been changed.
         initializationHtml(true);
     }
@@ -1249,11 +1287,14 @@
                     sumOfShares = 0;
                 }
             }
+            //console.log(sumOfAmount+"   "+ sumOfShares);
             if (sumOfShares === 0) {
                 _weightedaverageprice[i] = 0;
             } else {
                 _weightedaverageprice[i] = (sumOfAmount / sumOfShares);
             }
+            sumOfAmount = 0;
+            sumOfShares=0;
         }
 
 
@@ -1310,9 +1351,9 @@
         unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
         var toWrite;
         if (unrealizedTotal.toFixed(2) < 0)
-            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal + "</span>";
+            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
         else if (unrealizedTotal.toFixed(2) > 0)
-            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal + "</span>";
+            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2)+ "</span>";
         else
             toWrite = "$" + unrealizedTotal.toFixed(2);
 
@@ -1345,7 +1386,7 @@
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
             datasets: [{
                 data: _sharePrices[0],
                 label: "Stock A",
@@ -1443,13 +1484,16 @@
 
     function handleModal() {
         if (_currentPeriodIndex >= 3) {
-            var printPeriod = _periods[_currentPeriodIndex];
-            if (_currentPeriodIndex === 13)
-                printPeriod = 12;
-            document.getElementById("period").innerHTML = printPeriod;
+            // var printPeriod = _periods[_currentPeriodIndex];
+            // if (_currentPeriodIndex === 13)
+            //     printPeriod = 12;
+            // document.getElementById("period").innerHTML = printPeriod;
         }
-        if (_currentPeriodIndex === 13)
+        if (_currentPeriodIndex === 13){
+            document.getElementById("note").innerHTML = "You have finished this attempt. Click the Proceed button to " +
+                "proceed to the next attempt.";
             document.getElementById("next_period").innerHTML = PROCEED_KEY;
+        }
         end();
         modal.style.display = "none";
 
@@ -1485,8 +1529,11 @@
 
     // When the user clicks on <span> (x), close the modal
     proceedButton.onclick = function () {
-        if (currentAttempt === totalAttempts)
+        if (currentAttempt === totalAttempts) {
+            document.getElementById("note_label").innerHTML = "";
+            document.getElementById("note").innerHTML="";
             document.getElementById("next_period").innerHTML = END_EXPERIMENT_KEY;
+        }
         else {
             resetDataForNextAttempt();
             initialization();
