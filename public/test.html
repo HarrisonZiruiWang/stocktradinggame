@@ -201,12 +201,18 @@
     </p>
     <br>
     <p> <H4><u>Stock Price Development</u></H4> </p>
-    Stock prices change each round according to the following two processes.
+    <p style="font-size: 12px">You will play the 12-round stock trading game a total of <b> 8 times </b>.</p>
     <p>
-        <b>First</b>, it will be determined whether a stock will exhibit a price increase or decrease.
-        The probabilities of increases or decreases are different for each stock and do not
-        change over time. <strong>You do not know which Stock is associated with which of
-        the following probabilities:</strong></p>
+        Stock prices change each round according to the following two processes.  First, it will be determined whether
+        a stock will exhibit a price increase or decrease. The probabilities of increases or decreases are different
+        for each stock and do not change between rounds.</p>
+    <p>
+        Second, the magnitude of the price increase or decrease will be determined. Prices either change by $1, $3, or
+        $5 with the same probability. The magnitude of the price changes is completely independent of whether the price
+        is increasing or decreasing.
+    </p>
+    <p style="font-size: 12px">The performance of a stock during one iteration of the game has nothing to do with its
+        performance in other iterations of the game. Also, your choices do not affect the price development.</p>
     <div class="row">
         <div class="col-xs-12">
             <table class="table">
@@ -244,12 +250,12 @@
     </div>
     <!--    <img src = "https://i.ibb.co/f9s7hZ8/probabilities.png" alt = "Probabilities" class = "center"/>-->
 
-    <p>
-        <b>Second</b>, the magnitude of the price increase or decrease will be determined. Prices either change by $1,
-        $3, or
-        $5 with the same probability. The magnitude of the price changes is completely independent of whether the price
-        is
-        increasing or decreasing. </p>
+<!--    <p>-->
+<!--        <b>Second</b>, the magnitude of the price increase or decrease will be determined. Prices either change by $1,-->
+<!--        $3, or-->
+<!--        $5 with the same probability. The magnitude of the price changes is completely independent of whether the price-->
+<!--        is-->
+<!--        increasing or decreasing. </p>-->
     <br>
     <p> <H4><u>Trading</u></H4>
     <p>
@@ -282,24 +288,24 @@
         redirected to a
         short questionnaire.</p>
     <br>
-    <p> <H4><u>Compensation</u></H4>
-    <p>The total score you earned in this trading game will count as one of the assignments. You will participate in
-        five iterations of these 12 trading rounds, and one of the five iterations will be randomly chosen to determine
-        your total score. Your score will depend on the quality of decisions you make during the randomly chosen
-        iteration. In each iteration, you will initially be endowed with $1,000. At the end of the experiment,
-        your payoff will amount to 6 points plus 0.40% of your total assets in the randomly chosen iteration.
-        For example, if the total value of your portfolio at the end of the randomly chosen iteration is $1,100 you
-        will receive 6 points plus 4.40 ($1,100 x .40% = 4.40) points.</p>
-    <br>
-    <p>Hence, your total score for this assignment is 10.4 (out of 10).</p><br>
-    <p>Note that the score is not capped. If you do well, you can get a score higher than 10.</p>
-    <br>
-    <p>
-        Please also note that the probabilities for each of the stocks going up/down are randomly changed after each 12
-        round iteration. That is, if a certain stock has a 60% probability of going up in one round, it will have that
-        same 60% probability for each of the 12 rounds in that iteration. However, in the next iteration, it will be
-        just as likely to become the stock that has a 40% likelihood of going up each round as the stock that has a
-        45% (55%, 60%) likelihood of going up each round.</p>
+<!--    <p> <H4><u>Compensation</u></H4>-->
+<!--    <p>The total score you earned in this trading game will count as one of the assignments. You will participate in-->
+<!--        five iterations of these 12 trading rounds, and one of the five iterations will be randomly chosen to determine-->
+<!--        your total score. Your score will depend on the quality of decisions you make during the randomly chosen-->
+<!--        iteration. In each iteration, you will initially be endowed with $1,000. At the end of the experiment,-->
+<!--        your payoff will amount to 6 points plus 0.40% of your total assets in the randomly chosen iteration.-->
+<!--        For example, if the total value of your portfolio at the end of the randomly chosen iteration is $1,100 you-->
+<!--        will receive 6 points plus 4.40 ($1,100 x .40% = 4.40) points.</p>-->
+<!--    <br>-->
+<!--    <p>Hence, your total score for this assignment is 10.4 (out of 10).</p><br>-->
+<!--    <p>Note that the score is not capped. If you do well, you can get a score higher than 10.</p>-->
+<!--    <br>-->
+<!--    <p>-->
+<!--        Please also note that the probabilities for each of the stocks going up/down are randomly changed after each 12-->
+<!--        round iteration. That is, if a certain stock has a 60% probability of going up in one round, it will have that-->
+<!--        same 60% probability for each of the 12 rounds in that iteration. However, in the next iteration, it will be-->
+<!--        just as likely to become the stock that has a 40% likelihood of going up each round as the stock that has a-->
+<!--        45% (55%, 60%) likelihood of going up each round.</p>-->
     <!--    <p> You will participate in five iterations of these 12 trading rounds, and one of the five iterations will be-->
     <!--        randomly chosen to determine your compensation. Your compensation will depend on the quality of decisions-->
     <!--        you make during the randomly chosen iteration. In each iteration, you will initially be endowed with $1,000.-->
@@ -495,7 +501,7 @@
     <div id="myEndOfExperimentModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <div class="text-center top">Attempt <span id="attempt"></span> of <span id="totalAttempts">2</span>
+            <div class="text-center top">Game <span id="attempt"></span> of <span id="totalAttempts">2</span>
             </div>
             <div class="portfolio" style="text-align: center">
                 You have total cash of $<span id="totalCash"></span>
@@ -510,7 +516,7 @@
     </div>
 
     <div class="container">
-        <div class="text-center top1" style="width:30%;float:left;">Attempt <span id="attempt_label"></span> of 5</div>
+        <div class="text-center top1" style="width:30%;float:left;">Game <span id="attempt_label"></span> of 8</div>
         <div class="text-center top" style="width:30%;float:left;"><span id = "roundLabel">Round</span> <span id="period">
         </span><span id = "totalLabel">of 12</span></div>
         <div class="text-center top1" style="width:40%;float:right;"><span id="roundtype"></span></div>
@@ -689,7 +695,7 @@
     var unrealisedGain = new Array(18);
     var changeInAssests = new Array(12);
     var currentAttempt = 1;
-    var totalAttempts = 5;
+    var totalAttempts = 8;
     var startTime, endTime;
     var round_played_at = "";
     //initialization

@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bccde65e-7d43-4d01-8e36-cbbad2f47abb" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/gameinterface.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gaminginterface.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/probabilities.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/intro.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/popupmodal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/popupcss.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.css" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/test.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -114,6 +107,7 @@
       <workItem from="1583693949319" duration="266000" />
       <workItem from="1583697718056" duration="768000" />
       <workItem from="1584719220920" duration="298000" />
+      <workItem from="1586378012130" duration="2354000" />
     </task>
     <servers />
   </component>
@@ -138,22 +132,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>590</line>
+          <line>596</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>587</line>
+          <line>593</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>588</line>
+          <line>594</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/test.html</url>
-          <line>957</line>
+          <line>963</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
