@@ -201,7 +201,7 @@
     </p>
     <br>
     <p> <H4><u>Stock Price Development</u></H4> </p>
-    <p style="font-size: 12px">You will play the 12-round stock trading game a total of <b> 8 times </b>.</p>
+    <p >You will play the 12-round stock trading game a total of <b> 8 times </b>.</p>
     <p>
         Stock prices change each round according to the following two processes.  First, it will be determined whether
         a stock will exhibit a price increase or decrease. The probabilities of increases or decreases are different
@@ -211,7 +211,7 @@
         $5 with the same probability. The magnitude of the price changes is completely independent of whether the price
         is increasing or decreasing.
     </p>
-    <p style="font-size: 12px">The performance of a stock during one iteration of the game has nothing to do with its
+    <p >The performance of a stock during one iteration of the game has nothing to do with its
         performance in other iterations of the game. Also, your choices do not affect the price development.</p>
 <!--    <div class="row">-->
 <!--        <div class="col-xs-12">-->
@@ -336,7 +336,7 @@
         var button = document.getElementById("start");
         button.onclick = function () {
             start();
-            uid = prompt("Please enter your student ID", "");
+            uid = prompt("If you have a student ID, please enter it. Otherwise, please just hit ‘OK’. ", "");
             console.log(!(/^\d+$/.test(uid)));
             if(uid === undefined || uid ==="" || uid === null || !(/^\d+$/.test(uid))){
                 uid = defaultUid;
@@ -347,7 +347,7 @@
     </script>
 </div>
 <div id="thankyou" style="display: none">
-    <h2 style="align:center; vertical-align:middle"> Thank you for the playing game. Please reload if you wanna play
+    <h2 style="align:center; vertical-align:middle"> Thank you for playing the game. Please reload if you wanna play
         again(but it will no longer affect your score)</h2>
 </div>
 <div id="survey" style="display: none">
@@ -1496,8 +1496,8 @@
             // document.getElementById("period").innerHTML = printPeriod;
         }
         if (_currentPeriodIndex === 13){
-            document.getElementById("note").innerHTML = "You have finished this attempt. Click the Proceed button to " +
-                "proceed to the next attempt.";
+            document.getElementById("note").innerHTML = "You have finished this game. Click the Proceed button to " +
+                "proceed to the next game.";
             document.getElementById("next_period").innerHTML = PROCEED_KEY;
         }
         end();
