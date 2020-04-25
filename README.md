@@ -1,1 +1,1 @@
-# stocktradinggame_backend
+# stocktradinggame
