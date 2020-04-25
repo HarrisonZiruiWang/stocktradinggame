@@ -486,7 +486,7 @@
                 Your portfolio has <span id="changeType"></span> from the last round.
             </div>
             <div id="gainlossdiv" class="portfolio" style="text-align: center">
-                Your now have an unrealised <span id="a"></span><span id="gainlossType"></span><span
+                Your total portfolio <span id="a"></span><span id="gainlossType"></span><span
                     id="gainloss">10000</span>
             </div>
             <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
@@ -789,7 +789,7 @@
     }
 
     function populateModal() {
-        var change = _totalAssets[_currentPeriodIndex] - _totalAssets[_currentPeriodIndex - 1];
+        var change =changeInAssests[0];
         //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
         var printIndex = _currentPeriodIndex;
         if (_currentPeriodIndex === 13) {
@@ -816,7 +816,7 @@
         }
         document.getElementById("gainlossdiv").style.display = "block";
         document.getElementById("nochangediv").style.display = "none";
-        changeInAssests[0] = unrealisedGain[_currentPeriodIndex];
+        changeInAssests[0] = _cash + _shares - 1000;
         document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
 
         //document.getElementById("a").innerHTML = " a ";
@@ -1453,7 +1453,7 @@
             },
             title: {
                 display: true,
-                text: 'Your Stock Portfolio Gains/Losses'
+                text: 'Your Total Gains/Losses'
             }
         }
     });
