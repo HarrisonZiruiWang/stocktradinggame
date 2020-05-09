@@ -582,8 +582,8 @@
                         <td>
                             <button class="btn sell-button btn-sm" onclick="sell(0)">Sell</button>
                         </td>
-                        <td>$<span class="CurrentPrice">0</span></td>
-                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="dollarSignA">$</span><span class="CurrentPrice">0</span></td>
+                        <td><span class="dollarSignA">$</span><span class="AveragePrice">0</span></td>
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
@@ -599,8 +599,8 @@
                         <td>
                             <button class="btn sell-button btn-sm" onclick="sell(1)">Sell</button>
                         </td>
-                        <td>$<span class="CurrentPrice">0</span></td>
-                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="dollarSignB">$</span><span class="CurrentPrice">0</span></td>
+                        <td><span class="dollarSignB">$</span><span class="AveragePrice">0</span></td>
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
@@ -615,8 +615,8 @@
                         <td>
                             <button class="btn sell-button btn-sm" onclick="sell(2)">Sell</button>
                         </td>
-                        <td>$<span class="CurrentPrice">0</span></td>
-                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="dollarSignC">$</span><span class="CurrentPrice">0</span></td>
+                        <td><span class="dollarSignC">$</span><span class="AveragePrice">0</span></td>
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
@@ -631,8 +631,8 @@
                         <td>
                             <button class="btn sell-button btn-sm" onclick="sell(3)">Sell</button>
                         </td>
-                        <td>$<span class="CurrentPrice">0</span></td>
-                        <td>$<span class="AveragePrice">0</span></td>
+                        <td><span class="dollarSignD">$</span><span class="CurrentPrice">0</span></td>
+                        <td><span class="dollarSignD">$</span><span class="AveragePrice">0</span></td>
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
@@ -787,61 +787,63 @@
         document.getElementById("Shares").innerHTML = _shares;
         document.getElementById("TotalAssets").innerHTML = _totalAssets[_currentPeriodIndex];
     }
-
+    
+    // whole fn was commented by Zirui Wang on 5/9/2020 for the reason of removing pop-up windows in between rounds
     function populateModal() {
-        var change =changeInAssests[0];
-        //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
-        var printIndex = _currentPeriodIndex;
-        if (_currentPeriodIndex === 13) {
-            printIndex = "Last Round";
-            document.getElementById("roundModalLabel").innerHTML = "";
-            document.getElementById("totalModalLabel").innerHTML = "";
-        }
-        // if (_currentPeriodIndex > 2)
-        //     printIndex = _currentPeriodIndex - 1;
-        document.getElementById("round").innerHTML = printIndex;
-        let changeType = document.getElementById("changeType");
-        if (change > 0) {
-            changeType.innerHTML = "<span style='color: #c45850'>increased</span>";
-            //$('#changeType').css('color', '#c45850').text("increased");
-        } else if (change < 0) {
-            changeType.innerHTML = "<span style='color: #3cba9f'>decreased</span>";
+        //
+        // var change =changeInAssests[0];
+        // //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
+        // var printIndex = _currentPeriodIndex;
+        // if (_currentPeriodIndex === 13) {
+        //     printIndex = "Last Round";
+        //     document.getElementById("roundModalLabel").innerHTML = "";
+        //     document.getElementById("totalModalLabel").innerHTML = "";
+        // }
+        // // if (_currentPeriodIndex > 2)
+        // //     printIndex = _currentPeriodIndex - 1;
+        // document.getElementById("round").innerHTML = printIndex;
+        // let changeType = document.getElementById("changeType");
+        // if (change > 0) {
+        //     changeType.innerHTML = "<span style='color: #c45850'>increased</span>";
+        //     //$('#changeType').css('color', '#c45850').text("increased");
+        // } else if (change < 0) {
+        //     changeType.innerHTML = "<span style='color: #3cba9f'>decreased</span>";
 
-            //$('#changeType').css('color', '#3cba9f').text("decreased");
-        } else {
-            changeType.innerHTML = "<span style='color: #000000'>not changed</span>";
-            //document.getElementById("changeAssets").innerHTML="";
-          //  $('#changeType').css('color', '#000000').text("not changed");
-           // $('#changeAssets').text("");
-        }
-        document.getElementById("gainlossdiv").style.display = "block";
-        document.getElementById("nochangediv").style.display = "none";
-        changeInAssests[0] = _cash + _shares - 1000;
-        document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
+        //     //$('#changeType').css('color', '#3cba9f').text("decreased");
+        // } else {
+        //     changeType.innerHTML = "<span style='color: #000000'>not changed</span>";
+        //     //document.getElementById("changeAssets").innerHTML="";
+        //   //  $('#changeType').css('color', '#000000').text("not changed");
+        //    // $('#changeAssets').text("");
+        // }
+        // document.getElementById("gainlossdiv").style.display = "block";
+        // document.getElementById("nochangediv").style.display = "none";
+        // changeInAssests[0] = _cash + _shares - 1000;
+        // document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
 
-        //document.getElementById("a").innerHTML = " a ";
-        let gainlossType = document.getElementById("gainlossType");
-        if (changeInAssests[0] > 0) {
-            gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
-            //$('#gainlossType').css('color', '#c45850').text("gain");
-        } else if (changeInAssests[0] < 0) {
-            gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
-           // $('#gainlossType').css('color', '#3cba9f').text("loss");
-        } else {
-            document.getElementById("gainlossdiv").style.display = "none";
-            document.getElementById("nochangediv").style.display = "block";
-        }
-        var chartData = myChart2.data.datasets[0];
-        if (changeInAssests[0] < 0) {
-            backgroundColors[0] = "#3cba9f";
-            chartData.label = "Loss";
+        // //document.getElementById("a").innerHTML = " a ";
+        // let gainlossType = document.getElementById("gainlossType");
+        // if (changeInAssests[0] > 0) {
+        //     gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
+        //     //$('#gainlossType').css('color', '#c45850').text("gain");
+        // } else if (changeInAssests[0] < 0) {
+        //     gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
+        //    // $('#gainlossType').css('color', '#3cba9f').text("loss");
+        // } else {
+        //     document.getElementById("gainlossdiv").style.display = "none";
+        //     document.getElementById("nochangediv").style.display = "block";
+        // }
+        // var chartData = myChart2.data.datasets[0];
+        // if (changeInAssests[0] < 0) {
+        //     backgroundColors[0] = "#3cba9f";
+        //     chartData.label = "Loss";
 
-        } else {
-            backgroundColors[0] = "#c45850";
-            chartData.label = "Gain";
-        }
-        myChart2.update();
-        updateStockPrice();
+        // } else {
+        //     backgroundColors[0] = "#c45850";
+        //     chartData.label = "Gain";
+        // }
+        // myChart2.update();
+        // updateStockPrice();
     }
 
     function updateStockPrice() {
@@ -879,11 +881,22 @@
     }
 
     //count the total assets，cash+share value
+    //method modified by Zirui Wang on 5/9/2020
+    //change the entire row's color based on the result of gain/loss
     function countingAssets() {
-        var sharesOwned = document.getElementsByClassName("currentShares");
+        
         var currentPrices = document.getElementsByClassName("CurrentPrice");
-        var unrealizedGL = document.getElementsByClassName("UnrealizedGL");
         var averagePrices = document.getElementsByClassName("AveragePrice");
+        var preShare = document.getElementsByClassName("previousShares");
+        var sharesOwned = document.getElementsByClassName("currentShares");
+        var changeShare = document.getElementsByClassName("changeInShares");
+        var unrealizedGL = document.getElementsByClassName("UnrealizedGL");
+
+        var dollarSignsA = document.getElementsByClassName("dollarSignA");
+        var dollarSignsB = document.getElementsByClassName("dollarSignB");
+        var dollarSignsC = document.getElementsByClassName("dollarSignC");
+        var dollarSignsD = document.getElementsByClassName("dollarSignD");
+
         var shares = 0;
         var unrealizedTotal = 0;
         for (var i = 0; i < sharesOwned.length; i++) {
@@ -894,17 +907,131 @@
                     - (Number(sharesOwned[i].innerHTML) * Number(averagePrices[i].innerHTML));
 
                 var toWrite1;
-                if (ugl.toFixed(2) > 0)
+
+                if (ugl.toFixed(2) > 0) {
                     toWrite1 = "<span style = 'color:#c45850'>$" + ugl.toFixed(2) + "</span>";
-                else if (ugl.toFixed(2) < 0)
+
+                    currentPrices[i].style.color = "#c45850";
+                    averagePrices[i].style.color = "#c45850";
+                    preShare[i].style.color = "#c45850";
+                    sharesOwned[i].style.color = "#c45850";
+                    changeShare[i].style.color = "#c45850";
+
+                    if(i===0) {
+                        for (var j = 0; j < dollarSignsA.length; j++) {
+                            dollarSignsA[j].style.color = "#c45850";
+                        }
+                    }
+                    if(i===1) {
+                        for (var j = 0; j < dollarSignsB.length; j++) {
+                            dollarSignsB[j].style.color = "#c45850";
+                        }
+                    }
+                    if(i===2) {
+                        for (var j = 0; j < dollarSignsC.length; j++) {
+                            dollarSignsC[j].style.color = "#c45850";
+                        }
+                    }
+                    if(i===3) {
+                        for (var j = 0; j < dollarSignsD.length; j++) {
+                            dollarSignsD[j].style.color = "#c45850";
+                        }
+                    }
+                }
+                else if (ugl.toFixed(2) < 0) {
                     toWrite1 = "<span style = 'color:#3cba9f'>$" + ugl.toFixed(2) + "</span>";
-                else
+
+                    currentPrices[i].style.color = "#3cba9f";
+                    averagePrices[i].style.color = "#3cba9f";
+                    preShare[i].style.color = "#3cba9f";
+                    sharesOwned[i].style.color = "#3cba9f";
+                    changeShare[i].style.color = "#3cba9f";
+                    if(i===0) {
+                        for (var j = 0; j < dollarSignsA.length; j++) {
+                            dollarSignsA[j].style.color = "#3cba9f";
+                        }
+                    }
+                    if(i===1) {
+                        for (var j = 0; j < dollarSignsB.length; j++) {
+                            dollarSignsB[j].style.color = "#3cba9f";
+                        }
+                    }
+                    if(i===2) {
+                        for (var j = 0; j < dollarSignsC.length; j++) {
+                            dollarSignsC[j].style.color = "#3cba9f";
+                        }
+                    }
+                    if(i===3) {
+                        for (var j = 0; j < dollarSignsD.length; j++) {
+                            dollarSignsD[j].style.color = "#3cba9f";
+                        }
+                    }
+                }
+                else{
                     toWrite1 = "$" + ugl.toFixed(2);
+                    currentPrices[i].style.color = "#000000";
+                    averagePrices[i].style.color = "#000000";
+                    preShare[i].style.color = "#000000";
+                    sharesOwned[i].style.color = "#000000";
+                    changeShare[i].style.color = "#000000";
+
+                    if(i===0) {
+                        for (var j = 0; j < dollarSignsA.length; j++) {
+                            dollarSignsA[j].style.color = "#000000";
+                        }
+                    }
+                    if(i===1) {
+                        for (var j = 0; j < dollarSignsB.length; j++) {
+                            dollarSignsB[j].style.color = "#000000";
+                        }
+                    }
+                    if(i===2) {
+                        for (var j = 0; j < dollarSignsC.length; j++) {
+                            dollarSignsC[j].style.color = "#000000";
+                        }
+                    }
+                    if(i===3) {
+                        for (var j = 0; j < dollarSignsD.length; j++) {
+                            dollarSignsD[j].style.color = "#000000";
+                        }
+                    }
+                }
+
                 unrealizedGL[i].innerHTML = toWrite1;
                 unrealizedTotal += ugl;
             } else {
                 unrealizedGL[i].innerHTML = 0;
+
+                currentPrices[i].style.color = "#000000";
+                averagePrices[i].style.color = "#000000";
+                preShare[i].style.color = "#000000";
+                sharesOwned[i].style.color = "#000000";
+                changeShare[i].style.color = "#000000";
+
+                if(i===0) {
+                    for (var j = 0; j < dollarSignsA.length; j++) {
+                        dollarSignsA[j].style.color = "#000000";
+                    }
+                }
+                if(i===1) {
+                    for (var j = 0; j < dollarSignsB.length; j++) {
+                        dollarSignsB[j].style.color = "#000000";
+                    }
+                }
+                if(i===2) {
+                    for (var j = 0; j < dollarSignsC.length; j++) {
+                        dollarSignsC[j].style.color = "#000000";
+                    }
+                }
+                if(i===3) {
+                    for (var j = 0; j < dollarSignsD.length; j++) {
+                        dollarSignsD[j].style.color = "#000000";
+                    }
+                }
+
             }
+
+
         }
         _shares = shares;
         //Recalcault total assets for current period
@@ -1172,11 +1299,21 @@
         freshAveragePrice();
         countingAssets();
         //freshTotalAssetsChart();
-        if (_currentPeriodIndex > 3 && _currentPeriodIndex < 14) {
-            populateModal();
-            openModalBox();
-        }
 
+
+        // Commented by Zirui Wang on 5/9/2020 in order to remove pop-up windows in between rounds
+        // if (_currentPeriodIndex > 3 && _currentPeriodIndex < 14) {
+        //     populateModal();
+        //     openModalBox();
+        // }
+        
+        // Added by Zirui Wang on 5/9/2020
+        // Make sure at the end of each game, change the "Next period" button to "Proceed" button
+        if (_currentPeriodIndex === 13){
+            document.getElementById("note").innerHTML = "You have finished this game. Click the Proceed button to " +
+                "proceed to the next game.";
+            document.getElementById("next_period").innerHTML = PROCEED_KEY;
+        }
     }
 
     function resetDataForNextAttempt() {
@@ -1222,6 +1359,45 @@
         currentAttempt++;
         document.getElementById("next_period").innerHTML = NEXT_PERIOD_KEY;
         updateNextPeriodButton(ROUND_OBSERVATION, NOTE_OBSERVATION_KEY);
+
+        // the rest of method added by Zirui Wang on 5/9/2020
+        // reset text&numbers color at each attempt's beginning
+        var currentPrices = document.getElementsByClassName("CurrentPrice");
+
+        var dollarSignsA = document.getElementsByClassName("dollarSignA");
+        var dollarSignsB = document.getElementsByClassName("dollarSignB");
+        var dollarSignsC = document.getElementsByClassName("dollarSignC");
+        var dollarSignsD = document.getElementsByClassName("dollarSignD");
+
+        for (var i = 0; i < currentShares.length; i++) {
+
+            currentPrices[i].style.color = "#000000";
+            averagePrice[i].style.color = "#000000";
+            previousShares[i].style.color = "#000000";
+            currentShares[i].style.color = "#000000";
+            changeInShares[i].style.color = "#000000";
+
+            if(i===0) {
+                for (var j = 0; j < dollarSignsA.length; j++) {
+                    dollarSignsA[j].style.color = "#000000";
+                }
+            }
+            if(i===1) {
+                for (var j = 0; j < dollarSignsB.length; j++) {
+                    dollarSignsB[j].style.color = "#000000";
+                }
+            }
+            if(i===2) {
+                for (var j = 0; j < dollarSignsC.length; j++) {
+                    dollarSignsC[j].style.color = "#000000";
+                }
+            }
+            if(i===3) {
+                for (var j = 0; j < dollarSignsD.length; j++) {
+                    dollarSignsD[j].style.color = "#000000";
+                }
+            }
+        }
     }
 
     function updateNextPeriodButton(ROUND_KEY, NOTE_KEY) {
@@ -1347,21 +1523,28 @@
     // }
     //refresh unrealized gain and Los
     function freshUnrealizedTotle() {
+
         var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+
         for (i = 0; i < _unrealisedListGlobal.length; i++) {
             unrealizedGLs.innerHTML = _unrealisedListGlobal[i];
         }
         var unrealizedTotal = 0;
         for (var i = 0; i < unrealizedGLs.length; i++)
             unrealizedTotal += Number(unrealizedGLs[i].innerHTML);
+
         unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
         var toWrite;
-        if (unrealizedTotal.toFixed(2) < 0)
+
+        if (unrealizedTotal.toFixed(2) < 0){
             toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
-        else if (unrealizedTotal.toFixed(2) > 0)
+        }
+        else if (unrealizedTotal.toFixed(2) > 0) {
             toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2)+ "</span>";
-        else
+        }
+        else {
             toWrite = "$" + unrealizedTotal.toFixed(2);
+        }
 
         document.getElementById("UnrealizedTotle").innerHTML = toWrite;
     }
@@ -1457,6 +1640,10 @@
             }
         }
     });
+
+    // this line of code added by Zirui Wang on 5/9/2020 to remove chart2
+    document.getElementById("myChart2").style.display = "none";
+
     // for(i=0;i<chartData.data.length;i++){
     //     if(chartData.data[i] >= 0){
     //         backgroundColors.push("#3cba9f");
