@@ -1217,7 +1217,8 @@
             }
         }
         //added by Zirui Wang on 5/31/2020
-        let random_number = Math.floor(gainlossPopRandom*100);
+        let random_number = 1;
+        // Math.floor(gainlossPopRandom*100);
 
         var json =
             {
@@ -1239,7 +1240,7 @@
                 "s_stockD": s_stockD,
                 "time_spent": time_spent,
                 "round_played_at": round_played_at,
-                "random_number": 1
+                "random_number": random_number
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
