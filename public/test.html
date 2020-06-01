@@ -201,7 +201,7 @@
     </p>
     <br>
     <p> <H4><u>Stock Price Development</u></H4> </p>
-    <p >You will play the 12-round stock trading game a total of <b> 8 times </b>.</p>
+    <p >You will play the 12-round stock trading game a total of <b> 4 times </b>.</p>
     <p>
         Stock prices change each round according to the following two processes.  First, it will be determined whether
         a stock will exhibit a price increase or decrease. The probabilities of increases or decreases are different
@@ -516,7 +516,7 @@
     </div>
 
     <div class="container">
-        <div class="text-center top1" style="width:30%;float:left;">Game <span id="attempt_label"></span> of 8</div>
+        <div class="text-center top1" style="width:30%;float:left;">Game <span id="attempt_label"></span> of 4</div>
         <div class="text-center top" style="width:30%;float:left;"><span id = "roundLabel">Round</span> <span id="period">
         </span><span id = "totalLabel">of 12</span></div>
         <div class="text-center top1" style="width:40%;float:right;"><span id="roundtype"></span></div>
@@ -695,9 +695,14 @@
     var unrealisedGain = new Array(18);
     var changeInAssests = new Array(12);
     var currentAttempt = 1;
-    var totalAttempts = 8;
+    //changed to 4 instead of 8 by Zirui Wang on 5/30/2020
+    var totalAttempts = 4;
     var startTime, endTime;
     var round_played_at = "";
+    
+    //added by Zirui Wang on 5/31/2020
+    var gainlossPopRandom = Math.random();
+
     //initialization
     document.getElementById("roundtype").innerHTML = "Observation Round";
     assignUID();
@@ -789,19 +794,25 @@
     }
     
     // whole fn was commented by Zirui Wang on 5/9/2020 for the reason of removing pop-up windows in between rounds
+    // undo comment by Zirui Wang on 5/30/2020
+    // modified by Zirui Wang on 5/31/2020
     function populateModal() {
-        //
-        // var change =changeInAssests[0];
-        // //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
-        // var printIndex = _currentPeriodIndex;
-        // if (_currentPeriodIndex === 13) {
-        //     printIndex = "Last Round";
-        //     document.getElementById("roundModalLabel").innerHTML = "";
-        //     document.getElementById("totalModalLabel").innerHTML = "";
-        // }
-        // // if (_currentPeriodIndex > 2)
-        // //     printIndex = _currentPeriodIndex - 1;
-        // document.getElementById("round").innerHTML = printIndex;
+    
+        //prompt("random = " + gainlossPopRandom);
+
+        //var change =changeInAssests[0];
+        //document.getElementById("changeAssets").innerHTML = " by $"+Math.abs(change);
+        var printIndex = _currentPeriodIndex;
+        if (_currentPeriodIndex === 13) {
+            printIndex = "Last Round";
+            document.getElementById("roundModalLabel").innerHTML = "";
+            document.getElementById("totalModalLabel").innerHTML = "";
+        }
+        // if (_currentPeriodIndex > 2)
+        //     printIndex = _currentPeriodIndex - 1;
+        document.getElementById("round").innerHTML = printIndex;
+
+        //commented by Zirui Wang on 5/31/2020
         // let changeType = document.getElementById("changeType");
         // if (change > 0) {
         //     changeType.innerHTML = "<span style='color: #c45850'>increased</span>";
@@ -816,32 +827,42 @@
         //   //  $('#changeType').css('color', '#000000').text("not changed");
         //    // $('#changeAssets').text("");
         // }
-        // document.getElementById("gainlossdiv").style.display = "block";
-        // document.getElementById("nochangediv").style.display = "none";
-        // changeInAssests[0] = _cash + _shares - 1000;
-        // document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
+        document.getElementById("gainlossdiv").style.display = "block";
+        document.getElementById("nochangediv").style.display = "none";
+        changeInAssests[0] = _cash + _shares - 1000;
+        document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
 
-        // //document.getElementById("a").innerHTML = " a ";
-        // let gainlossType = document.getElementById("gainlossType");
-        // if (changeInAssests[0] > 0) {
-        //     gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
-        //     //$('#gainlossType').css('color', '#c45850').text("gain");
-        // } else if (changeInAssests[0] < 0) {
-        //     gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
-        //    // $('#gainlossType').css('color', '#3cba9f').text("loss");
-        // } else {
-        //     document.getElementById("gainlossdiv").style.display = "none";
-        //     document.getElementById("nochangediv").style.display = "block";
-        // }
-        // var chartData = myChart2.data.datasets[0];
-        // if (changeInAssests[0] < 0) {
-        //     backgroundColors[0] = "#3cba9f";
-        //     chartData.label = "Loss";
+        //document.getElementById("a").innerHTML = " a ";
+        let gainlossType = document.getElementById("gainlossType");
+        if (changeInAssests[0] > 0) {
+            if(gainlossPopRandom>=0.5) {
+                gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
+                openModalBox();
 
-        // } else {
-        //     backgroundColors[0] = "#c45850";
-        //     chartData.label = "Gain";
-        // }
+            } else {
+            }
+            //$('#gainlossType').css('color', '#c45850').text("gain");
+        } else if (changeInAssests[0] < 0) {
+            if(gainlossPopRandom<0.5) {
+                gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
+                openModalBox();
+
+            } else {
+            }
+           // $('#gainlossType').css('color', '#3cba9f').text("loss");
+        } else {
+            //commented by Zirui Wang on 5/31/2020
+            //document.getElementById("nochangediv").style.display = "block";
+        }
+        var chartData = myChart2.data.datasets[0];
+        if (changeInAssests[0] < 0) {
+            backgroundColors[0] = "#3cba9f";
+            chartData.label = "Loss";
+
+        } else {
+            backgroundColors[0] = "#c45850";
+            chartData.label = "Gain";
+        }
         // myChart2.update();
         // updateStockPrice();
     }
@@ -1302,10 +1323,11 @@
 
 
         // Commented by Zirui Wang on 5/9/2020 in order to remove pop-up windows in between rounds
-        // if (_currentPeriodIndex > 3 && _currentPeriodIndex < 14) {
-        //     populateModal();
-        //     openModalBox();
-        // }
+        // undo comment by Zirui Wang on 5/30/2020
+        if (_currentPeriodIndex > 3 && _currentPeriodIndex < 14) {
+            populateModal();
+            //openModalBox();
+        }
         
         // Added by Zirui Wang on 5/9/2020
         // Make sure at the end of each game, change the "Next period" button to "Proceed" button
@@ -1413,6 +1435,10 @@
 
     function openModalBox() {
         modal.style.display = "block";
+    }
+
+    function closeModalBox() {
+        modal.style.display = "none";
     }
 
     //call this function when click the buy button
