@@ -826,7 +826,7 @@
         //     //document.getElementById("changeAssets").innerHTML="";
         //   //  $('#changeType').css('color', '#000000').text("not changed");
         //    // $('#changeAssets').text("");
-        // }
+        // 
         document.getElementById("gainlossdiv").style.display = "block";
         document.getElementById("nochangediv").style.display = "none";
         changeInAssests[0] = _cash + _shares - 1000;
@@ -1216,6 +1216,9 @@
                 }
             }
         }
+        //added by Zirui Wang on 5/31/2020
+        //let random_number = gainlossPopRandom;
+
         var json =
             {
                 "uid": uid,
@@ -1235,7 +1238,8 @@
                 "s_stockC": s_stockC,
                 "s_stockD": s_stockD,
                 "time_spent": time_spent,
-                "round_played_at": round_played_at
+                "round_played_at": round_played_at,
+                //"random_number": random_number
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
