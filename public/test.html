@@ -315,7 +315,8 @@
     <!--    <p> Hence, you would receive $7.40 in total.</p>-->
     <br>
     <div style="text-align: center">
-        <button class="btn btn-primary btn-lg blue" id="start" disabled>Start Experiment</button>
+        <!-- button was changed to be enabled at the beginning by Zirui Wang on 6/2/2020 -->
+        <button class="btn btn-primary btn-lg blue" id="start">Start Experiment</button>
     </div>
 
     <br>
@@ -339,7 +340,12 @@
             uid = prompt("If you have a student ID, please enter it. Otherwise, please just hit ‘OK’. ", "");
             console.log(!(/^\d+$/.test(uid)));
             if(uid === undefined || uid ==="" || uid === null || !(/^\d+$/.test(uid))){
-                uid = defaultUid;
+                //modified due to the fact that the buttion will never be disabled by Zirui Wang on 6/2/2020
+                if(defaultUid !== undefined) {
+                    uid = defaultUid;
+                } else {
+                    uid = 999999999;
+                }
             }
             document.getElementById("experiment").style.display = "block";
             document.getElementById("intro").style.display = "none";
@@ -750,8 +756,9 @@
                 let month = currentDate.getMonth() + 1;
                 uid = currentDate.getDate() + "" + month + "" + currentDate.getFullYear() + "" + currentDate.getHours()
                     + "" + currentDate.getMinutes() + "" + uid_temp;
-                if (uid !== undefined)
-                    button.disabled = false;
+                // commented by Zirui Wang on 6/2/2020
+                // if (uid !== undefined)
+                //     button.disabled = false;
                 defaultUid = uid;
                 console.log(uid);
             }
