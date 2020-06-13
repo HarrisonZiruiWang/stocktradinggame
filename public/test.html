@@ -133,9 +133,10 @@
             border-right: 2px solid #34407c
         }
 
-        .flex:last-child {
+        /*  Edited by Zirui Wang  on 6/13/2020  */
+        /* .flex:last-child {
             border-right: none
-        }
+        } */
 
         .btns {
             display: flex;
@@ -537,16 +538,17 @@
                 <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
             </div>
         </div>
+        <!-- Edited by Zirui Wang  on 6/13/2020 -->
         <div class="row">
-            <div class="col-xs-6 flex ">
+            <div class="col-xs-4 flex ">
                 <div>Cash:</div>
                 <div>$<span id="Cash">10000</span></div>
             </div>
-            <div class="col-xs-6 flex ">
+            <div class="col-xs-4 flex ">
                 <div>Shares:</div>
                 <div>$<span id="Shares">0</span></div>
             </div>
-            <div class="col-xs-4 flex " style="display: none">
+            <div class="col-xs-4 flex "> 
                 <div>Total Assets:</div>
                 <div>$<span id="TotalAssets">10000</span></div>
             </div>
@@ -837,7 +839,7 @@
         document.getElementById("gainlossdiv").style.display = "block";
         document.getElementById("nochangediv").style.display = "none";
         changeInAssests[0] = _cash + _shares - 1000;
-        document.getElementById("gainloss").innerHTML = " of $" + Math.abs(changeInAssests[0]);
+        document.getElementById("gainloss").innerHTML = " is $" + Math.abs(changeInAssests[0]);
 
         //document.getElementById("a").innerHTML = " a ";
         let gainlossType = document.getElementById("gainlossType");
