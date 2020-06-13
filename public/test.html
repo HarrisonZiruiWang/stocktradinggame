@@ -554,7 +554,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
                 <canvas id="myChart" style="height: 330px;"></canvas>
             </div>
 
@@ -1645,6 +1645,11 @@
             }
         }
     });
+
+    //alert("myChart display style: " + document.getElementById("myChart").style.display);
+
+    document.getElementById("myChart").style.display = "block";
+    //alert("myChart display style changed to: " + document.getElementById("myChart").style.display);
 
     var ctx2 = document.getElementById("myChart2").getContext('2d');
     var backgroundColors = [];
