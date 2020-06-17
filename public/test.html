@@ -495,7 +495,7 @@
                 Your portfolio has <span id="changeType"></span> from the last round.
             </div>
             <div id="gainlossdiv" class="portfolio" style="text-align: center">
-                Your unrealized <span id="a"></span><span id="gainlossType"></span><span
+                Your stock portfolio has an unrealized <span id="a"></span><span id="gainlossType"></span><span
                     id="gainloss">10000</span>
             </div>
             <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
@@ -845,7 +845,7 @@
         // Modified by Zirui Wang on 6/16/2020
         changeInAssests[0] = _cash + _shares - 1000;
         // document.getElementById("gainloss").innerHTML = " is $" + Math.abs(changeInAssests[0]);
-        document.getElementById("gainloss").innerHTML = " is $" +  Math.abs(unrealisedGain[_currentPeriodIndex]);
+        document.getElementById("gainloss").innerHTML = " of $" +  Math.abs(unrealisedGain[_currentPeriodIndex]);
 
         
         //document.getElementById("a").innerHTML = " a ";
