@@ -495,14 +495,14 @@
                 Your portfolio has <span id="changeType"></span> from the last round.
             </div>
             <div id="gainlossdiv" class="portfolio" style="text-align: center">
-                Your total portfolio <span id="a"></span><span id="gainlossType"></span><span
+                Your unrealized <span id="a"></span><span id="gainlossType"></span><span
                     id="gainloss">10000</span>
             </div>
             <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
                 Your stock portfolio is breaking even
             </div>
             <div style="text-align: center">
-                <button class="btn btn-primary btn-lg blue" id="confirm">Ok</button>
+                <button class="btn btn-primary btn-lg blue" id="confirm">OK</button>
             </div>
         </div>
 
@@ -840,12 +840,16 @@
         // 
         document.getElementById("gainlossdiv").style.display = "block";
         document.getElementById("nochangediv").style.display = "none";
-        changeInAssests[0] = _cash + _shares - 1000;
-        document.getElementById("gainloss").innerHTML = " is $" + Math.abs(changeInAssests[0]);
 
+        // Modified by Zirui Wang on 6/16/2020
+        changeInAssests[0] = _cash + _shares - 1000;
+        // document.getElementById("gainloss").innerHTML = " is $" + Math.abs(changeInAssests[0]);
+        document.getElementById("gainloss").innerHTML = " is $" +  Math.abs(unrealisedGain[_currentPeriodIndex]);
+
+        
         //document.getElementById("a").innerHTML = " a ";
         let gainlossType = document.getElementById("gainlossType");
-        if (changeInAssests[0] > 0) {
+        if (unrealisedGain[_currentPeriodIndex] > 0) {
             if(gainlossPopRandom>=0.5) {
                 gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
                 openModalBox();
@@ -853,7 +857,7 @@
             } else {
             }
             //$('#gainlossType').css('color', '#c45850').text("gain");
-        } else if (changeInAssests[0] < 0) {
+        } else if (unrealisedGain[_currentPeriodIndex] < 0) {
             if(gainlossPopRandom<0.5) {
                 gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
                 openModalBox();
@@ -865,15 +869,15 @@
             //commented by Zirui Wang on 5/31/2020
             //document.getElementById("nochangediv").style.display = "block";
         }
-        var chartData = myChart2.data.datasets[0];
-        if (changeInAssests[0] < 0) {
-            backgroundColors[0] = "#3cba9f";
-            chartData.label = "Loss";
+        // var chartData = myChart2.data.datasets[0];
+        // if (changeInAssests[0] < 0) {
+        //     backgroundColors[0] = "#3cba9f";
+        //     chartData.label = "Loss";
 
-        } else {
-            backgroundColors[0] = "#c45850";
-            chartData.label = "Gain";
-        }
+        // } else {
+        //     backgroundColors[0] = "#c45850";
+        //     chartData.label = "Gain";
+        // }
         // myChart2.update();
         // updateStockPrice();
     }
