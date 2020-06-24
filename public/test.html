@@ -714,6 +714,11 @@
     //added by Zirui Wang on 5/31/2020
     var gainlossPopRandom = Math.random();
 
+    //added by Zirui Wang on 6/24/2020
+    const urlParams = new URLSearchParams(window.location.search);
+    const workerId = urlParams.get('workerId');
+
+
     //initialization
     document.getElementById("roundtype").innerHTML = "Observation Round";
     assignUID();
@@ -1234,6 +1239,7 @@
         }
         //added by Zirui Wang on 5/31/2020
         let random_number = gainlossPopRandom;
+        let worker_id = workerId;
 
         var json =
             {
@@ -1255,7 +1261,8 @@
                 "s_stockD": s_stockD,
                 "time_spent": time_spent,
                 "round_played_at": round_played_at,
-                "random_number": random_number
+                "random_number": random_number,
+                "worker_id": worker_id
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
