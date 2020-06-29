@@ -182,6 +182,41 @@
         .alert {
             margin-bottom: 10px;
         }
+
+        /* Hide all steps by default: 
+           Added by Zirui Wang on 6/29/2020
+           Refer to w3schools */
+        .tab {
+            display: none;
+        }
+
+        /* Make circles that indicate the steps of the form: 
+           Added by Zirui Wang on 6/29/2020
+           Refer to w3schools */
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        /* Mark the active step: 
+           Added by Zirui Wang on 6/29/2020
+           Refer to w3schools */
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid:
+           Added by Zirui Wang on 6/29/2020
+           Refer to w3schools  */
+        .step.finish {
+            background-color: #4CAF50;
+        }
     </style>
 </head>
 <body>
@@ -267,10 +302,11 @@
         during these rounds. Rounds 3 – 12 are Trading Rounds.</p>
     <p> Your total portfolio will be held in cash and stocks. No interest will be paid on the amount you hold in cash.
         The left graph entitled “Graph of Stock Prices in Each Round” displays the price development of all stocks.
-        Using your mouse cursor, you can investigate each stock’s price in more detail. The right graph entitled “Your
+        Using your mouse cursor, you can investigate each stock’s price in more detail. </p>
+        <!-- The right graph entitled “Your
         Total Trading Gains/Losses to Date” displays your total portfolio gain or loss. A total portfolio gain means the
         value of your portfolio is now above the $1,000 you started with. A total portfolio loss means the value of your
-        portfolio is now below the $1,000 you started with. </p>
+        portfolio is now below the $1,000 you started with. </p> -->
     <br>
     <p> <H4><u>Buying Shares</u></H4>
     <p> At the bottom of your screen will see a row for each stock. If you click on the “buy” button, you will receive
@@ -284,6 +320,14 @@
     <p> If you click on “sell,” you will sell one share of stock at the current price and the proceedings will be added
         to your
         cash balance.You cannot sell shares you do not own — i.e., short-selling is not allowed in this experiment.</p>
+    <br>
+    <p><H4><u>Compensation</u></H4>
+    <p> For this HIT you will be paid $2 plus a bonus. A computer will randomly choose one of your 4 games and the bonus
+        will be equal to 0.1% times your Total Assets in that game. For example, if Game #3 was randomly chosen by the 
+        computer and you finished with $1500 in that game, your bonus compensation would be equal to 0.1% x $1500 = $1.50.
+        So your total compensation for the HIT would be equal to $2 + $1.50 = $3.50. You will be informed about your bonus
+        after you complete all 4 games and the questionnaire.</p>
+    <br>
     <p> When you are content with all your trading decisions for the current round, you can click on the “Next Round”
         button to
         receive new prices. In period 12, the button’s label will change to “Continue.” If you click on it you will be
@@ -315,7 +359,7 @@
     <!--        chosen iteration, i.e., if the total value of your portfolio at the end of the randomly chosen iteration is-->
     <!--        $1,100 you will receive a flat fee of $3 plus $4.40 ($1,100 x .40% = $4.40).  </p>-->
     <!--    <p> Hence, you would receive $7.40 in total.</p>-->
-    <br>
+    
     <div style="text-align: center">
         <!-- button was changed to be enabled at the beginning by Zirui Wang on 6/2/2020 -->
         <button class="btn btn-primary btn-lg blue" id="start">Start Experiment</button>
@@ -335,19 +379,24 @@
         Your anonymity is assured; the researchers who have requested your participation will not receive any personal
         information about you. By continuing, you are confirming that you understand these instructions and conditions
         of participation.</p>
+
+    <!-- Modified by Zirui Wang on 06/27/2020 -->
     <script type="text/javascript">
         var button = document.getElementById("start");
         button.onclick = function () {
             start();
-            uid = prompt("If you have a student ID, please enter it. Otherwise, please just hit ‘OK’. ", "");
-            console.log(!(/^\d+$/.test(uid)));
-            if(uid === undefined || uid ==="" || uid === null || !(/^\d+$/.test(uid))){
-                //modified due to the fact that the buttion will never be disabled by Zirui Wang on 6/2/2020
-                if(defaultUid !== undefined) {
-                    uid = defaultUid;
-                } else {
-                    uid = 999999999;
-                }
+            // uid = prompt("If you have a student ID, please enter it. Otherwise, please just hit ‘OK’. ", "");
+            // console.log(!(/^\d+$/.test(uid)));
+            // if(uid === undefined || uid ==="" || uid === null || !(/^\d+$/.test(uid))){
+            //     //modified due to the need that the buttion will never be disabled by Zirui Wang on 6/2/2020
+            //     if(defaultUid !== undefined) {
+            //         uid = defaultUid;
+            //     } else {
+            //         uid = 999999999;
+            //     }
+            // }
+            if(defaultUid === undefined) {
+                uid = 999999999;
             }
             document.getElementById("experiment").style.display = "block";
             document.getElementById("intro").style.display = "none";
@@ -367,8 +416,6 @@
     <hr>
     <div class="header">
         <p style="font-size: 15px"><b>Please evaluate the following statements</b></p>
-
-
     </div>
     <form action="" name="formquestion1">
         <div id="question1">
@@ -443,7 +490,6 @@
                     <td style="width:150px"><input type="radio" name="q11" value="1" id="q44"/></td>
                     <td style="width:150px"><input type="radio" name="q11" value="1" id="q45"/></td>
                 </tr>
-
             </table>
         </div>
         <br>
@@ -480,11 +526,360 @@
                 <input style="margin-top: 18px; margin-left: 20px" type="radio" id="opt25" value="opt25"><span
                     class="span">Refuse to answer</span>
             </div>
-
         </div>
-
     </form>
 </div> -->
+
+<!-- Added by Zirui Wang on 06/28/2020 -->
+<div id="survey" style="display: block">
+    <form id="surveyForm">
+        <div class="tab">
+            <div>
+                <h2>Question 1</h2>
+                <hr>
+                <label for="q1">In the last (4th) game, if you recall, what is the largest portfolio level paper gain 
+                    you have experienced?</label><br>
+                <input type="text" id="q1" name="question_1" value=""><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <h2>Question 2</h2>
+                <hr>
+                <label for="q2">In the last (4th) game, if you recall, what is the largest paper (unrealized) gain on 
+                    a single stock that you have experienced?</label><br>
+                <input type="text" id="q2" name="question_2" value=""><br><br>
+            </div>
+
+            <div>
+                <h2>Question 3</h2>
+                <hr>
+                <label for="q3">In the last (4th) game, if you recall, what is the largest portfolio level paper 
+                    (unrealized) loss you have experienced?</label><br>
+                <input type="text" id="q3" name="question_3" value=""><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <h2>Question 4</h2>
+                <hr>
+                <label for="q4">In the last (4th) game, if you recall, what is the largest paper loss on a single 
+                    stock that you have experienced? </label><br>
+                <input type="text" id="q4" name="question_4" value=""><br><br>
+            </div>
+        </div>
+        
+        <div class="tab">
+            <div>
+                <h2>Question 5</h2>
+                <hr>
+                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following 
+                    statement: “When deciding to sell shares of stock that I currently own, it is important that I 
+                    consider the performance of my entire portfolio.”</label><br>
+                <input type="radio" id="q5_1" name="question_5" value="1">
+                <label for="q5_1" style="width:150px">1</label>
+
+                <input type="radio" id="q5_2" name="question_5" value="2">
+                <label for="q5_2" style="width:150px">2</label>
+
+                <input type="radio" id="q5_3" name="question_5" value="3">
+                <label for="q5_3" style="width:150px">3</label>
+
+                <input type="radio" id="q5_4" name="question_5" value="4">
+                <label for="q5_4" style="width:150px">4</label>
+
+                <input type="radio" id="q5_5" name="question_5" value="5">
+                <label for="q5_5" style="width:150px">5</label><br><br>
+            </div>
+        </div>
+
+        <div class="tab">
+            <div>
+                <h2>Question 6</h2>
+                <hr>
+                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: 
+                    “When deciding to sell shares of stock that I own, it is important to consider the price I paid for 
+                    the stock.”</label><br>
+                <input type="radio" id="q6_1" name="question_6" value="1">
+                <label for="q6_1" style="width:150px">1</label>
+
+                <input type="radio" id="q6_2" name="question_6" value="2">
+                <label for="q6_2" style="width:150px">2</label>
+
+                <input type="radio" id="q6_3" name="question_6" value="3">
+                <label for="q6_3" style="width:150px">3</label>
+
+                <input type="radio" id="q6_4" name="question_6" value="4">
+                <label for="q6_4" style="width:150px">4</label>
+
+                <input type="radio" id="q6_5" name="question_6" value="5">
+                <label for="q6_5" style="width:150px">5</label><br><br>
+            </div>
+            
+            <div style="background-color: #f2f2f2;">
+                <h2>Question 7</h2>
+                <hr>
+                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: 
+                    “It hurts to sell a stock for less than I paid for it.”</label><br>
+                <input type="radio" id="q7_1" name="question_7" value="1">
+                <label for="q7_1" style="width:150px">1</label>
+
+                <input type="radio" id="q7_2" name="question_7" value="2">
+                <label for="q7_2" style="width:150px">2</label>
+
+                <input type="radio" id="q7_3" name="question_7" value="3">
+                <label for="q7_3" style="width:150px">3</label>
+
+                <input type="radio" id="q7_4" name="question_7" value="4">
+                <label for="q7_4" style="width:150px">4</label>
+
+                <input type="radio" id="q7_5" name="question_7" value="5">
+                <label for="q7_5" style="width:150px">5</label><br><br>
+            </div>
+
+            <div>
+                <h2>Question 8</h2>
+                <hr>
+                <label>Normally, if the price of a stock in your portfolio rose substantially since you bought 
+                    it, which of these two actions would make you feel happier: holding on to the stock, or selling that 
+                    stock?</label><br>
+                <input type="radio" id="q8_1" name="question_8" value="holding on to the stock">
+                <label for="q8_1" style="width:250px">Holding on to the stock</label>
+
+                <input type="radio" id="q8_2" name="question_8" value="selling that stock">
+                <label for="q8_2" style="width:250px">Selling that stock</label><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <h2>Question 9</h2>
+                <hr>
+                <label>Normally, if the price of a stock in your portfolio dropped substantially since you 
+                    bought it, which of these two actions would make you feel more painful: holding on to the stock, 
+                    or selling that stock?</label><br>
+                <input type="radio" id="q9_1" name="question_9" value="holding on to the stock">
+                <label for="q9_1" style="width:250px">Holding on to the stock</label>
+
+                <input type="radio" id="q9_2" name="question_9" value="selling that stock">
+                <label for="q9_2" style="width:250px">Selling that stock</label><br><br>
+            </div>
+        </div>
+
+        <div class="tab">
+            <div>
+                <h2>Question 10</h2>
+                <hr>
+                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: 
+                    “When deciding to sell shares of stock that I currently own, it is important that I focus on the stock 
+                    itself and not get distracted by the performance of the other stocks in my portfolio.”</label><br>
+                <input type="radio" id="q10_1" name="question_10" value="1">
+                <label for="q10_1" style="width:150px">1</label>
+
+                <input type="radio" id="q10_2" name="question_10" value="2">
+                <label for="q10_2" style="width:150px">2</label>
+
+                <input type="radio" id="q10_3" name="question_10" value="3">
+                <label for="q10_3" style="width:150px">3</label>
+
+                <input type="radio" id="q10_4" name="question_10" value="4">
+                <label for="q10_4" style="width:150px">4</label>
+
+                <input type="radio" id="q10_5" name="question_10" value="5">
+                <label for="q10_5" style="width:150px">5</label><br><br>
+            </div>
+        </div>
+
+        <div class="tab">
+            <div>
+                <h2>Question 11</h2>
+                <hr>
+                <label>Imagine that you face the following pair of concurrent decisions. First examine both decisions, 
+                    then indicate the options you prefer. (You will hold the pair of lotteries you choose, one from A and 
+                    B, and the other from C and D).</label><br>
+                <label>Decision (i). Choose between:</label><br>
+                <input type="radio" id="q11_1" name="question_11_i" value="A">
+                <label for="q11_1" style="width:250px">A. a sure gain of $240</label>
+
+                <input type="radio" id="q11_2" name="question_11_i" value="B">
+                <label for="q11_2" style="width:450px">B. 25% chance to gain $1000, and 75% chance to gain nothing</label><br>
+
+                <label>Decision (ii). Choose between:</label><br>
+                <input type="radio" id="q11_3" name="question_11_ii" value="C">
+                <label for="q11_3" style="width:250px">C. a sure loss of $750 </label>
+
+                <input type="radio" id="q11_4" name="question_11_ii" value="D">
+                <label for="q11_4" style="width:450px">D. 75% chance to lose $1000, and 25% chance to lose nothing</label><br><br>
+            </div>
+        </div>
+
+        <div class="tab">
+            <div>
+                <h2>Question 12</h2>
+                <hr>
+                <label>Over the past 12 months, have you bought or sold shares of stock? (Please ignore mutual fund 
+                    transactions)</label><br>
+                <input type="radio" id="q12_1" name="question_12" value="yes">
+                <label for="q12_1" style="width:250px">Yes</label>
+
+                <input type="radio" id="q12_2" name="question_12" value="no">
+                <label for="q12_2" style="width:250px">No</label><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <h2>Question 13</h2>
+                <hr>
+                <label>Approximately how many stock transactions (buy or sell orders) have you completed in the past 
+                    12 months?</label><br>
+                <input type="radio" id="q13_1" name="question_13" value="<10">
+                <label for="q13_1" style="width:150px"><10</label>
+
+                <input type="radio" id="q13_2" name="question_13" value="10-50">
+                <label for="q13_2" style="width:150px">10-50</label>
+
+                <input type="radio" id="q13_3" name="question_13" value="50-100">
+                <label for="q13_3" style="width:150px">50-100</label>
+
+                <input type="radio" id="q13_4" name="question_13" value=">100">
+                <label for="q13_4" style="width:150px">>100</label><br><br>
+            </div>
+        </div>
+
+        <div class="tab">
+            <h2>Question 14</h2>
+            <hr>
+            <div>
+                <label>Gender</label><br>
+                <input type="radio" id="q14_gender_1" name="question_14_gender" value="male">
+                <label for="q14_gender_1" style="width:250px">Male</label>
+
+                <input type="radio" id="q14_gender_2" name="question_14_gender" value="female">
+                <label for="q14_gender_2" style="width:250px">Female</label>
+
+                <input type="radio" id="q14_gender_3" name="question_14_gender" value="other">
+                <label for="q14_gender_3" style="width:250px">Other</label><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <label for="q14_age">Age</label><br>
+                <input type="text" id="q14_age" name="question_14_age" value=""><br><br>
+            </div>
+
+            <div>
+                <label>Annual Income</label><br>
+                <input type="radio" id="q14_annual_income_1" name="question_14_annual_income" value="<$15k">
+                <label for="q14_annual_income_1" style="width:130px"><$15k</label>
+
+                <input type="radio" id="q14_annual_income_2" name="question_14_annual_income" value="$15k-$30k">
+                <label for="q14_annual_income_2" style="width:130px">$15k-$30k</label>
+
+                <input type="radio" id="q14_annual_income_3" name="question_14_annual_income" value="$30k-$55k">
+                <label for="q14_annual_income_3" style="width:130px">$30k-$55k</label>
+
+                <input type="radio" id="q14_annual_income_4" name="question_14_annual_income" value="$55k-$90k">
+                <label for="q14_annual_income_4" style="width:130px">$55k-$90k</label>
+                
+                <input type="radio" id="q14_annual_income_5" name="question_14_annual_income" value=">$90k">
+                <label for="q14_annual_income_5" style="width:130px">>$90k</label>
+                
+                <input type="radio" id="q14_annual_income_6" name="question_14_annual_income" value="I don’t want to tell">
+                <label for="q14_annual_income_6" style="width:130px">I don’t want to tell</label><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <label>Net Worth</label><br>
+                <input type="radio" id="q14_net_worth_1" name="question_14_net_worth" value="<$0">
+                <label for="q14_net_worth_1" style="width:130px"><$0</label>
+
+                <input type="radio" id="q14_net_worth_2" name="question_14_net_worth" value="$0-$20k">
+                <label for="q14_net_worth_2" style="width:130px">$0-$20k</label>
+
+                <input type="radio" id="q14_net_worth_3" name="question_14_net_worth" value="$20k-$95k">
+                <label for="q14_net_worth_3" style="width:130px">$20k-$95k</label>
+
+                <input type="radio" id="q14_net_worth_4" name="question_14_net_worth" value="$95k-$320k">
+                <label for="q14_net_worth_4" style="width:130px">$95k-$320k</label>
+                
+                <input type="radio" id="q14_net_worth_5" name="question_14_net_worth" value=">$320k">
+                <label for="q14_net_worth_5" style="width:130px">>$320k</label>
+                
+                <input type="radio" id="q14_net_worth_6" name="question_14_net_worth" value="I don’t want to tell">
+                <label for="q14_net_worth_6" style="width:130px">I don’t want to tell</label><br><br>
+            </div>
+
+            <div>
+                <label>Job Classification Categories</label><br>
+                <input type="radio" id="q14_job_1" name="question_14_job" value="Agriculture, Food, & Natural Resources">
+                <label for="q14_job_1" style="width:300px">Agriculture, Food, & Natural Resources</label>
+
+                <input type="radio" id="q14_job_2" name="question_14_job" value="Business, Management, & Administration">
+                <label for="q14_job_2" style="width:300px">Business, Management, & Administration</label>
+
+                <input type="radio" id="q14_job_3" name="question_14_job" value="Communications & Information Systems">
+                <label for="q14_job_3" style="width:300px">Communications & Information Systems</label><br>
+
+                <input type="radio" id="q14_job_4" name="question_14_job" value="Engineering, Manufacturing, & Technology">
+                <label for="q14_job_4" style="width:300px">Engineering, Manufacturing, & Technology</label>
+                
+                <input type="radio" id="q14_job_5" name="question_14_job" value="Health Science Technology">
+                <label for="q14_job_5" style="width:300px">Health Science Technology</label>
+                
+                <input type="radio" id="q14_job_6" name="question_14_job" value="Human Services">
+                <label for="q14_job_6" style="width:300px">Human Services</label><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <label>Education – Highest earned degree</label><br>
+                <input type="radio" id="q14_education_1" name="question_14_education" value="High School Diploma">
+                <label for="q14_education_1" style="width:300px">High School Diploma</label>
+
+                <input type="radio" id="q14_education_2" name="question_14_education" value="Associate degree">
+                <label for="q14_education_2" style="width:300px">Associate degree</label>
+
+                <input type="radio" id="q14_education_3" name="question_14_education" value="Bachelor's degree">
+                <label for="q14_education_3" style="width:300px">Bachelor's degree</label><br>
+
+                <input type="radio" id="q14_education_4" name="question_14_education" value="Master's degree">
+                <label for="q14_education_4" style="width:300px">Master's degree</label>
+                
+                <input type="radio" id="q14_education_5" name="question_14_education" value="Doctoral degree">
+                <label for="q14_education_5" style="width:300px">Doctoral degree</label>
+                
+                <input type="radio" id="q14_education_6" name="question_14_education" value="Other">
+                <label for="q14_education_6" style="width:300px">Other</label><br><br>
+            </div>
+
+            <div>
+                <label for="q14_residence">Residence Info – Country, State, Zip</label><br>
+                <input type="text" id="q14_residence" name="question_14_residence" value=""><br><br>
+            </div>
+
+            <div style="background-color: #f2f2f2;">
+                <label>Homeowner or Renter</label><br>
+                <input type="radio" id="q14_owner_1" name="question_14_owner" value="Homeowner">
+                <label for="q14_owner_1" style="width:250px">Homeowner</label>
+
+                <input type="radio" id="q14_owner_2" name="question_14_owner" value="Renter">
+                <label for="q14_owner_2" style="width:250px">Renter</label><br><br>
+            </div>
+        </div>
+
+        <div id="surveyButtons" style="overflow:auto;display: none;">
+            <div style="float:right;">
+              <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+              <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+            </div>
+        </div>
+
+        <!-- Circles which indicates the steps of the form: -->
+        <div id="surveySteps" style="text-align:center;margin-top:40px;display: none;">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+    </form> 
+</div>
+
 <div id="experiment" style="display: none">
     <div id="myModal" class="modal">
 
@@ -721,6 +1116,34 @@
     const urlParams = new URLSearchParams(window.location.search);
     const workerId = urlParams.get('workerId');
 
+    // Added by Zirui Wang on 6/29/2020
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+
+    var q1 = "";
+    var q2 = "";
+    var q3 = "";
+    var q4 = "";
+    var q5 = "";
+    var q6 = "";
+    var q7 = "";
+    var q8 = "";
+    var q9 = "";
+    var q10 = "";
+    var q11i = "";
+    var q11ii = "";
+    var q12 = "";
+    var q13 = "";
+    var q14_gender = "";
+    var q14_age = "";
+    var q14_income = "";
+    var q14_networth = "";
+    var q14_job = "";
+    var q14_education = "";
+    var q14_residence = "";
+    var q14_homeowner = "";
+
+    var surveyDone = false;
+
 
     //initialization
     document.getElementById("roundtype").innerHTML = "Observation Round";
@@ -860,7 +1283,7 @@
         let gainlossType = document.getElementById("gainlossType");
         if (unrealisedGain[_currentPeriodIndex] > 0) {
             if(gainlossPopRandom>=0.5) {
-                gainlossType.innerHTML = "<span style='color: #c45850'>gain</span>";
+                gainlossType.innerHTML = "<span style='color: #3cba9f'>gain</span>";
                 openModalBox();
 
             } else {
@@ -868,7 +1291,7 @@
             //$('#gainlossType').css('color', '#c45850').text("gain");
         } else if (unrealisedGain[_currentPeriodIndex] < 0) {
             if(gainlossPopRandom<0.5) {
-                gainlossType.innerHTML = "<span style='color: #3cba9f'>loss</span>";
+                gainlossType.innerHTML = "<span style='color: #c45850'>loss</span>";
                 openModalBox();
 
             } else {
@@ -954,36 +1377,6 @@
                 var toWrite1;
 
                 if (ugl.toFixed(2) > 0) {
-                    toWrite1 = "<span style = 'color:#c45850'>$" + ugl.toFixed(2) + "</span>";
-
-                    currentPrices[i].style.color = "#c45850";
-                    averagePrices[i].style.color = "#c45850";
-                    preShare[i].style.color = "#c45850";
-                    sharesOwned[i].style.color = "#c45850";
-                    changeShare[i].style.color = "#c45850";
-
-                    if(i===0) {
-                        for (var j = 0; j < dollarSignsA.length; j++) {
-                            dollarSignsA[j].style.color = "#c45850";
-                        }
-                    }
-                    if(i===1) {
-                        for (var j = 0; j < dollarSignsB.length; j++) {
-                            dollarSignsB[j].style.color = "#c45850";
-                        }
-                    }
-                    if(i===2) {
-                        for (var j = 0; j < dollarSignsC.length; j++) {
-                            dollarSignsC[j].style.color = "#c45850";
-                        }
-                    }
-                    if(i===3) {
-                        for (var j = 0; j < dollarSignsD.length; j++) {
-                            dollarSignsD[j].style.color = "#c45850";
-                        }
-                    }
-                }
-                else if (ugl.toFixed(2) < 0) {
                     toWrite1 = "<span style = 'color:#3cba9f'>$" + ugl.toFixed(2) + "</span>";
 
                     currentPrices[i].style.color = "#3cba9f";
@@ -991,6 +1384,7 @@
                     preShare[i].style.color = "#3cba9f";
                     sharesOwned[i].style.color = "#3cba9f";
                     changeShare[i].style.color = "#3cba9f";
+
                     if(i===0) {
                         for (var j = 0; j < dollarSignsA.length; j++) {
                             dollarSignsA[j].style.color = "#3cba9f";
@@ -1009,6 +1403,35 @@
                     if(i===3) {
                         for (var j = 0; j < dollarSignsD.length; j++) {
                             dollarSignsD[j].style.color = "#3cba9f";
+                        }
+                    }
+                }
+                else if (ugl.toFixed(2) < 0) {
+                    toWrite1 = "<span style = 'color:#c45850'>$" + ugl.toFixed(2) + "</span>";
+
+                    currentPrices[i].style.color = "#c45850";
+                    averagePrices[i].style.color = "#c45850";
+                    preShare[i].style.color = "#c45850";
+                    sharesOwned[i].style.color = "#c45850";
+                    changeShare[i].style.color = "#c45850";
+                    if(i===0) {
+                        for (var j = 0; j < dollarSignsA.length; j++) {
+                            dollarSignsA[j].style.color = "#c45850";
+                        }
+                    }
+                    if(i===1) {
+                        for (var j = 0; j < dollarSignsB.length; j++) {
+                            dollarSignsB[j].style.color = "#c45850";
+                        }
+                    }
+                    if(i===2) {
+                        for (var j = 0; j < dollarSignsC.length; j++) {
+                            dollarSignsC[j].style.color = "#c45850";
+                        }
+                    }
+                    if(i===3) {
+                        for (var j = 0; j < dollarSignsD.length; j++) {
+                            dollarSignsD[j].style.color = "#c45850";
                         }
                     }
                 }
@@ -1086,9 +1509,9 @@
         unrealisedGain[_currentPeriodIndex] = unrealizedTotal.toFixed(2);
         var toWrite;
         if (unrealizedTotal.toFixed(2) > 0)
-            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2) + "</span>";
-        else if (unrealizedTotal.toFixed(2) < 0)
             toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
+        else if (unrealizedTotal.toFixed(2) < 0)
+            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2) + "</span>";
         else
             toWrite = "$" + unrealizedTotal.toFixed(2);
 
@@ -1172,13 +1595,14 @@
 
     function proceedToSurvey() {
         document.getElementById("survey").style.display = "block";
+        showTab(currentTab); // Display the current tab
         document.getElementById("experiment").style.display = "none";
     }
 
     function proceedToThankyou() {
 
         document.getElementById("thankyou").style.display = "block";
-        document.getElementById("experiment").style.display = "none";
+        document.getElementById("survey").style.display = "none";
     }
 
     function saveData() {
@@ -1246,6 +1670,31 @@
         //added by Zirui Wang on 6/24/2020
         let worker_id = workerId;
 
+        if (surveyDone) {
+            let q1 = document.getElementById("q1").value;
+            let q2 = document.getElementById("q2").value;
+            let q3 = document.getElementById("q3").value;
+            let q4 = document.getElementById("q4").value;
+            let q5 = document.getElementsByName('question_5')[0].value;
+            let q6 = "";
+            let q7 = "";
+            let q8 = "";
+            let q9 = "";
+            let q10 = "";
+            let q11i = "";
+            let q11ii = "";
+            let q12 = "";
+            let q13 = "";
+            let q14_gender = "";
+            let q14_age = "";
+            let q14_income = "";
+            let q14_networth = "";
+            let q14_job = "";
+            let q14_education = "";
+            let q14_residence = "";
+            let q14_homeowner = "";
+        }
+
         var json =
             {
                 "uid": uid,
@@ -1267,7 +1716,13 @@
                 "time_spent": time_spent,
                 "round_played_at": round_played_at,
                 "random_number": random_number,
-                "worker_id": worker_id
+                "worker_id": worker_id,
+                "question_1" : q1,
+                "question_2" : q2,
+                "question_3" : q3,
+                "question_4" : q4,
+                "question_5" : q5
+
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
@@ -1323,9 +1778,9 @@
             proceedToNextAttempt();
         }
         if (document.getElementById("next_period").innerHTML === END_EXPERIMENT_KEY) {
-            //proceedToSurvey();
+            proceedToSurvey();
             //window.location.reload();
-            proceedToThankyou();
+            //proceedToThankyou();
         }
         calcAveragePrice();
         updatePreviousShares(_currentPeriodIndex);
@@ -1626,6 +2081,61 @@
     //refresh the total assets Chart
     function freshTotalAssetsChart() {
         myChart2.update();
+    }
+
+    // Added by Zirui Wang on 6/29/2020. Refer to w3schools
+    function showTab(n) {
+        // This function will display the specified tab of the form ...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        // ... and fix the Previous/Next buttons:
+        if (n === 0) {
+            document.getElementById("surveyButtons").style.display = "block";
+            document.getElementById("surveySteps").style.display = "block";
+            document.getElementById("prevBtn").style.display = "none";
+
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n === (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Submit";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        // ... and run a function that displays the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    // Added by Zirui Wang on 6/29/2020. Refer to w3schools
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentTab = currentTab + n;
+        // if you have reached the end of the form... :
+        if (currentTab >= x.length) {
+            //...the form gets submitted:
+            //document.getElementById("surveyForm").submit();
+            surveyDone = true;
+            saveData();
+            proceedToThankyou();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    // Added by Zirui Wang on 6/29/2020. Refer to w3schools
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class to the current step:
+        x[n].className += " active";
     }
 
     var ctx = document.getElementById("myChart").getContext('2d');
