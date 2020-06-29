@@ -405,10 +405,14 @@
 </div>
 <div id="thankyou" style="display: none">
     <!-- Please reload if you wanna play again(but it will no longer affect your score) -->
-    <h2 style="align:center; vertical-align:middle"> Thank you for playing the game. </h2>
-    
+    <h3> Thank you for completing all 4 games and answering the questionnaire! </h2>
+
+    <p>    To compute your bonus payment, Game <input disabled id="numRandomGame" value="#X" style="width: 30px;"> was chosen and you finished with $Y in this game, 
+        so you will be paid a bonus of <input disabled id="formula" value=".1% x $Y = $Z" style="width: 100px;">. </p>
+        
+    <p>    Click next to receive the completion code you will need to get paid.</p>
     <!-- Added by Zirui Wang on 06/24/2020 -->
-    <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320">Click here to get the completion code.</a>
+    <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320">Next</a>
 </div>
 <!-- Commented by Zirui Wang on 6/14/2020 -->
 <!-- <div id="survey" style="display: none">
@@ -1119,7 +1123,7 @@
     // Added by Zirui Wang on 6/29/2020
     var currentTab = 0; // Current tab is set to be the first tab (0)
 
-
+    var total_assets = [1000, 1000, 1000, 1000];
 
     var surveyDone = false;
 
@@ -1579,6 +1583,8 @@
     }
 
     function proceedToThankyou() {
+        var random_var = Math.floor(Math.random() * 4) + 1
+        document.getElementById("numRandomGame").value = random_var;
 
         document.getElementById("thankyou").style.display = "block";
         document.getElementById("survey").style.display = "none";
@@ -1814,7 +1820,7 @@
         // Commented by Zirui Wang on 5/9/2020 in order to remove pop-up windows in between rounds
         // undo comment by Zirui Wang on 5/30/2020
         if (_currentPeriodIndex > 3 && _currentPeriodIndex < 14) {
-            populateModal();
+            //populateModal();
             //openModalBox();
         }
         
@@ -1824,6 +1830,8 @@
             document.getElementById("note").innerHTML = "You have finished this game. Click the Proceed button to " +
                 "proceed to the next game.";
             document.getElementById("next_period").innerHTML = PROCEED_KEY;
+
+            //total_assets[]=
         }
     }
 
