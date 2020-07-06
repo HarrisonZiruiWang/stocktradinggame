@@ -1826,22 +1826,22 @@
             q2 = document.getElementById("q2").value;
             q3 = document.getElementById("q3").value;
             q4 = document.getElementById("q4").value;
-            q5 = document.getElementsByName('question_5')[0].value;
-            q6 = document.getElementsByName('question_6')[0].value;
-            q7 = document.getElementsByName('question_7')[0].value;
-            q8 = document.getElementsByName('question_8')[0].value;
-            q9 = document.getElementsByName('question_9')[0].value;
-            q10 = document.getElementsByName('question_10')[0].value;
-            q11i = document.getElementsByName('question_11_i')[0].value;
-            q11ii = document.getElementsByName('question_11_ii')[0].value;
-            q12 = document.getElementsByName('question_12')[0].value;
-            q13 = document.getElementsByName('question_13')[0].value;
-            q14_gender = document.getElementsByName('question_14_gender')[0].value;
+            q5 = getValueByName('question_5');
+            q6 = getValueByName('question_6');
+            q7 = getValueByName('question_7');
+            q8 = getValueByName('question_8');
+            q9 = getValueByName('question_9');
+            q10 = getValueByName('question_10');
+            q11i = getValueByName('question_11_i');
+            q11ii = getValueByName('question_11_ii');
+            q12 = getValueByName('question_12');
+            q13 = getValueByName('question_13');
+            q14_gender = getValueByName('question_14_gender');
             q14_age = document.getElementById("q14_age").value;
-            q14_income = document.getElementsByName('question_14_annual_income')[0].value;
-            q14_networth = document.getElementsByName('question_14_net_worth')[0].value;
-            q14_education = document.getElementsByName('question_14_education')[0].value;
-            q14_homeowner = document.getElementsByName('question_14_owner')[0].value;
+            q14_income = getValueByName('question_14_annual_income');
+            q14_networth = getValueByName('question_14_net_worth');
+            q14_education = getValueByName('question_14_education');
+            q14_homeowner = getValueByName('question_14_owner');
             q14_residence = document.getElementById("q14_zip").value;
         }
 
@@ -1902,6 +1902,15 @@
             //console.log(xhr.status);
         };
 
+    }
+
+    function getValueByName(name) {
+        var ele = document.getElementsByName(name); 
+              
+        for(i = 0; i < ele.length; i++) { 
+            if(ele[i].checked) 
+                return ele[i].value;
+        } 
     }
 
     function start() {
