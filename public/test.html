@@ -13,7 +13,7 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            width: 100%;
+            width: 90%;
         }
 
         .modal {
@@ -217,11 +217,50 @@
         .step.finish {
             background-color: #4CAF50;
         }
+
+        /* Hide all steps by default: 
+           Added by Zirui Wang on 7/5/2020
+           Refer to w3schools */
+        .introTab {
+            display: none;
+        }
+
+        /* Make circles that indicate the steps of the form: 
+           Added by Zirui Wang on 7/5/2020
+           Refer to w3schools */
+        .introStep {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        /* Mark the active step: 
+           Added by Zirui Wang on 7/5/2020
+           Refer to w3schools */
+        .introStep.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid:
+           Added by Zirui Wang on 7/5/2020
+           Refer to w3schools  */
+        .introStep.finish {
+            background-color: #4CAF50;
+        }
     </style>
 </head>
 <body>
+
+<!-- Modified by Zirui Wang on 7/5/2020 -->
 <div id="intro">
     <H2> Instructions </H2>
+    <div class = "introTab">
+    <br>
     <p> This HIT will involve buying and selling fictitious stocks and will take
         approximately 20 minutes. You will be given $1,000 of experiment cash
         that you may use to trade stocks. Your final compensation will depend upon the
@@ -236,7 +275,9 @@
         buttons at the bottom of your
         screen.
     </p>
+    </div>
     <br>
+    <div class = "introTab">
     <p> <H4><u>Stock Price Development</u></H4> </p>
     <p >You will play the 12-round stock trading game a total of <b> 4 times </b>.</p>
     <p>
@@ -250,6 +291,8 @@
     </p>
     <p >The performance of a stock during one iteration of the game has nothing to do with its
         performance in other iterations of the game. Also, your choices do not affect the price development.</p>
+    <br>
+    </div>
 <!--    <div class="row">-->
 <!--        <div class="col-xs-12">-->
 <!--            <table class="table">-->
@@ -293,7 +336,8 @@
 <!--        $5 with the same probability. The magnitude of the price changes is completely independent of whether the price-->
 <!--        is-->
 <!--        increasing or decreasing. </p>-->
-    <br>
+    
+    <div class="introTab">
     <p> <H4><u>Trading</u></H4>
     <p>
         Once you start the experiment you will be shown a screen with information, graphs and a trading interface.
@@ -303,11 +347,14 @@
     <p> Your total portfolio will be held in cash and stocks. No interest will be paid on the amount you hold in cash.
         The left graph entitled “Graph of Stock Prices in Each Round” displays the price development of all stocks.
         Using your mouse cursor, you can investigate each stock’s price in more detail. </p>
+        <br>
+    </div>
         <!-- The right graph entitled “Your
         Total Trading Gains/Losses to Date” displays your total portfolio gain or loss. A total portfolio gain means the
         value of your portfolio is now above the $1,000 you started with. A total portfolio loss means the value of your
         portfolio is now below the $1,000 you started with. </p> -->
-    <br>
+    
+    <div class="introTab">
     <p> <H4><u>Buying Shares</u></H4>
     <p> At the bottom of your screen will see a row for each stock. If you click on the “buy” button, you will receive
         one
@@ -320,7 +367,10 @@
     <p> If you click on “sell,” you will sell one share of stock at the current price and the proceedings will be added
         to your
         cash balance.You cannot sell shares you do not own — i.e., short-selling is not allowed in this experiment.</p>
-    <br>
+        <br>
+    </div>
+    
+    <div class="introTab">
     <p><H4><u>Compensation</u></H4>
     <p> For this HIT you will be paid $2 plus a bonus. A computer will randomly choose one of your 4 games and the bonus
         will be equal to 0.1% times your Total Assets in that game. For example, if Game #3 was randomly chosen by the 
@@ -379,7 +429,23 @@
         Your anonymity is assured; the researchers who have requested your participation will not receive any personal
         information about you. By continuing, you are confirming that you understand these instructions and conditions
         of participation.</p>
+    </div>
+    <br>
+    <div id="introButtons" style="overflow:auto;display: none;">
+        <div style="float:right;">
+            <button type="button" id="introPrevBtn" class="btn btn-primary btn-sm" onclick="introNextPrev(-1)">Previous</button>
+            <button type="button" id="introNextBtn" class="btn btn-primary btn-sm" onclick="introNextPrev(1)">Next</button>
+        </div>
+    </div>
 
+    <!-- Circles which indicates the steps of the form: -->
+    <div id="introSteps" style="text-align:center;margin-top:40px;display: none;">
+        <span class="introStep"></span>
+        <span class="introStep"></span>
+        <span class="introStep"></span>
+        <span class="introStep"></span>
+        <span class="introStep"></span>
+    </div>
     <!-- Modified by Zirui Wang on 06/27/2020 -->
     <script type="text/javascript">
         var button = document.getElementById("start");
@@ -406,14 +472,21 @@
 <div id="thankyou" style="display: none">
     <!-- Please reload if you wanna play again(but it will no longer affect your score) -->
     <h3> Thank you for completing all 4 games and answering the questionnaire! </h2>
-
-    <p>    To compute your bonus payment, Game <input disabled id="numRandomGame" value="#X" style="width: 30px;"> was 
-        chosen and you finished with <input disabled id="totalAssetthisRound" value="#Y" style="width: 30px;"> in this game, 
-        so you will be paid a bonus of <input disabled id="formula" value=".1% x $Y = $Z" style="width: 100px;">. </p>
-        
+    <br>
+    <!-- Added by Zirui Wang on 07/05/2020 -->
+    <p> To compute your bonus payment, Game <input disabled id="numRandomGame" value="#X" type="text"> was 
+        chosen and you finished with <input disabled id="totalAssetthisRound" value="#Y" type="text"> in this game, 
+        so you will be paid a bonus of <input disabled id="formula" value=".1% x $Y = $Z" type="text">. </p>
+    <br>
+    <p>Your total compensation (including fixed payment and bonus) will be paid within the next <b>3 business days</b>.</p>
+    <br>
     <p>    Click next to receive the completion code you will need to get paid.</p>
+    <br>
     <!-- Added by Zirui Wang on 06/24/2020 -->
-    <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320">Next</a>
+    <div style="float:right;">
+        <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320" 
+            class="btn btn-primary btn-sm" role="button">Next</a>
+    </div>
 </div>
 <!-- Commented by Zirui Wang on 6/14/2020 -->
 <!-- <div id="survey" style="display: none">
@@ -536,39 +609,80 @@
 </div> -->
 
 <!-- Added by Zirui Wang on 06/28/2020 -->
-<div id="survey" style="display: block">
+<!-- Modified by Zirui Wang on 07/05/2020 -->
+<div id="survey" style="display: none">
     <form id="surveyForm">
         <div class="tab">
             <div>
                 <h2>Question 1</h2>
                 <hr>
-                <label for="q1">In the last (4th) game, if you recall, what is the largest portfolio level paper gain 
-                    you have experienced?</label><br>
-                <input type="text" id="q1" name="question_1" value=""><br><br>
+                <h3>During each game, you were shown your portfolio unrealized gain/loss.</h3>
+                <img src="survey_total.jpg" alt="location reminder of portfolio unrealized gain/loss" class="center">
+                <h3>In the last game, what is the largest portfolio unrealized <b>gain</b> you experienced?</h3>
+                <br>
+                <input type="radio" id="q1_1" name="question_1_radio" value="I experienced" 
+                    onclick="getElementById('q1').removeAttribute('hidden');getElementById('q1').value='';">
+                <label for="q1_1">I experienced one, and the largest is</label>
+                <input type="text" id="q1" name="question_1" value="I didn’t experience" hidden>
+                <br>
+                <input type="radio" id="q1_2" name="question_1_radio" value="I didn’t experience" 
+                    onclick="getElementById('q1').setAttribute('hidden','hidden');getElementById('q1').value='I didn’t experience';">
+                <label for="q1_2">I didn’t experience any portfolio unrealized <b>gains</b></label>
+                <br><br>
             </div>
 
             <div style="background-color: #f2f2f2;">
                 <h2>Question 2</h2>
                 <hr>
-                <label for="q2">In the last (4th) game, if you recall, what is the largest paper (unrealized) gain on 
-                    a single stock that you have experienced?</label><br>
-                <input type="text" id="q2" name="question_2" value=""><br><br>
+                <h3>During each game, you were shown your portfolio unrealized gain/loss.</h3>
+                <img src="survey_total.jpg" alt="location reminder of portfolio unrealized gain/loss" class="center">
+                <h3>In the last game, what is the largest portfolio unrealized <b>loss</b> you experienced?</h3>
+                <br>
+                <input type="radio" id="q2_1" name="question_2_radio" value="Yes, I experienced." 
+                    onclick="getElementById('q2').removeAttribute('hidden');getElementById('q2').value='';">
+                <label for="q2_1">I experienced one, and the largest is</label>
+                <input type="text" id="q2" name="question_2" value="I didn’t experience" hidden>
+                <br>
+                <input type="radio" id="q2_2" name="question_2_radio" value="I didn’t experience" 
+                    onclick="getElementById('q2').setAttribute('hidden','hidden');getElementById('q2').value='I didn’t experience';">
+                <label for="q2_2">I didn’t experience any portfolio unrealized <b>losses</b></label>
+                <br><br>
             </div>
 
             <div>
                 <h2>Question 3</h2>
                 <hr>
-                <label for="q3">In the last (4th) game, if you recall, what is the largest portfolio level paper 
-                    (unrealized) loss you have experienced?</label><br>
-                <input type="text" id="q3" name="question_3" value=""><br><br>
+                <h3>During each game, you were also shown individual stocks’ unrealized gains/losses.</h3>
+                <img src="survey_individual.jpg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
+                <h3>In the last game, what is the largest individual stock’s unrealized <b>gain</b> that you experienced?</h3>
+                <br>
+                <input type="radio" id="q3_1" name="question_3_radio" value="Yes, I experienced." 
+                    onclick="getElementById('q3').removeAttribute('hidden');getElementById('q3').value='';">
+                <label for="q3_1">I experienced one, and the largest is</label>
+                <input type="text" id="q3" name="question_3" value="I didn’t experience" hidden>
+                <br>
+                <input type="radio" id="q3_2" name="question_3_radio" value="I didn’t experience" 
+                    onclick="getElementById('q3').setAttribute('hidden','hidden');getElementById('q3').value='I didn’t experience';">
+                <label for="q3_2">I didn’t experience any individual stock unrealized gains</label>
+                <br><br>
             </div>
 
             <div style="background-color: #f2f2f2;">
                 <h2>Question 4</h2>
                 <hr>
-                <label for="q4">In the last (4th) game, if you recall, what is the largest paper loss on a single 
-                    stock that you have experienced? </label><br>
-                <input type="text" id="q4" name="question_4" value=""><br><br>
+                <h3>During each game, you were also shown individual stocks’ unrealized gains/losses.</h3>
+                <img src="survey_individual.jpg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
+                <h3>In the last game, what is the largest individual stock’s unrealized <b>loss</b> that you experienced?</h3>
+                <br>
+                <input type="radio" id="q4_1" name="question_4_radio" value="Yes, I experienced." 
+                    onclick="getElementById('q4').removeAttribute('hidden');getElementById('q4').value='';">
+                <label for="q4_1">I experienced one, and the largest is</label>
+                <input type="text" id="q4" name="question_4" value="I didn’t experience" hidden>
+                <br>
+                <input type="radio" id="q4_2" name="question_4_radio" value="I didn’t experience" 
+                    onclick="getElementById('q4').setAttribute('hidden','hidden');getElementById('q4').value='I didn’t experience';">
+                <label for="q4_2">I didn’t experience any individual stock unrealized losses</label>
+                <br><br>
             </div>
         </div>
         
@@ -576,23 +690,25 @@
             <div>
                 <h2>Question 5</h2>
                 <hr>
-                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following 
-                    statement: “When deciding to sell shares of stock that I currently own, it is important that I 
-                    consider the performance of my entire portfolio.”</label><br>
-                <input type="radio" id="q5_1" name="question_5" value="1">
-                <label for="q5_1" style="width:150px">1</label>
-
-                <input type="radio" id="q5_2" name="question_5" value="2">
-                <label for="q5_2" style="width:150px">2</label>
-
-                <input type="radio" id="q5_3" name="question_5" value="3">
-                <label for="q5_3" style="width:150px">3</label>
-
-                <input type="radio" id="q5_4" name="question_5" value="4">
-                <label for="q5_4" style="width:150px">4</label>
-
-                <input type="radio" id="q5_5" name="question_5" value="5">
-                <label for="q5_5" style="width:150px">5</label><br><br>
+                <h3>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following
+                    statement: </h3>
+                <br>
+                <h4><i>“When deciding to sell shares of stock that I currently own, it is important that I 
+                    consider the performance of my entire portfolio.”</i></h4><br>
+                <input type="radio" id="q5_1" name="question_5" value="Strongly disagree">
+                <label for="q5_1" style="width:350px">Strongly disagree</label>
+                <br>
+                <input type="radio" id="q5_2" name="question_5" value="Disagree">
+                <label for="q5_2" style="width:350px">Disagree</label>
+                <br>
+                <input type="radio" id="q5_3" name="question_5" value="Neither agree nor disagree">
+                <label for="q5_3" style="width:350px">Neither agree nor disagree</label>
+                <br>
+                <input type="radio" id="q5_4" name="question_5" value="Agree">
+                <label for="q5_4" style="width:350px">Agree</label>
+                <br>
+                <input type="radio" id="q5_5" name="question_5" value="Strongly agree">
+                <label for="q5_5" style="width:350px">Strongly agree</label><br><br>
             </div>
         </div>
 
@@ -600,55 +716,54 @@
             <div>
                 <h2>Question 6</h2>
                 <hr>
-                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: 
-                    “When deciding to sell shares of stock that I own, it is important to consider the price I paid for 
-                    the stock.”</label><br>
-                <input type="radio" id="q6_1" name="question_6" value="1">
-                <label for="q6_1" style="width:150px">1</label>
-
-                <input type="radio" id="q6_2" name="question_6" value="2">
-                <label for="q6_2" style="width:150px">2</label>
-
-                <input type="radio" id="q6_3" name="question_6" value="3">
-                <label for="q6_3" style="width:150px">3</label>
-
-                <input type="radio" id="q6_4" name="question_6" value="4">
-                <label for="q6_4" style="width:150px">4</label>
-
-                <input type="radio" id="q6_5" name="question_6" value="5">
-                <label for="q6_5" style="width:150px">5</label><br><br>
+                <h3>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: </h3><br>
+                <h4><i>“When deciding to sell shares of stock that I own, it is important to consider the price I paid for 
+                    the stock.”</i></h4><br>
+                <input type="radio" id="q6_1" name="question_6" value="Strongly disagree">
+                <label for="q6_1" style="width:350px">Strongly disagree</label>
+                <br>
+                <input type="radio" id="q6_2" name="question_6" value="Disagree">
+                <label for="q6_2" style="width:350px">Disagree</label>
+                <br>
+                <input type="radio" id="q6_3" name="question_6" value="Neither agree nor disagree">
+                <label for="q6_3" style="width:350px">Neither agree nor disagree</label>
+                <br>
+                <input type="radio" id="q6_4" name="question_6" value="Agree">
+                <label for="q6_4" style="width:350px">Agree</label>
+                <br>
+                <input type="radio" id="q6_5" name="question_6" value="Strongly agree">
+                <label for="q6_5" style="width:350px">Strongly agree</label><br><br>
             </div>
             
             <div style="background-color: #f2f2f2;">
                 <h2>Question 7</h2>
                 <hr>
-                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: 
-                    “It hurts to sell a stock for less than I paid for it.”</label><br>
-                <input type="radio" id="q7_1" name="question_7" value="1">
-                <label for="q7_1" style="width:150px">1</label>
-
-                <input type="radio" id="q7_2" name="question_7" value="2">
-                <label for="q7_2" style="width:150px">2</label>
-
-                <input type="radio" id="q7_3" name="question_7" value="3">
-                <label for="q7_3" style="width:150px">3</label>
-
-                <input type="radio" id="q7_4" name="question_7" value="4">
-                <label for="q7_4" style="width:150px">4</label>
-
-                <input type="radio" id="q7_5" name="question_7" value="5">
-                <label for="q7_5" style="width:150px">5</label><br><br>
+                <h3>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: </h3><br>
+                <h4>    <i>“It hurts to sell a stock for less than I paid for it.”</i></h4><br>
+                <input type="radio" id="q7_1" name="question_7" value="Strongly disagree">
+                <label for="q7_1" style="width:350px">Strongly disagree</label>
+                <br>
+                <input type="radio" id="q7_2" name="question_7" value="Disagree">
+                <label for="q7_2" style="width:350px">Disagree</label>
+                <br>
+                <input type="radio" id="q7_3" name="question_7" value="Neither agree nor disagree">
+                <label for="q7_3" style="width:350px">Neither agree nor disagree</label>
+                <br>
+                <input type="radio" id="q7_4" name="question_7" value="Agree">
+                <label for="q7_4" style="width:350px">Agree</label>
+                <br>
+                <input type="radio" id="q7_5" name="question_7" value="Strongly agree">
+                <label for="q7_5" style="width:350px">Strongly agree</label><br><br>
             </div>
 
             <div>
                 <h2>Question 8</h2>
                 <hr>
-                <label>Normally, if the price of a stock in your portfolio rose substantially since you bought 
-                    it, which of these two actions would make you feel happier: holding on to the stock, or selling that 
-                    stock?</label><br>
+                <h3>Normally, if the price of a stock in your portfolio rose substantially since you bought 
+                    it, which of these two actions would make you feel happier?</h3><br>
                 <input type="radio" id="q8_1" name="question_8" value="holding on to the stock">
                 <label for="q8_1" style="width:250px">Holding on to the stock</label>
-
+                <br>
                 <input type="radio" id="q8_2" name="question_8" value="selling that stock">
                 <label for="q8_2" style="width:250px">Selling that stock</label><br><br>
             </div>
@@ -656,12 +771,11 @@
             <div style="background-color: #f2f2f2;">
                 <h2>Question 9</h2>
                 <hr>
-                <label>Normally, if the price of a stock in your portfolio dropped substantially since you 
-                    bought it, which of these two actions would make you feel more painful: holding on to the stock, 
-                    or selling that stock?</label><br>
+                <h3>Normally, if the price of a stock in your portfolio dropped substantially since you 
+                    bought it, which of these two actions would make you feel more painful?</h3><br>
                 <input type="radio" id="q9_1" name="question_9" value="holding on to the stock">
                 <label for="q9_1" style="width:250px">Holding on to the stock</label>
-
+                <br>
                 <input type="radio" id="q9_2" name="question_9" value="selling that stock">
                 <label for="q9_2" style="width:250px">Selling that stock</label><br><br>
             </div>
@@ -671,23 +785,23 @@
             <div>
                 <h2>Question 10</h2>
                 <hr>
-                <label>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: 
-                    “When deciding to sell shares of stock that I currently own, it is important that I focus on the stock 
-                    itself and not get distracted by the performance of the other stocks in my portfolio.”</label><br>
-                <input type="radio" id="q10_1" name="question_10" value="1">
-                <label for="q10_1" style="width:150px">1</label>
-
-                <input type="radio" id="q10_2" name="question_10" value="2">
-                <label for="q10_2" style="width:150px">2</label>
-
-                <input type="radio" id="q10_3" name="question_10" value="3">
-                <label for="q10_3" style="width:150px">3</label>
-
-                <input type="radio" id="q10_4" name="question_10" value="4">
-                <label for="q10_4" style="width:150px">4</label>
-
-                <input type="radio" id="q10_5" name="question_10" value="5">
-                <label for="q10_5" style="width:150px">5</label><br><br>
+                <h3>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: </h3><br>
+                <h4><i> “When deciding to sell shares of stock that I currently own, it is important that I focus on the stock 
+                    itself and not get distracted by the performance of the other stocks in my portfolio.”</i></h4><br>
+                <input type="radio" id="q10_1" name="question_10" value="Strongly disagree">
+                <label for="q10_1" style="width:350px">Strongly disagree</label>
+                <br>
+                <input type="radio" id="q10_2" name="question_10" value="Disagree">
+                <label for="q10_2" style="width:350px">Disagree</label>
+                <br>
+                <input type="radio" id="q10_3" name="question_10" value="Neither agree nor disagree">
+                <label for="q10_3" style="width:350px">Neither agree nor disagree</label>
+                <br>
+                <input type="radio" id="q10_4" name="question_10" value="Agree">
+                <label for="q10_4" style="width:350px">Agree</label>
+                <br>
+                <input type="radio" id="q10_5" name="question_10" value="Strongly agree">
+                <label for="q10_5" style="width:350px">Strongly agree</label><br><br>
             </div>
         </div>
 
@@ -695,20 +809,19 @@
             <div>
                 <h2>Question 11</h2>
                 <hr>
-                <label>Imagine that you face the following pair of concurrent decisions. First examine both decisions, 
-                    then indicate the options you prefer. (You will hold the pair of lotteries you choose, one from A and 
-                    B, and the other from C and D).</label><br>
-                <label>Decision (i). Choose between:</label><br>
+                <h3>Imagine that you face the following pair of concurrent decisions. First examine both decisions, 
+                    then indicate the options you prefer. </h3><br>
+                <h4>Decision (i). Choose between:</h4><br>
                 <input type="radio" id="q11_1" name="question_11_i" value="A">
                 <label for="q11_1" style="width:250px">A. a sure gain of $240</label>
-
+                <br>
                 <input type="radio" id="q11_2" name="question_11_i" value="B">
                 <label for="q11_2" style="width:450px">B. 25% chance to gain $1000, and 75% chance to gain nothing</label><br>
-
-                <label>Decision (ii). Choose between:</label><br>
+                <br>
+                <h4>Decision (ii). Choose between:</h4><br>
                 <input type="radio" id="q11_3" name="question_11_ii" value="C">
                 <label for="q11_3" style="width:250px">C. a sure loss of $750 </label>
-
+                <br>
                 <input type="radio" id="q11_4" name="question_11_ii" value="D">
                 <label for="q11_4" style="width:450px">D. 75% chance to lose $1000, and 25% chance to lose nothing</label><br><br>
             </div>
@@ -718,11 +831,11 @@
             <div>
                 <h2>Question 12</h2>
                 <hr>
-                <label>Over the past 12 months, have you bought or sold shares of stock? (Please ignore mutual fund 
-                    transactions)</label><br>
+                <h3>Over the past 12 months, have you bought or sold shares of stock? (Please ignore mutual fund 
+                    transactions)</h3><br>
                 <input type="radio" id="q12_1" name="question_12" value="yes">
                 <label for="q12_1" style="width:250px">Yes</label>
-
+                <br>
                 <input type="radio" id="q12_2" name="question_12" value="no">
                 <label for="q12_2" style="width:250px">No</label><br><br>
             </div>
@@ -730,17 +843,17 @@
             <div style="background-color: #f2f2f2;">
                 <h2>Question 13</h2>
                 <hr>
-                <label>Approximately how many stock transactions (buy or sell orders) have you completed in the past 
-                    12 months?</label><br>
+                <h3>Approximately how many stock transactions (buy or sell orders) have you completed in the past 
+                    12 months?</h3><br>
                 <input type="radio" id="q13_1" name="question_13" value="<10">
                 <label for="q13_1" style="width:150px"><10</label>
-
+                <br>
                 <input type="radio" id="q13_2" name="question_13" value="10-50">
                 <label for="q13_2" style="width:150px">10-50</label>
-
+                <br>
                 <input type="radio" id="q13_3" name="question_13" value="50-100">
                 <label for="q13_3" style="width:150px">50-100</label>
-
+                <br>
                 <input type="radio" id="q13_4" name="question_13" value=">100">
                 <label for="q13_4" style="width:150px">>100</label><br><br>
             </div>
@@ -750,125 +863,132 @@
             <h2>Question 14</h2>
             <hr>
             <div>
-                <label>Gender</label><br>
+                <h3>What is your gender?</h3><br>
                 <input type="radio" id="q14_gender_1" name="question_14_gender" value="male">
                 <label for="q14_gender_1" style="width:250px">Male</label>
-
+                <br>
                 <input type="radio" id="q14_gender_2" name="question_14_gender" value="female">
                 <label for="q14_gender_2" style="width:250px">Female</label>
-
+                <br>
                 <input type="radio" id="q14_gender_3" name="question_14_gender" value="other">
-                <label for="q14_gender_3" style="width:250px">Other</label><br><br>
+                <label for="q14_gender_3" style="width:450px">Other</label>
+                <br>
+                <input type="radio" id="q14_gender_4" name="question_14_gender" value="I would prefer not to say">
+                <label for="q14_gender_4" style="width:250px">I would prefer not to say</label><br><br>
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <label for="q14_age">Age</label><br>
-                <input type="text" id="q14_age" name="question_14_age" value=""><br><br>
+                <h3>What is your age?</h3><br>
+
+                <input type="radio" id="q14_age_1" name="question_14_age_radio" value="My age is" 
+                    onclick="getElementById('q14_age').removeAttribute('hidden');getElementById('q14_age').value='';">
+                <label for="q14_age_1">My age is</label>
+                <input type="text" id="q14_age" name="question_14_age" value="I would prefer not to say" hidden>
+                <br>
+                <input type="radio" id="q14_age_2" name="question_14_age_radio" value="I would prefer not to say" 
+                    onclick="getElementById('q14_age').setAttribute('hidden','hidden');getElementById('q14_age').value='I would prefer not to say';">
+                <label for="q14_age_2">I would prefer not to say</label>
+                <br><br>
             </div>
 
             <div>
-                <label>Annual Income</label><br>
+                <h3>What is your annual income?</h3><br>
                 <input type="radio" id="q14_annual_income_1" name="question_14_annual_income" value="<$15k">
-                <label for="q14_annual_income_1" style="width:130px"><$15k</label>
-
+                <label for="q14_annual_income_1" style="width:330px"><$15k</label>
+                <br>
                 <input type="radio" id="q14_annual_income_2" name="question_14_annual_income" value="$15k-$30k">
-                <label for="q14_annual_income_2" style="width:130px">$15k-$30k</label>
-
+                <label for="q14_annual_income_2" style="width:330px">$15k-$30k</label>
+                <br>
                 <input type="radio" id="q14_annual_income_3" name="question_14_annual_income" value="$30k-$55k">
-                <label for="q14_annual_income_3" style="width:130px">$30k-$55k</label>
-
+                <label for="q14_annual_income_3" style="width:330px">$30k-$55k</label>
+                <br>
                 <input type="radio" id="q14_annual_income_4" name="question_14_annual_income" value="$55k-$90k">
-                <label for="q14_annual_income_4" style="width:130px">$55k-$90k</label>
-                
+                <label for="q14_annual_income_4" style="width:330px">$55k-$90k</label>
+                <br>
                 <input type="radio" id="q14_annual_income_5" name="question_14_annual_income" value=">$90k">
-                <label for="q14_annual_income_5" style="width:130px">>$90k</label>
-                
-                <input type="radio" id="q14_annual_income_6" name="question_14_annual_income" value="I don’t want to tell">
-                <label for="q14_annual_income_6" style="width:130px">I don’t want to tell</label><br><br>
+                <label for="q14_annual_income_5" style="width:330px">>$90k</label>
+                <br>
+                <input type="radio" id="q14_annual_income_6" name="question_14_annual_income" value="I would prefer not to say">
+                <label for="q14_annual_income_6" style="width:330px">I would prefer not to say</label><br><br>
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <label>Net Worth</label><br>
+                <h3>What is your net worth?</h3><br>
                 <input type="radio" id="q14_net_worth_1" name="question_14_net_worth" value="<$0">
-                <label for="q14_net_worth_1" style="width:130px"><$0</label>
-
+                <label for="q14_net_worth_1" style="width:330px"><$0</label>
+                <br>
                 <input type="radio" id="q14_net_worth_2" name="question_14_net_worth" value="$0-$20k">
-                <label for="q14_net_worth_2" style="width:130px">$0-$20k</label>
-
+                <label for="q14_net_worth_2" style="width:330px">$0-$20k</label>
+                <br>
                 <input type="radio" id="q14_net_worth_3" name="question_14_net_worth" value="$20k-$95k">
-                <label for="q14_net_worth_3" style="width:130px">$20k-$95k</label>
-
+                <label for="q14_net_worth_3" style="width:330px">$20k-$95k</label>
+                <br>
                 <input type="radio" id="q14_net_worth_4" name="question_14_net_worth" value="$95k-$320k">
-                <label for="q14_net_worth_4" style="width:130px">$95k-$320k</label>
-                
+                <label for="q14_net_worth_4" style="width:330px">$95k-$320k</label>
+                <br>
                 <input type="radio" id="q14_net_worth_5" name="question_14_net_worth" value=">$320k">
-                <label for="q14_net_worth_5" style="width:130px">>$320k</label>
-                
-                <input type="radio" id="q14_net_worth_6" name="question_14_net_worth" value="I don’t want to tell">
-                <label for="q14_net_worth_6" style="width:130px">I don’t want to tell</label><br><br>
+                <label for="q14_net_worth_5" style="width:330px">>$320k</label>
+                <br>
+                <input type="radio" id="q14_net_worth_6" name="question_14_net_worth" value="I would prefer not to say">
+                <label for="q14_net_worth_6" style="width:330px">I would prefer not to say</label><br><br>
             </div>
 
             <div>
-                <label>Job Classification Categories</label><br>
-                <input type="radio" id="q14_job_1" name="question_14_job" value="Agriculture, Food, & Natural Resources">
-                <label for="q14_job_1" style="width:300px">Agriculture, Food, & Natural Resources</label>
-
-                <input type="radio" id="q14_job_2" name="question_14_job" value="Business, Management, & Administration">
-                <label for="q14_job_2" style="width:300px">Business, Management, & Administration</label>
-
-                <input type="radio" id="q14_job_3" name="question_14_job" value="Communications & Information Systems">
-                <label for="q14_job_3" style="width:300px">Communications & Information Systems</label><br>
-
-                <input type="radio" id="q14_job_4" name="question_14_job" value="Engineering, Manufacturing, & Technology">
-                <label for="q14_job_4" style="width:300px">Engineering, Manufacturing, & Technology</label>
-                
-                <input type="radio" id="q14_job_5" name="question_14_job" value="Health Science Technology">
-                <label for="q14_job_5" style="width:300px">Health Science Technology</label>
-                
-                <input type="radio" id="q14_job_6" name="question_14_job" value="Human Services">
-                <label for="q14_job_6" style="width:300px">Human Services</label><br><br>
-            </div>
-
-            <div style="background-color: #f2f2f2;">
-                <label>Education – Highest earned degree</label><br>
+                <h3>What is the highest degree or level of school you have completed?</h3><br>
                 <input type="radio" id="q14_education_1" name="question_14_education" value="High School Diploma">
                 <label for="q14_education_1" style="width:300px">High School Diploma</label>
-
+                <br>
                 <input type="radio" id="q14_education_2" name="question_14_education" value="Associate degree">
                 <label for="q14_education_2" style="width:300px">Associate degree</label>
-
+                <br>
                 <input type="radio" id="q14_education_3" name="question_14_education" value="Bachelor's degree">
-                <label for="q14_education_3" style="width:300px">Bachelor's degree</label><br>
-
+                <label for="q14_education_3" style="width:300px">Bachelor's degree</label>
+                <br>
                 <input type="radio" id="q14_education_4" name="question_14_education" value="Master's degree">
                 <label for="q14_education_4" style="width:300px">Master's degree</label>
-                
+                <br>
                 <input type="radio" id="q14_education_5" name="question_14_education" value="Doctoral degree">
                 <label for="q14_education_5" style="width:300px">Doctoral degree</label>
-                
+                <br>
                 <input type="radio" id="q14_education_6" name="question_14_education" value="Other">
-                <label for="q14_education_6" style="width:300px">Other</label><br><br>
-            </div>
-
-            <div>
-                <label for="q14_residence">Residence Info – Country, State, Zip</label><br>
-                <input type="text" id="q14_residence" name="question_14_residence" value=""><br><br>
+                <label for="q14_education_6" style="width:300px">Other</label>
+                <br>
+                <input type="radio" id="q14_education_7" name="question_14_education" value="I would prefer not to say">
+                <label for="q14_education_7" style="width:300px">I would prefer not to say</label><br><br>
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <label>Homeowner or Renter</label><br>
+                <h3>Are you homeowner or renter?</h3><br>
                 <input type="radio" id="q14_owner_1" name="question_14_owner" value="Homeowner">
                 <label for="q14_owner_1" style="width:250px">Homeowner</label>
-
+                <br>
                 <input type="radio" id="q14_owner_2" name="question_14_owner" value="Renter">
-                <label for="q14_owner_2" style="width:250px">Renter</label><br><br>
+                <label for="q14_owner_2" style="width:250px">Renter</label>
+                <br>
+                <input type="radio" id="q14_owner_3" name="question_14_owner" value="I would prefer not to say">
+                <label for="q14_owner_3" style="width:300px">I would prefer not to say</label><br><br>
+            </div>
+
+            <div>
+                <h3>What is the zip code of your residence?</h3><br>
+
+                <input type="radio" id="q14_zip_1" name="question_14_zip_radio" value="My zip code is" 
+                    onclick="getElementById('q14_zip').removeAttribute('hidden');getElementById('q14_zip').value='';">
+                <label for="q14_zip_1">My zip code is</label>
+                <input type="text" id="q14_zip" name="question_14_zip" value="I would prefer not to say" hidden>
+                <br>
+                <input type="radio" id="q14_zip_2" name="question_14_zip_radio" value="I would prefer not to say" 
+                    onclick="getElementById('q14_zip').setAttribute('hidden','hidden');getElementById('q14_zip').value='I would prefer not to say';">
+                <label for="q14_zip_2">I would prefer not to say</label>
+
+                <br><br>
             </div>
         </div>
-
+        <br>
         <div id="surveyButtons" style="overflow:auto;display: none;">
             <div style="float:right;">
-              <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
-              <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+              <button type="button" id="prevBtn" class="btn btn-primary btn-sm" onclick="nextPrev(-1)">Previous</button>
+              <button type="button" id="nextBtn" class="btn btn-primary btn-sm" onclick="nextPrev(1)">Next</button>
             </div>
         </div>
 
@@ -1090,7 +1210,7 @@
         " You may begin trading in Round 3. Click the Next Round button to proceed to the next round.";
     const ROUND_TRADING = "Trading Round";
     const ROUND_OBSERVATION = "Observation Round";
-    const END_EXPERIMENT_KEY = "End Experiment";
+    const END_EXPERIMENT_KEY = "Start Survey";
     //Total assets, it will change over  time
     var _totalAssets = new Array(18);
     var _unrealisedListGlobal = new Array(4);
@@ -1123,11 +1243,16 @@
 
     // Added by Zirui Wang on 6/29/2020
     var currentTab = 0; // Current tab is set to be the first tab (0)
+    
+    // Added by Zirui Wang on 7/5/2020
+    var currentIntroTab = 0; // Current tab is set to be the first tab (0)
 
-    var total_assets = [1000, 1000, 1000, 1000];
-
+    // Added by Zirui Wang on 7/5/2020
+    var total_assets = [0, 1000, 1000, 1000, 1000];
     var surveyDone = false;
 
+    // Added by Zirui Wang on 7/5/2020
+    showIntroTab(currentIntroTab);
 
     //initialization
     document.getElementById("roundtype").innerHTML = "Observation Round";
@@ -1584,8 +1709,21 @@
     }
 
     function proceedToThankyou() {
+        // Added by Zirui Wang on 7/5/2020
         var random_var = Math.floor(Math.random() * 4) + 1
-        document.getElementById("numRandomGame").value = random_var;
+
+        var num_game = document.getElementById("numRandomGame");
+        var total = document.getElementById("totalAssetthisRound");
+
+        num_game.value = random_var;
+        total.value = total_assets[random_var];
+
+        num_game.style.width = ((num_game.value.length + 1) * 8) + 'px';
+        total.style.width = ((total.value.length + 1) * 8) + 'px';
+
+        var formula = document.getElementById("formula");
+        formula.value = ".1% x $" + total.value + " = $" + total_assets[random_var]*0.001;
+        formula.style.width = ((formula.value.length + 1) * 7) + 'px';
 
         document.getElementById("thankyou").style.display = "block";
         document.getElementById("survey").style.display = "none";
@@ -1832,7 +1970,8 @@
                 "proceed to the next game.";
             document.getElementById("next_period").innerHTML = PROCEED_KEY;
 
-            //total_assets[]=
+            // Added by Zirui Wang on 7/5/2020
+            total_assets[currentAttempt]= _totalAssets[_currentPeriodIndex];
         }
     }
 
@@ -2093,6 +2232,61 @@
     function freshTotalAssetsChart() {
         myChart2.update();
     }
+
+    // Added by Zirui Wang on 7/5/2020. Refer to w3schools
+    function showIntroTab(n) {
+        // This function will display the specified tab of the form ...
+        var x = document.getElementsByClassName("introTab");
+        x[n].style.display = "block";
+        // ... and fix the Previous/Next buttons:
+        if (n === 0) {
+            document.getElementById("introButtons").style.display = "block";
+            document.getElementById("introSteps").style.display = "block";
+            document.getElementById("introPrevBtn").style.display = "none";
+
+        } else {
+            document.getElementById("introPrevBtn").style.display = "inline";
+        }
+        if (n === (x.length - 1)) {
+            document.getElementById("introNextBtn").style.display = "none";
+            //document.getElementById("introPrevBtn").style.display = "none";
+        } else {
+            document.getElementById("introNextBtn").style.display = "inline";
+            document.getElementById("introNextBtn").innerHTML = "Next";
+        }
+        // ... and run a function that displays the correct step indicator:
+        fixIntroStepIndicator(n)
+    }
+
+    // Added by Zirui Wang on 7/5/2020. Refer to w3schools
+    function introNextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("introTab");
+        // Hide the current tab:
+        x[currentIntroTab].style.display = "none";
+        // Increase or decrease the current tab by 1:
+        currentIntroTab = currentIntroTab + n;
+        // if you have reached the end of the form... :
+        if (currentIntroTab >= x.length) {
+            //...the form gets submitted:
+            //document.getElementById("surveyForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showIntroTab(currentIntroTab);
+    }
+
+    // Added by Zirui Wang on 7/5/2020. Refer to w3schools
+    function fixIntroStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("introStep");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class to the current step:
+        x[n].className += " active";
+    }
+
 
     // Added by Zirui Wang on 6/29/2020. Refer to w3schools
     function showTab(n) {
