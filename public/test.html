@@ -1250,6 +1250,7 @@
     // Added by Zirui Wang on 7/5/2020
     var total_assets = [0, 1000, 1000, 1000, 1000];
     var surveyDone = false;
+    var bonus = 0;
 
     // Added by Zirui Wang on 7/5/2020
     showIntroTab(currentIntroTab);
@@ -1708,8 +1709,8 @@
         document.getElementById("experiment").style.display = "none";
     }
 
-    function proceedToThankyou() {
-        // Added by Zirui Wang on 7/5/2020
+    // Added by Zirui Wang on 7/5/2020
+    function setupThankyouPanel() {
         var random_var = Math.floor(Math.random() * 4) + 1
 
         var num_game = document.getElementById("numRandomGame");
@@ -1722,9 +1723,12 @@
         total.style.width = ((total.value.length + 1) * 8) + 'px';
 
         var formula = document.getElementById("formula");
-        formula.value = ".1% x $" + total.value + " = $" + total_assets[random_var]*0.001;
+        bonus = total_assets[random_var]*0.001;
+        formula.value = ".1% x $" + total.value + " = $" + bonus;
         formula.style.width = ((formula.value.length + 1) * 7) + 'px';
+    }
 
+    function proceedToThankyou() {
         document.getElementById("thankyou").style.display = "block";
         document.getElementById("survey").style.display = "none";
     }
@@ -1823,24 +1827,25 @@
             q3 = document.getElementById("q3").value;
             q4 = document.getElementById("q4").value;
             q5 = document.getElementsByName('question_5')[0].value;
-            q6 = "";
-            q7 = "";
-            q8 = "";
-            q9 = "";
-            q10 = "";
-            q11i = "";
-            q11ii = "";
-            q12 = "";
-            q13 = "";
-            q14_gender = "";
-            q14_age = "";
-            q14_income = "";
-            q14_networth = "";
-            q14_job = "";
-            q14_education = "";
-            q14_residence = "";
-            q14_homeowner = "";
+            q6 = document.getElementsByName('question_6')[0].value;
+            q7 = document.getElementsByName('question_7')[0].value;
+            q8 = document.getElementsByName('question_8')[0].value;
+            q9 = document.getElementsByName('question_9')[0].value;
+            q10 = document.getElementsByName('question_10')[0].value;
+            q11i = document.getElementsByName('question_11_i')[0].value;
+            q11ii = document.getElementsByName('question_11_ii')[0].value;
+            q12 = document.getElementsByName('question_12')[0].value;
+            q13 = document.getElementsByName('question_13')[0].value;
+            q14_gender = document.getElementsByName('question_14_gender')[0].value;
+            q14_age = document.getElementById("q14_age").value;
+            q14_income = document.getElementsByName('question_14_annual_income')[0].value;
+            q14_networth = document.getElementsByName('question_14_net_worth')[0].value;
+            q14_education = document.getElementsByName('question_14_education')[0].value;
+            q14_homeowner = document.getElementsByName('question_14_owner')[0].value;
+            q14_residence = document.getElementById("q14_zip").value;
         }
+
+        let bonus_payment = bonus;
 
         var json =
             {
@@ -1864,12 +1869,28 @@
                 "round_played_at": round_played_at,
                 "random_number": random_number,
                 "worker_id": worker_id,
-                "question_1" : q1,
-                "question_2" : q2,
-                "question_3" : q3,
-                "question_4" : q4,
-                "question_5" : q5
-
+                "question_1" : q1,                          // 1
+                "question_2" : q2,                          // 2
+                "question_3" : q3,                          // 3
+                "question_4" : q4,                          // 4
+                "question_5" : q5,                          // 5
+                "question_6" : q6,                          // 6
+                "question_7" : q7,                          // 7
+                "question_8" : q8,                          // 8
+                "question_9" : q9,                          // 9
+                "question_10" : q10,                        // 10
+                "question_11_i" : q11i,                     // 11
+                "question_11_ii" : q11ii,                   // 12
+                "question_12" : q12,                        // 13
+                "question_13" : q13,                        // 14
+                "question_14_gender" : q14_gender,          // 15
+                "question_14_age" : q14_age,                // 16
+                "question_14_annual_income" : q14_income,   // 17
+                "question_14_net_worth" : q14_networth,     // 18
+                "question_14_education" : q14_education,    // 19
+                "question_14_homeowner" : q14_homeowner,    // 20
+                "question_14_zipcode" : q14_residence,      // 21
+                "bonus" : bonus_payment                     // 22
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
@@ -2323,6 +2344,7 @@
         if (currentTab >= x.length) {
             //...the form gets submitted:
             //document.getElementById("surveyForm").submit();
+            setupThankyouPanel();
             surveyDone = true;
             saveData();
             proceedToThankyou();
