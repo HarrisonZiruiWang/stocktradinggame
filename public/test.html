@@ -275,11 +275,12 @@
         buttons at the bottom of your
         screen.
     </p>
+    <p >You will play the 12-round stock trading game a total of <b> 4 times</b>.</p>
     </div>
     <br>
     <div class = "introTab">
     <p> <H4><u>Stock Price Development</u></H4> </p>
-    <p >You will play the 12-round stock trading game a total of <b> 4 times </b>.</p>
+    
     <p>
         Stock prices change each round according to the following two processes.  First, it will be determined whether
         a stock will exhibit a price increase or decrease. The probabilities of increases or decreases are different
@@ -1060,16 +1061,20 @@
 
     </div>
     <div id="myEndOfExperimentModal" class="modal">
-        <!-- Modal content -->
+        <!-- Modal content Modified by Zirui Wang on 7/12/2020-->
         <div class="modal-content">
             <div class="text-center top">Game <span id="attempt"></span> of <span id="totalAttempts">2</span>
             </div>
-            <div class="portfolio" style="text-align: center">
+            <div class="portfolio" style="text-align: center; display: none;">
                 You have total cash of $<span id="totalCash"></span>
             </div>
-            <div class="portfolio" style="text-align: center">
+            <div class="portfolio" style="text-align: center; display: none;">
                 You have total shares of $<span id="totalShare"></span>
             </div>
+            <div class="portfolio" style="text-align: center">
+                At the end of this game, your total asset value is $<span id="totalAssetNew"></span> (cash value $<span id="totalCashNew"></span> + stock value $<span id="totalShareNew"></span>).
+            </div>
+            <br>
             <div style="text-align: center">
                 <button class="btn btn-primary btn-lg blue" id="proceed">Proceed</button>
             </div>
@@ -1095,11 +1100,11 @@
         <!-- Edited by Zirui Wang  on 6/13/2020 -->
         <div class="row">
             <div class="col-xs-4 flex ">
-                <div>Cash:</div>
+                <div>Cash Value:</div>
                 <div>$<span id="Cash">10000</span></div>
             </div>
             <div class="col-xs-4 flex ">
-                <div>Shares:</div>
+                <div>Stock Value:</div>
                 <div>$<span id="Shares">0</span></div>
             </div>
             <div class="col-xs-4 flex "> 
@@ -1728,6 +1733,9 @@
         document.getElementById("totalAttempts").innerHTML = totalAttempts + "";
         document.getElementById("totalCash").innerHTML = _cash;
         document.getElementById("totalShare").innerHTML =  _shares;
+        document.getElementById("totalCashNew").innerHTML = _cash;
+        document.getElementById("totalShareNew").innerHTML =  _shares;
+        document.getElementById("totalAssetNew").innerHTML = total_assets[currentAttempt];
         // $("#totalCash").text(_cash);
         // $("#totalShare").text(_shares);
     }
