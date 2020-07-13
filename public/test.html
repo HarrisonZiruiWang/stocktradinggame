@@ -190,6 +190,17 @@
             display: none;
         }
 
+        /* Style the input fields */
+        input {
+            font-size: 17px;
+            border: 1px solid #aaaaaa;
+        }
+
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
         /* Make circles that indicate the steps of the form: 
            Added by Zirui Wang on 6/29/2020
            Refer to w3schools */
@@ -251,6 +262,14 @@
            Refer to w3schools  */
         .introStep.finish {
             background-color: #4CAF50;
+        }
+
+        /* Added by Zirui Wang on 7/13/2020 */
+        .required {
+            color: red;
+        }
+        .required_alert {
+            display: none;
         }
     </style>
 </head>
@@ -447,6 +466,7 @@
         <span class="introStep"></span>
         <span class="introStep"></span>
     </div>
+    <br>
     <!-- Modified by Zirui Wang on 06/27/2020 -->
     <script type="text/javascript">
         var button = document.getElementById("start");
@@ -612,20 +632,24 @@
 <!-- Added by Zirui Wang on 06/28/2020 -->
 <!-- Modified by Zirui Wang on 07/05/2020 -->
 <div id="survey" style="display: none">
+    <span class="required">* Required</span><br><br>
     <form id="surveyForm">
         <div class="tab">
             <div>
-                <br><h2>Question 1</h2>
+                <h2>Question 1</h2>
                 <hr>
                 <h4>During each game, you were shown your portfolio unrealized gain/loss.</h4>
                 <img src="survey_total.jpg" alt="location reminder of portfolio unrealized gain/loss" class="center">
-                <h4>In the last game, what is the largest portfolio unrealized <b>gain</b> you experienced?</h4>
+                <h4>In the last game, what is the largest portfolio unrealized <b>gain</b> you experienced?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_1">This is a required question.</span><br>
                 <br>
                 <input type="radio" id="q1_1" name="question_1_radio" value="I experienced" 
                     onclick="getElementById('q1').removeAttribute('hidden');getElementById('q1').value='';">
                 <label for="q1_1"><h4>I did experience portfolio unrealized gains, and to the best of my memory, the largest <b>gain</b> was $</h4></label>
-                <input type="text" id="q1" name="question_1" value="I didn’t experience" hidden style="width: 100px;">
+                
+                <input type="text" id="q1" name="question_1" value="" style="width: 100px;" onfocus="getElementById('q1_1').setAttribute('checked','checked');">
                 <br>
+                
                 <input type="radio" id="q1_2" name="question_1_radio" value="I didn’t experience" 
                     onclick="getElementById('q1').setAttribute('hidden','hidden');getElementById('q1').value='I didn’t experience';">
                 <label for="q1_2"><h4>I didn’t experience any portfolio unrealized <b>gains</b></h4></label>
@@ -637,12 +661,13 @@
                 <hr>
                 <h4>During each game, you were shown your portfolio unrealized gain/loss.</h4>
                 <img src="survey_total.jpg" alt="location reminder of portfolio unrealized gain/loss" class="center">
-                <h4>In the last game, what is the largest portfolio unrealized <b>loss</b> you experienced?</h4>
+                <h4>In the last game, what is the largest portfolio unrealized <b>loss</b> you experienced?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_2">This is a required question.</span><br>
                 <br>
                 <input type="radio" id="q2_1" name="question_2_radio" value="Yes, I experienced." 
                     onclick="getElementById('q2').removeAttribute('hidden');getElementById('q2').value='';">
-                <label for="q2_1"><h4>I did experience portfolio unrealized losses, and to the best of my memory, the largest <b>loss</b> was $</h4></label>
-                <input type="text" id="q2" name="question_2" value="I didn’t experience" hidden style="width: 100px;">
+                <label for="q2_1"><h4>I did experience portfolio unrealized losses, and to the best of my memory, the largest <b>loss</b> was -$</h4></label>
+                <input type="text" id="q2" name="question_2" value="" style="width: 100px;" onfocus="getElementById('q2_1').setAttribute('checked','checked');">
                 <br>
                 <input type="radio" id="q2_2" name="question_2_radio" value="I didn’t experience" 
                     onclick="getElementById('q2').setAttribute('hidden','hidden');getElementById('q2').value='I didn’t experience';">
@@ -655,12 +680,13 @@
                 <hr>
                 <h4>During each game, you were also shown individual stocks’ unrealized gains/losses.</h4>
                 <img src="survey_individual.jpg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
-                <h4>In the last game, what is the largest individual stock’s unrealized <b>gain</b> that you experienced?</h4>
+                <h4>In the last game, what is the largest individual stock’s unrealized <b>gain</b> that you experienced?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_3">This is a required question.</span><br>
                 <br>
                 <input type="radio" id="q3_1" name="question_3_radio" value="Yes, I experienced." 
                     onclick="getElementById('q3').removeAttribute('hidden');getElementById('q3').value='';">
-                <label for="q3_1"><h4>I did experience individual stock unrealized gains, and to the best of my memory, the largest <b>gain</b> was -$</h4></label>
-                <input type="text" id="q3" name="question_3" value="I didn’t experience" hidden style="width: 100px;">
+                <label for="q3_1"><h4>I did experience individual stock unrealized gains, and to the best of my memory, the largest <b>gain</b> was $</h4></label>
+                <input type="text" id="q3" name="question_3" value="" style="width: 100px;" onfocus="getElementById('q3_1').setAttribute('checked','checked');">
                 <br>
                 <input type="radio" id="q3_2" name="question_3_radio" value="I didn’t experience" 
                     onclick="getElementById('q3').setAttribute('hidden','hidden');getElementById('q3').value='I didn’t experience';">
@@ -673,12 +699,13 @@
                 <hr>
                 <h4>During each game, you were also shown individual stocks’ unrealized gains/losses.</h4>
                 <img src="survey_individual.jpg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
-                <h4>In the last game, what is the largest individual stock’s unrealized <b>loss</b> that you experienced?</h4>
+                <h4>In the last game, what is the largest individual stock’s unrealized <b>loss</b> that you experienced?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_4">This is a required question.</span><br>
                 <br>
                 <input type="radio" id="q4_1" name="question_4_radio" value="Yes, I experienced." 
                     onclick="getElementById('q4').removeAttribute('hidden');getElementById('q4').value='';">
                 <label for="q4_1"><h4>I did experience individual stock unrealized losses, and to the best of my memory, the largest <b>loss</b> was -$</h4></label>
-                <input type="text" id="q4" name="question_4" value="I didn’t experience" hidden style="width: 100px;">
+                <input type="text" id="q4" name="question_4" value="" style="width: 100px;" onfocus="getElementById('q4_1').setAttribute('checked','checked');">
                 <br>
                 <input type="radio" id="q4_2" name="question_4_radio" value="I didn’t experience" 
                     onclick="getElementById('q4').setAttribute('hidden','hidden');getElementById('q4').value='I didn’t experience';">
@@ -689,17 +716,18 @@
         
         <div class="tab">
             <div>
-                <h4>For question 5 to 7, on a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following
+                <h4>For questions 5 to 7, on a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following
                     statements: </h4>
                 
-                <br>
                 <br><h2>Question 5</h2>
                 <hr>
                 <!-- <h4>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following
                     statement: </h4>
                 <br> -->
                 <h4><i>“When deciding to sell shares of stock that I currently own, it is important that I 
-                    consider the performance of my entire portfolio.”</i></h4><br>
+                    consider the performance of my entire portfolio.”</i><span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_5">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q5_1" name="question_5" value="Strongly disagree">
                 <label for="q5_1" style="width:350px"><h4>1--Strongly disagree</h4></label>
                 <br>
@@ -717,11 +745,13 @@
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <br><h2>Question 6</h2>
+                <h2>Question 6</h2>
                 <hr>
                 <!-- <h4>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: </h4><br> -->
                 <h4><i>“When deciding to sell shares of stock that I own, it is important to consider the price I paid for 
-                    the stock.”</i></h4><br>
+                    the stock.”</i><span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_6">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q6_1" name="question_6" value="Strongly disagree">
                 <label for="q6_1" style="width:350px"><h4>1--Strongly disagree</h4></label>
                 <br>
@@ -739,10 +769,12 @@
             </div>
             
             <div>
-                <br><h2>Question 7</h2>
+                <h2>Question 7</h2>
                 <hr>
                 <!-- <h4>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: </h4><br> -->
-                <h4>    <i>“It hurts to sell a stock for less than I paid for it.”</i></h4><br>
+                <h4>    <i>“It hurts to sell a stock for less than I paid for it.”</i><span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_7">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q7_1" name="question_7" value="Strongly disagree">
                 <label for="q7_1" style="width:350px"><h4>1--Strongly disagree</h4></label>
                 <br>
@@ -761,10 +793,12 @@
         </div>
         <div class="tab">
             <div>
-                <br><h2>Question 8</h2>
+                <h2>Question 8</h2>
                 <hr>
                 <h4>Normally, if the price of a stock in your portfolio rose substantially since you bought 
-                    it, which of these two actions would make you feel happier?</h4><br>
+                    it, which of these two actions would make you feel happier?<span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_8">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q8_1" name="question_8" value="holding on to the stock">
                 <label for="q8_1" style="width:250px"><h4>Holding on to the stock</h4></label>
                 <br>
@@ -776,7 +810,9 @@
                 <br><h2>Question 9</h2>
                 <hr>
                 <h4>Normally, if the price of a stock in your portfolio dropped substantially since you 
-                    bought it, which of these two actions would make you feel more painful?</h4><br>
+                    bought it, which of these two actions would make you feel more painful?<span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_9">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q9_1" name="question_9" value="holding on to the stock">
                 <label for="q9_1" style="width:250px"><h4>Holding on to the stock</h4></label>
                 <br>
@@ -785,9 +821,11 @@
             </div>
 
             <div>
-                <br><h2>Question 10</h2>
+                <h2>Question 10</h2>
                 <hr>
-                <h4>You played the stock trading games four times, how many stocks were available to trade in each game?</h4><br>
+                <h4>You played the stock trading games four times, how many stocks were available to trade in each game?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_10">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q10_1" name="question_10" value="1">
                 <label for="q10_1" style="width:250px"><h4>1</h4></label>
                 <br>
@@ -805,11 +843,13 @@
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <br><h2>Question 11</h2>
+                <h2>Question 11</h2>
                 <hr>
                 <h4>On a scale of 1 (strongly disagree) to 5 (strongly agree), please rate the following statement: </h4><br>
                 <h4><i> “When deciding to sell shares of stock that I currently own, it is important that I focus on the stock 
-                    itself and not get distracted by the performance of the other stocks in my portfolio.”</i></h4><br>
+                    itself and not get distracted by the performance of the other stocks in my portfolio.”</i><span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_11">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q11_1" name="question_11" value="Strongly disagree">
                 <label for="q11_1" style="width:350px"><h4>1--Strongly disagree</h4></label>
                 <br>
@@ -829,18 +869,22 @@
 
         <div class="tab">
             <div>
-                <br><h2>Question 12</h2>
+                <h2>Question 12</h2>
                 <hr>
                 <h4>Imagine that you face the following pair of <b>concurrent</b> decisions. First examine both decisions, 
-                    then indicate the options you prefer. </h4><br>
-                <h4>Decision (i). Choose between:</h4><br>
+                    then indicate the options you prefer.</h4><br>
+                <h4>Decision (i). Choose between:<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_12_i">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q12_1" name="question_12_i" value="A">
                 <label for="q12_1"><h4>A. a sure gain of $240</h4></label>
                 <br>
                 <input type="radio" id="q12_2" name="question_12_i" value="B">
                 <label for="q12_2"><h4>B. 25% chance to gain $1000, and 75% chance to gain nothing</h4></label><br>
                 <br>
-                <h4>Decision (ii). Choose between:</h4><br>
+                <h4>Decision (ii). Choose between:<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_12_ii">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q12_3" name="question_12_ii" value="C">
                 <label for="q12_3"><h4>C. a sure loss of $750 </h4></label>
                 <br>
@@ -851,10 +895,12 @@
 
         <div class="tab">
             <div>
-                <br><h2>Question 13</h2>
+                <h2>Question 13</h2>
                 <hr>
                 <h4>Over the past 12 months, have you bought or sold shares of stock? (Please ignore mutual fund 
-                    transactions)</h4><br>
+                    transactions)<span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_13">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q13_1" name="question_13" value="yes">
                 <label for="q13_1" style="width:250px"><h4>Yes</h4></label>
                 <br>
@@ -866,7 +912,9 @@
                 <br><h2>Question 14</h2>
                 <hr>
                 <h4>Approximately how many stock transactions (buy or sell orders) have you completed in the past 
-                    12 months?</h4><br>
+                    12 months?<span class="required"> *</span></h4>
+                    <span class="required required_alert" id="required_alert_14">This is a required question.</span><br>
+                    <br>
                 <input type="radio" id="q14_1" name="question_14" value="<10">
                 <label for="q14_1" style="width:150px"><h4><10</h4></label>
                 <br>
@@ -885,7 +933,9 @@
             <h2>Question 15</h2>
             <hr>
             <div>
-                <br><h4>What is your gender?</h4><br>
+                <br><h4>What is your gender?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_gender">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q15_gender_1" name="question_15_gender" value="male">
                 <label for="q15_gender_1" style="width:250px"><h4>Male</h4></label>
                 <br>
@@ -900,12 +950,14 @@
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <br><h4>What is your age?</h4><br>
+                <br><h4>What is your age?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_age">This is a required question.</span><br>
+                <br>
 
                 <input type="radio" id="q15_age_1" name="question_15_age_radio" value="My age is" 
                     onclick="getElementById('q15_age').removeAttribute('hidden');getElementById('q15_age').value='';">
-                <label for="q15_age_1"><h4>My age is</h4></label>
-                <input type="text" id="q15_age" name="question_15_age" value="I would prefer not to say" hidden>
+                <label for="q15_age_1"><h4>My age is </h4></label>
+                <input type="text" id="q15_age" name="question_15_age" value="" style="width: 100px;" onfocus="getElementById('q15_age_1').setAttribute('checked','checked');">
                 <br>
                 <input type="radio" id="q15_age_2" name="question_15_age_radio" value="I would prefer not to say" 
                     onclick="getElementById('q15_age').setAttribute('hidden','hidden');getElementById('q15_age').value='I would prefer not to say';">
@@ -914,7 +966,9 @@
             </div>
 
             <div>
-                <br><h4>What is your annual income?</h4><br>
+                <br><h4>What is your annual income?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_income">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q15_annual_income_1" name="question_15_annual_income" value="<$15k">
                 <label for="q15_annual_income_1" style="width:330px"><h4><$15k</h4></label>
                 <br>
@@ -935,7 +989,9 @@
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <br><h4>What is your net worth?</h4><br>
+                <br><h4>What is your net worth?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_net_worth">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q15_net_worth_1" name="question_15_net_worth" value="<$0">
                 <label for="q15_net_worth_1" style="width:330px"><h4><$0</h4></label>
                 <br>
@@ -956,7 +1012,9 @@
             </div>
 
             <div>
-                <br><h4>What is the highest degree or level of school you have completed?</h4><br>
+                <br><h4>What is the highest degree or level of school you have completed?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_edu">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q15_education_1" name="question_15_education" value="High School Diploma"
                     onclick="getElementById('q15_edu').setAttribute('hidden','hidden');getElementById('q15_edu').value='High School Diploma';">
                 <label for="q15_education_1" style="width:300px"><h4>High School Diploma</h4></label>
@@ -979,8 +1037,8 @@
                 <br>
                 <input type="radio" id="q15_education_6" name="question_15_education" value="Other"
                     onclick="getElementById('q15_edu').removeAttribute('hidden');getElementById('q15_edu').value='';">
-                <label for="q15_education_6"><h4>Other, please Specify:</h4></label>
-                <input type="text" id="q15_edu" name="question_15_edu_inputbox" value="" hidden>
+                <label for="q15_education_6"><h4>Other, please Specify: </h4></label>
+                <input type="text" id="q15_edu" name="question_15_edu_inputbox" value="" style="width: 300px;" onfocus="getElementById('q15_education_6').setAttribute('checked','checked');">
                 <br>
                 <input type="radio" id="q15_education_7" name="question_15_education" value="I would prefer not to say"
                     onclick="getElementById('q15_edu').setAttribute('hidden','hidden');getElementById('q15_edu').value='I would prefer not to say';">
@@ -988,7 +1046,9 @@
             </div>
 
             <div style="background-color: #f2f2f2;">
-                <br><h4>Are you homeowner or renter?</h4><br>
+                <br><h4>Are you homeowner or renter?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_home">This is a required question.</span><br>
+                <br>
                 <input type="radio" id="q15_owner_1" name="question_15_owner" value="Homeowner">
                 <label for="q15_owner_1" style="width:250px"><h4>Homeowner</h4></label>
                 <br>
@@ -1000,12 +1060,14 @@
             </div>
 
             <div>
-                <br><h4>What is the zip code of your residence?</h4><br>
+                <br><h4>What is the zip code of your residence?<span class="required"> *</span></h4>
+                <span class="required required_alert" id="required_alert_15_zip">This is a required question.</span><br>
+                <br>
 
                 <input type="radio" id="q15_zip_1" name="question_15_zip_radio" value="My zip code is" 
                     onclick="getElementById('q15_zip').removeAttribute('hidden');getElementById('q15_zip').value='';">
-                <label for="q15_zip_1"><h4>My zip code is</h4></label>
-                <input type="text" id="q15_zip" name="question_15_zip" value="I would prefer not to say" hidden>
+                <label for="q15_zip_1"><h4>My zip code is </h4></label>
+                <input type="text" id="q15_zip" name="question_15_zip" value="" style="width: 100px;" onfocus="getElementById('q15_zip_1').setAttribute('checked','checked');">
                 <br>
                 <input type="radio" id="q15_zip_2" name="question_15_zip_radio" value="I would prefer not to say" 
                     onclick="getElementById('q15_zip').setAttribute('hidden','hidden');getElementById('q15_zip').value='I would prefer not to say';">
@@ -1031,6 +1093,7 @@
             <span class="step"></span>
             <span class="step"></span>
         </div>
+        <br>
     </form> 
 </div>
 
@@ -1061,7 +1124,7 @@
 
     </div>
     <div id="myEndOfExperimentModal" class="modal">
-        <!-- Modal content Modified by Zirui Wang on 7/12/2020-->
+        <!-- Modal content. Modified by Zirui Wang on 7/12/2020-->
         <div class="modal-content">
             <div class="text-center top">Game <span id="attempt"></span> of <span id="totalAttempts">2</span>
             </div>
@@ -1072,7 +1135,10 @@
                 You have total shares of $<span id="totalShare"></span>
             </div>
             <div class="portfolio" style="text-align: center">
-                At the end of this game, your total asset value is $<span id="totalAssetNew"></span> (cash value $<span id="totalCashNew"></span> + stock value $<span id="totalShareNew"></span>).
+                At the end of this game, your total asset value is $<span id="totalAssetNew"></span> 
+            </div>
+            <div class="portfolio" style="text-align: center">
+            (cash value $<span id="totalCashNew"></span> + stock value $<span id="totalShareNew"></span>).
             </div>
             <br>
             <div style="text-align: center">
@@ -1086,14 +1152,14 @@
         <div class="text-center top" style="width:30%;float:left;"><span id = "roundLabel">Round</span> <span id="period">
         </span><span id = "totalLabel">of 12</span></div>
         <div class="text-center top1" style="width:40%;float:right;"><span id="roundtype"></span></div>
-
+        <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
-            <div class="col-xs-8">
-                <p> <H4 id = "note_label"><u>Note</u></H4> </p>
+            <div class="col-xs-8" style="height: 100px;">
+                <H4 id = "note_label"><u>Note</u></H4>
                 <div><span id="note">You are now in an Observation Round.  You may only watch the stock prices.  You may begin trading in Round 3. Click the Next Round button 	to proceed to the next round.</span>
                 </div>
             </div>
-            <div class="col-xs-4 btns">
+            <div class="col-xs-4 btns" style="height: 100px;">
                 <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
             </div>
         </div>
@@ -1112,9 +1178,10 @@
                 <div>$<span id="TotalAssets">10000</span></div>
             </div>
         </div>
+        <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
-            <div class="col-xs-12">
-                <canvas id="myChart" style="height: 330px;"></canvas>
+            <div class="col-xs-8 col-md-offset-2">
+                <canvas id="myChart" ></canvas>
             </div>
 
             <div class="col-xs-6">
@@ -1286,8 +1353,8 @@
     var bonus = 0;
 
     // Added by Zirui Wang on 7/5/2020
-    showIntroTab(currentIntroTab);
-    //proceedToSurvey();
+    //showIntroTab(currentIntroTab);
+    proceedToSurvey();
     
     //initialization
     document.getElementById("roundtype").innerHTML = "Observation Round";
@@ -2345,6 +2412,7 @@
         }
         // Otherwise, display the correct tab:
         showIntroTab(currentIntroTab);
+        topFunction();
     }
 
     // Added by Zirui Wang on 7/5/2020. Refer to w3schools
@@ -2356,6 +2424,108 @@
         }
         //... and adds the "active" class to the current step:
         x[n].className += " active";
+    }
+
+    // Added by Zirui Wang on 7/13/2020. Refer to w3schools
+    function validateSurvey() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                if(y[i].name=="question_1") document.getElementById("required_alert_1").style = "display:inline;";
+                if(y[i].name=="question_2") document.getElementById("required_alert_2").style = "display:inline;";
+                if(y[i].name=="question_3") document.getElementById("required_alert_3").style = "display:inline;";
+                if(y[i].name=="question_4") document.getElementById("required_alert_4").style = "display:inline;";
+                if(y[i].name=="question_15_age") document.getElementById("required_alert_15_age").style = "display:inline;";
+                if(y[i].name=="question_15_edu_inputbox") document.getElementById("required_alert_15_edu").style = "display:inline;";
+                if(y[i].name=="question_15_zip") document.getElementById("required_alert_15_zip").style = "display:inline;";
+
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false:
+                valid = false;
+            }
+        }
+        if(currentTab==1){
+            if(getValueByName("question_5")==undefined){
+                valid = false;
+                document.getElementById("required_alert_5").style = "display:inline;";
+            }
+            if(getValueByName("question_6")==undefined){
+                valid = false;
+                document.getElementById("required_alert_6").style = "display:inline;";
+            }
+            if(getValueByName("question_7")==undefined){
+                valid = false;
+                document.getElementById("required_alert_7").style = "display:inline;";
+            }
+        }
+        if(currentTab==2){
+            if(getValueByName("question_8")==undefined){
+                valid = false;
+                document.getElementById("required_alert_8").style = "display:inline;";
+            }
+            if(getValueByName("question_9")==undefined){
+                valid = false;
+                document.getElementById("required_alert_9").style = "display:inline;";
+            }
+            if(getValueByName("question_10")==undefined){
+                valid = false;
+                document.getElementById("required_alert_10").style = "display:inline;";
+            }
+            if(getValueByName("question_11")==undefined){
+                valid = false;
+                document.getElementById("required_alert_11").style = "display:inline;";
+            }
+        }
+        if(currentTab==3){
+            if(getValueByName("question_12_i")==undefined){
+                valid = false;
+                document.getElementById("required_alert_12_i").style = "display:inline;";
+            }
+            if(getValueByName("question_12_ii")==undefined){
+                valid = false;
+                document.getElementById("required_alert_12_ii").style = "display:inline;";
+            }
+        }
+        if(currentTab==4){
+            if(getValueByName("question_13")==undefined){
+                valid = false;
+                document.getElementById("required_alert_13").style = "display:inline;";
+            }
+            if(getValueByName("question_14")==undefined){
+                valid = false;
+                document.getElementById("required_alert_14").style = "display:inline;";
+            }
+        }
+        if(currentTab==5){
+            if(getValueByName("question_15_gender")==undefined){
+                valid = false;
+                document.getElementById("required_alert_15_gender").style = "display:inline;";
+            }
+            if(getValueByName("question_15_annual_income")==undefined){
+                valid = false;
+                document.getElementById("required_alert_15_income").style = "display:inline;";
+            }
+            if(getValueByName("question_15_net_worth")==undefined){
+                valid = false;
+                document.getElementById("required_alert_15_net_worth").style = "display:inline;";
+            }
+            if(getValueByName("question_15_owner")==undefined){
+                valid = false;
+                document.getElementById("required_alert_15_home").style = "display:inline;";
+            }
+        }
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
     }
 
 
@@ -2386,6 +2556,8 @@
     function nextPrev(n) {
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateSurvey()) return false;  
         // Hide the current tab:
         x[currentTab].style.display = "none";
         // Increase or decrease the current tab by 1:
@@ -2402,6 +2574,7 @@
         }
         // Otherwise, display the correct tab:
         showTab(currentTab);
+        topFunction();
     }
 
     // Added by Zirui Wang on 6/29/2020. Refer to w3schools
@@ -2413,6 +2586,13 @@
         }
         //... and adds the "active" class to the current step:
         x[n].className += " active";
+    }
+
+    // Added by Zirui Wang on 7/12/2020. Refer to w3schools
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     }
 
     var ctx = document.getElementById("myChart").getContext('2d');
