@@ -1155,7 +1155,7 @@
         <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
             <div class="col-xs-12" style="height: 35px;">
-                <span id = "note_label" style="font-size: 20px;"><u>Note:</u></span><span id="note"> You are now in an Observation Round.  You may only watch the stock prices.  You may begin trading in Round 3. Click the Next Round button 	to proceed to the next round.</span>
+                <span id = "note_label" style="font-size: 20px;"><u>Note:</u></span><span id="note"> You are now in an Observation Round. You may begin trading in Round 3. Click the Next Round button at the bottom to proceed to the next round.</span>
             </div>
             <!-- <div class="col-xs-4 btns" style="height: 100px;">
                 <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
@@ -1304,11 +1304,11 @@
     var urlg = "https://stock-trading-game.herokuapp.com/";
 
     const PROCEED_KEY = "Proceed";
-    const NEXT_PERIOD_KEY = "Next Period";
+    const NEXT_PERIOD_KEY = "Next Round";
     const NOTE_TRADING_KEY = " You are now in a Trading Round. You may now trade stocks using the buttons below.  " +
-        "Click the Next Round button to proceed to the next round.";
-    const NOTE_OBSERVATION_KEY = "You are now in an Observation Round.  You may only watch the stock prices. " +
-        " You may begin trading in Round 3. Click the Next Round button to proceed to the next round.";
+        "Click the Next Round button at the bottom to proceed to the next round.";
+    const NOTE_OBSERVATION_KEY = "You are now in an Observation Round.  " +
+        " You may begin trading in Round 3. Click the Next Round button at the bottom to proceed to the next round.";
     const ROUND_TRADING = "Trading Round";
     const ROUND_OBSERVATION = "Observation Round";
     const END_EXPERIMENT_KEY = "Start Survey";
@@ -1824,14 +1824,14 @@
         num_game.value = random_var;
         total.value = total_assets[random_var];
 
-        num_game.style.width = ((num_game.value.length + 1) * 8) + 'px';
-        total.style.width = ((total.value.length + 1) * 8) + 'px';
+        num_game.style.width = ((num_game.value.length + 1) * 9) + 'px';
+        total.style.width = ((total.value.length + 1) * 9) + 'px';
 
         var formula = document.getElementById("formula");
         var bonus_number = total_assets[random_var]*0.001;
         bonus = bonus_number.toFixed(2);
-        formula.value = ".1% x $" + total.value + " = $" + bonus;
-        formula.style.width = ((formula.value.length + 1) * 7) + 'px';
+        formula.value = "0.1% x $" + total.value + " = $" + bonus;
+        formula.style.width = ((formula.value.length + 1) * 9) + 'px';
     }
 
     function proceedToThankyou() {
