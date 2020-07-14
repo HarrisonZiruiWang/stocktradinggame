@@ -1154,14 +1154,12 @@
         <div class="text-center top1" style="width:40%;float:right;"><span id="roundtype"></span></div>
         <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
-            <div class="col-xs-8" style="height: 100px;">
-                <H4 id = "note_label"><u>Note</u></H4>
-                <div><span id="note">You are now in an Observation Round.  You may only watch the stock prices.  You may begin trading in Round 3. Click the Next Round button 	to proceed to the next round.</span>
-                </div>
+            <div class="col-xs-12" style="height: 35px;">
+                <span id = "note_label" style="font-size: 20px;"><u>Note:</u></span><span id="note"> You are now in an Observation Round.  You may only watch the stock prices.  You may begin trading in Round 3. Click the Next Round button 	to proceed to the next round.</span>
             </div>
-            <div class="col-xs-4 btns" style="height: 100px;">
+            <!-- <div class="col-xs-4 btns" style="height: 100px;">
                 <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
-            </div>
+            </div> -->
         </div>
         <!-- Edited by Zirui Wang  on 6/13/2020 -->
         <div class="row">
@@ -1180,7 +1178,7 @@
         </div>
         <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
-            <div class="col-xs-8 col-md-offset-2">
+            <div class="col-xs-6 col-md-offset-3">
                 <canvas id="myChart" ></canvas>
             </div>
 
@@ -1193,18 +1191,16 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th width="10%">Stock</th>
-                        <th width="12.5%">Buy</th>
-                        <th width="12.5%">Sell</th>
-                        <th width="12.5%">Current Price</th>
+                        <th width="7%">Stock</th>
+                        <th width="5%">Buy</th>
+                        <th width="5%">Sell</th>
+                        <th width="10%">Current Price</th>
 
-                        <th width="15%">Average Purchase Price</th>
-                        <th width="12.5%">Shares from last round</th>
-                        <th width="12.5%">Shares this round</th>
-                        <th width="12.5%">Change in shares</th>
-
-                        <!--                        <th width="12.5%">Realized Gain / Loss</th>-->
-                        <th width="12.5%">Unrealized Gain / Loss</th>
+                        <th width="16%">Average Purchase Price</th>
+                        <th width="15.5%">Shares from Last Round</th>
+                        <th width="12.5%">Shares this Round</th>
+                        <th width="12.5%">Change in Shares</th>
+                        <th width="17.5%">Unrealized Gain/Loss</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -1290,6 +1286,11 @@
                 </table>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xs-4 btns col-md-offset-8" style="height: 30px;">
+                <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
+            </div>
+        </div>
     </div>
 </div>
 </body>
@@ -1304,7 +1305,7 @@
 
     const PROCEED_KEY = "Proceed";
     const NEXT_PERIOD_KEY = "Next Period";
-    const NOTE_TRADING_KEY = "You are now in a Trading Round. You may now trade stocks using the buttons below.  " +
+    const NOTE_TRADING_KEY = " You are now in a Trading Round. You may now trade stocks using the buttons below.  " +
         "Click the Next Round button to proceed to the next round.";
     const NOTE_OBSERVATION_KEY = "You are now in an Observation Round.  You may only watch the stock prices. " +
         " You may begin trading in Round 3. Click the Next Round button to proceed to the next round.";
