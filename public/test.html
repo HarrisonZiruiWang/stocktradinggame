@@ -1341,6 +1341,7 @@
     //added by Zirui Wang on 6/24/2020
     const urlParams = new URLSearchParams(window.location.search);
     const workerId = urlParams.get('workerId');
+    const assignmentId = urlParams.get('assignmentId');
 
     // Added by Zirui Wang on 6/29/2020
     var currentTab = 0; // Current tab is set to be the first tab (0)
@@ -1903,6 +1904,7 @@
 
         //added by Zirui Wang on 6/24/2020
         let worker_id = workerId;
+        let assignment_id = assignmentId;
 
         let q1 = "";
         let q2 = "";
@@ -1999,7 +2001,8 @@
                 "question_15_education" : q15_education,    // 19
                 "question_15_homeowner" : q15_homeowner,    // 20
                 "question_15_zipcode" : q15_residence,      // 21
-                "bonus" : bonus_payment                     // 22
+                "bonus" : bonus_payment,                     // 22
+                "assignment_id" : assignment_id
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
