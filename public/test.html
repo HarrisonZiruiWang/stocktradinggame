@@ -294,7 +294,7 @@
         buttons at the bottom of your
         screen.
     </p>
-    <p >You will play the 12-round stock trading game a total of <b> 4 times</b>.</p>
+    <p >You will play the 12-round stock trading game a total of <b> 4 times</b>. A timer requires you spend at least ten seconds on each page.</p>
     </div>
     <br>
     <div class = "introTab">
@@ -453,8 +453,8 @@
     <br>
     <div id="introButtons" style="overflow:auto;display: none;">
         <div style="float:right;">
-            <button type="button" id="introPrevBtn" class="btn btn-primary btn-sm" onclick="introNextPrev(-1)">Previous</button>
-            <button type="button" id="introNextBtn" class="btn btn-primary btn-sm" onclick="introNextPrev(1)">Next</button>
+            <button type="button" id="introPrevBtn" class="btn btn-primary btn-sm" onclick="introNextPrev(-1);">Previous</button>
+            <button type="button" id="introNextBtn" class="btn btn-primary btn-sm" onclick="introNextPrev(1); timerCountDown('introNextBtn', 'Next', _introCountDownComplete, currentIntroTab);" disabled>Next</button>
         </div>
     </div>
 
@@ -487,6 +487,7 @@
             }
             document.getElementById("experiment").style.display = "block";
             document.getElementById("intro").style.display = "none";
+            timer('next_period', 'Next Round');
         };
     </script>
 </div>
@@ -1080,7 +1081,7 @@
         <div id="surveyButtons" style="overflow:auto;display: none;">
             <div style="float:right;">
               <button type="button" id="prevBtn" class="btn btn-primary btn-sm" onclick="nextPrev(-1)">Previous</button>
-              <button type="button" id="nextBtn" class="btn btn-primary btn-sm" onclick="nextPrev(1)">Next</button>
+              <button type="button" id="nextBtn" class="btn btn-primary btn-sm" onclick="nextPrev(1); timerCountDown('nextBtn', 'Next', _surveyCountDownComplete, currentTab);">Next</button>
             </div>
         </div>
 
@@ -1155,7 +1156,7 @@
         <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
             <div class="col-xs-12" style="height: 35px;">
-                <span id = "note_label" style="font-size: 20px;"><u>Note:</u></span><span id="note"> You are now in an Observation Round. You may begin trading in Round 3. Click the Next Round button at the bottom to proceed to the next round.</span>
+                <span id = "note_label" style="font-size: 20px;"><u>Note</u>: </span><span id="note">You are now in an Observation Round. You may begin trading in Round 3. After ten seconds, you will be able to click the Next Round button at the bottom to proceed.</span>
             </div>
             <!-- <div class="col-xs-4 btns" style="height: 100px;">
                 <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
@@ -1288,7 +1289,7 @@
         </div>
         <div class="row">
             <div class="col-xs-4 btns col-md-offset-8" style="height: 30px;">
-                <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
+                <button class="btn btn-primary btn-lg blue" onclick="nextPeriod();timer('next_period', 'Next Round');" id="next_period">Next Round</button>
             </div>
         </div>
     </div>
@@ -1309,6 +1310,8 @@
         "Click the Next Round button at the bottom to proceed to the next round.";
     const NOTE_OBSERVATION_KEY = "You are now in an Observation Round.  " +
         " You may begin trading in Round 3. Click the Next Round button at the bottom to proceed to the next round.";
+    const NOTE_OBSERVATION_KEY_FIRST_ROUND = "You are now in an Observation Round.  " +
+        " You may begin trading in Round 3. After ten seconds, you will be able to click the Next Round button at the bottom to proceed.";
     const ROUND_TRADING = "Trading Round";
     const ROUND_OBSERVATION = "Observation Round";
     const END_EXPERIMENT_KEY = "Start Survey";
@@ -1354,9 +1357,16 @@
     var surveyDone = false;
     var bonus = 0;
 
+    // Added by Zirui Wang on 7/21/2020
+    var _introCountDownComplete = [0, 0, 0, 0, 1];
+    var _surveyCountDownComplete = [0, 0, 0, 0, 0, 0];
+
     // Added by Zirui Wang on 7/5/2020
     showIntroTab(currentIntroTab);
     //proceedToSurvey();
+
+    // Added by Zirui Wang on 7/21/2020
+    timerCountDown('introNextBtn', 'Next', _introCountDownComplete, currentIntroTab);
     
     //initialization
     document.getElementById("roundtype").innerHTML = "Observation Round";
@@ -1813,6 +1823,7 @@
         document.getElementById("survey").style.display = "block";
         showTab(currentTab); // Display the current tab
         document.getElementById("experiment").style.display = "none";
+        timerCountDown('nextBtn', 'Next', _surveyCountDownComplete, currentTab);
     }
 
     // Added by Zirui Wang on 7/5/2020
@@ -2159,7 +2170,7 @@
         }
         currentAttempt++;
         document.getElementById("next_period").innerHTML = NEXT_PERIOD_KEY;
-        updateNextPeriodButton(ROUND_OBSERVATION, NOTE_OBSERVATION_KEY);
+        updateNextPeriodButton(ROUND_OBSERVATION, NOTE_OBSERVATION_KEY_FIRST_ROUND);
 
         // the rest of method added by Zirui Wang on 5/9/2020
         // reset text&numbers color at each attempt's beginning
@@ -2391,10 +2402,8 @@
         }
         if (n === (x.length - 1)) {
             document.getElementById("introNextBtn").style.display = "none";
-            //document.getElementById("introPrevBtn").style.display = "none";
         } else {
             document.getElementById("introNextBtn").style.display = "inline";
-            document.getElementById("introNextBtn").innerHTML = "Next";
         }
         // ... and run a function that displays the correct step indicator:
         fixIntroStepIndicator(n)
@@ -2597,6 +2606,56 @@
     function topFunction() {
         document.body.scrollTop = 0; // For Safari
         document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    }
+
+    // Added by Zirui Wang on 7/21/2020. Refer to stackoverflow
+    function timer(buttonName, buttonContent) {
+        if(buttonName=="introNextBtn") {
+            document.getElementById('introPrevBtn').setAttribute('disabled','disabled');
+        }
+        if(buttonName=="nextBtn") {
+            document.getElementById('prevBtn').setAttribute('disabled','disabled');
+        }
+        // Get refreence to span and button
+        var btn = document.getElementById(buttonName);
+        if( _currentPeriodIndex < 13) {
+            btn.setAttribute('disabled','disabled');
+            btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
+            var spn = document.getElementById('tempSpn');
+            var count = 3;     // Set count
+            var timer = null;  // For referencing the timer
+
+            (function countDown(){
+                // Display counter and start counting down
+                spn.innerHTML = count;
+                
+                // Run the function again every second if the count is not zero
+                if(count !== 0){
+                    timer = setTimeout(countDown, 1000);
+                    count--; // decrease the timer
+                } else {
+                    // Enable the button
+                    btn.removeAttribute("disabled");
+                    btn.innerHTML = buttonContent;
+                    
+                    if(buttonName=="introNextBtn") {
+                        document.getElementById('introPrevBtn').removeAttribute("disabled");
+                    }
+                    if(buttonName=="nextBtn") {
+                        document.getElementById('prevBtn').removeAttribute("disabled");
+                        if( currentTab == 5 ) btn.innerHTML = "Submit";
+                    }
+                }
+            }());
+        }
+    }
+
+    // Added by Zirui Wang on 7/21/2020. 
+    function timerCountDown(buttonName, buttonContent, completeArray, arrayIndex) {
+        if (completeArray[arrayIndex] == 0) {
+            timer(buttonName, buttonContent);
+            completeArray[arrayIndex] = 1;
+        }
     }
 
     var ctx = document.getElementById("myChart").getContext('2d');
