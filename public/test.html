@@ -487,7 +487,6 @@
             }
             document.getElementById("experiment").style.display = "block";
             document.getElementById("intro").style.display = "none";
-            timer('next_period', 'Next Round');
         };
     </script>
 </div>
@@ -2618,36 +2617,39 @@
         }
         // Get refreence to span and button
         var btn = document.getElementById(buttonName);
-        if( _currentPeriodIndex < 13) {
-            btn.setAttribute('disabled','disabled');
-            btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
-            var spn = document.getElementById('tempSpn');
-            var count = 3;     // Set count
-            var timer = null;  // For referencing the timer
-
-            (function countDown(){
-                // Display counter and start counting down
-                spn.innerHTML = count;
-                
-                // Run the function again every second if the count is not zero
-                if(count !== 0){
-                    timer = setTimeout(countDown, 1000);
-                    count--; // decrease the timer
-                } else {
-                    // Enable the button
-                    btn.removeAttribute("disabled");
-                    btn.innerHTML = buttonContent;
-                    
-                    if(buttonName=="introNextBtn") {
-                        document.getElementById('introPrevBtn').removeAttribute("disabled");
-                    }
-                    if(buttonName=="nextBtn") {
-                        document.getElementById('prevBtn').removeAttribute("disabled");
-                        if( currentTab == 5 ) btn.innerHTML = "Submit";
-                    }
-                }
-            }());
+        if( _currentPeriodIndex >= 13 && buttonName == "next_period") {
+            return false;
         }
+        
+        btn.setAttribute('disabled','disabled');
+        btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
+        var spn = document.getElementById('tempSpn');
+        var count = 1;     // Set count
+        var timer = null;  // For referencing the timer
+
+        (function countDown(){
+            // Display counter and start counting down
+            spn.innerHTML = count;
+            
+            // Run the function again every second if the count is not zero
+            if(count !== 0){
+                timer = setTimeout(countDown, 1000);
+                count--; // decrease the timer
+            } else {
+                // Enable the button
+                btn.removeAttribute("disabled");
+                btn.innerHTML = buttonContent;
+                
+                if(buttonName=="introNextBtn") {
+                    document.getElementById('introPrevBtn').removeAttribute("disabled");
+                }
+                if(buttonName=="nextBtn") {
+                    document.getElementById('prevBtn').removeAttribute("disabled");
+                    if( currentTab == 5 ) btn.innerHTML = "Submit";
+                }
+            }
+        }());
+        
     }
 
     // Added by Zirui Wang on 7/21/2020. 
