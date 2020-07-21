@@ -2620,11 +2620,11 @@
         if( _currentPeriodIndex >= 13 && buttonName == "next_period") {
             return false;
         }
-        
+
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 1;     // Set count
+        var count = 2;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
