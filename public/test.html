@@ -1360,7 +1360,7 @@
     var bonus = 0;
 
     // Added by Zirui Wang on 7/21/2020
-    var _introCountDownComplete = [0, 0, 0, 0, 1];
+    var _introCountDownComplete = [0, 0, 0, 0, 0];
     var _surveyCountDownComplete = [0, 0, 0, 0, 0, 0];
 
     // Added by Zirui Wang on 7/5/2020
@@ -2623,6 +2623,10 @@
         }
         // Get refreence to span and button
         var btn = document.getElementById(buttonName);
+        if(buttonName=="introNextBtn" && currentIntroTab == 5) {
+            btn = document.getElementById("start");
+            buttonContent = "Start Experiment"
+        }
         if( _currentPeriodIndex >= 13 && buttonName == "next_period") {
             return false;
         }
