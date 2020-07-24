@@ -1145,7 +1145,7 @@
             </div>
             <br>
             <div style="text-align: center">
-                <button class="btn btn-primary btn-lg blue" id="proceed" onclick="timer('proceed','Proceed');">Proceed</button>
+                <button class="btn btn-primary btn-lg blue" id="proceed">Proceed</button>
             </div>
         </div>
     </div>
@@ -2079,6 +2079,8 @@
     function nextPeriod() {
         if (document.getElementById("next_period").innerHTML === PROCEED_KEY) {
             proceedToNextAttempt();
+            // Added by Zirui Wang on 7/23/2020
+            timer('proceed','Proceed');
         }
         if (document.getElementById("next_period").innerHTML === END_EXPERIMENT_KEY) {
             proceedToSurvey();
