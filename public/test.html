@@ -1145,7 +1145,7 @@
             </div>
             <br>
             <div style="text-align: center">
-                <button class="btn btn-primary btn-lg blue" id="proceed">Proceed</button>
+                <button class="btn btn-primary btn-lg blue" id="proceed" onclick="timer('proceed','Proceed');">Proceed</button>
             </div>
         </div>
     </div>
@@ -2628,7 +2628,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 0;     // Set count
+        var count = 1;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
