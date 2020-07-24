@@ -393,8 +393,8 @@
     <div class="introTab">
     <p><H4><u>Compensation</u></H4>
     <p> For this HIT you will be paid $2 plus a bonus. A computer will randomly choose one of your 4 games and the bonus
-        will be equal to 0.1% times your Total Assets in that game. For example, if Game #3 was randomly chosen by the 
-        computer and you finished with $1500 in that game, your bonus compensation would be equal to 0.1% x $1500 = $1.50.
+        will be equal to 0.1% times your <b>combined stock and cash value</b> in that game. For example, if Game #3 was randomly chosen by the 
+        computer and you finished with $1200 in stock and $300 in cash value in that game, your bonus compensation would be equal to 0.1% x $1500 = $1.50.
         So your total compensation for the HIT would be equal to $2 + $1.50 = $3.50. You will be informed about your bonus
         after you complete all 4 games and the questionnaire.</p>
     <br>
@@ -1140,6 +1140,9 @@
             <div class="portfolio" style="text-align: center">
             (cash value $<span id="totalCashNew"></span> + stock value $<span id="totalShareNew"></span>).
             </div>
+            <div class="portfolio" style="text-align: center">
+                If this game was randomly chosen by the computer for your bonus payment, your bonus payment would be based on a total asset value of $<span id="bonusTotalAsset"></span>. 
+            </div>
             <br>
             <div style="text-align: center">
                 <button class="btn btn-primary btn-lg blue" id="proceed">Proceed</button>
@@ -1814,6 +1817,7 @@
         document.getElementById("totalCashNew").innerHTML = _cash;
         document.getElementById("totalShareNew").innerHTML =  _shares;
         document.getElementById("totalAssetNew").innerHTML = total_assets[currentAttempt];
+        document.getElementById("bonusTotalAsset").innerHTML = total_assets[currentAttempt];
         // $("#totalCash").text(_cash);
         // $("#totalShare").text(_shares);
     }
@@ -2624,7 +2628,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 10;     // Set count
+        var count = 0;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
