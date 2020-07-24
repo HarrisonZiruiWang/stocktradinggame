@@ -2623,10 +2623,12 @@
         }
         // Get refreence to span and button
         var btn = document.getElementById(buttonName);
-        if(buttonName=="introNextBtn" && currentIntroTab == 5) {
+
+        if(buttonName=="introNextBtn" && currentIntroTab == 4) {
             btn = document.getElementById("start");
             buttonContent = "Start Experiment"
         }
+
         if( _currentPeriodIndex >= 13 && buttonName == "next_period") {
             return false;
         }
@@ -2634,7 +2636,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 2;     // Set count
+        var count = 1;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
