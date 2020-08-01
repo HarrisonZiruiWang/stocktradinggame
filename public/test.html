@@ -763,7 +763,7 @@
                 <h2>Question 1</h2>
                 <hr>
                 <h4>During each game, you were shown your portfolio unrealized gain/loss.</h4>
-                <img src="survey_total.jpg" alt="location reminder of portfolio unrealized gain/loss" class="center">
+                <img src="survey_total_ver2.jpeg" alt="location reminder of portfolio unrealized gain/loss" class="center">
                 <h4>In the last game, what is the largest portfolio unrealized <b>gain</b> you experienced?<span class="required"> *</span></h4>
                 <span class="required required_alert" id="required_alert_1">This is a required question.</span><br>
                 <br>
@@ -784,7 +784,7 @@
                 <br><h2>Question 2</h2>
                 <hr>
                 <h4>During each game, you were shown your portfolio unrealized gain/loss.</h4>
-                <img src="survey_total.jpg" alt="location reminder of portfolio unrealized gain/loss" class="center">
+                <img src="survey_total_ver2.jpeg" alt="location reminder of portfolio unrealized gain/loss" class="center">
                 <h4>In the last game, what is the largest portfolio unrealized <b>loss</b> you experienced?<span class="required"> *</span></h4>
                 <span class="required required_alert" id="required_alert_2">This is a required question.</span><br>
                 <br>
@@ -803,7 +803,7 @@
                 <br><h2>Question 3</h2>
                 <hr>
                 <h4>During each game, you were also shown individual stocks’ unrealized gains/losses.</h4>
-                <img src="survey_individual.jpg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
+                <img src="survey_individual_ver2.jpeg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
                 <h4>In the last game, what is the largest individual stock’s unrealized <b>gain</b> that you experienced?<span class="required"> *</span></h4>
                 <span class="required required_alert" id="required_alert_3">This is a required question.</span><br>
                 <br>
@@ -822,7 +822,7 @@
                 <br><h2>Question 4</h2>
                 <hr>
                 <h4>During each game, you were also shown individual stocks’ unrealized gains/losses.</h4>
-                <img src="survey_individual.jpg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
+                <img src="survey_individual_ver2.jpeg" alt="location reminder of individual stocks’ unrealized gains/losses" class="center">
                 <h4>In the last game, what is the largest individual stock’s unrealized <b>loss</b> that you experienced?<span class="required"> *</span></h4>
                 <span class="required required_alert" id="required_alert_4">This is a required question.</span><br>
                 <br>
@@ -2709,6 +2709,9 @@
         
         if (currentIntroTab == 4 && n == 1) {
             document.getElementById("introNextBtn").innerHTML = "Start Quiz";
+            if(_introCountDownComplete[currentIntroTab+2]==1) {
+                document.getElementById("introNextBtn").innerHTML = "Continue Quiz";
+            }
         }
         if (currentIntroTab == 5 && n == 1) {
             document.getElementById("introHeader").innerHTML = "Eligibility Quiz";
