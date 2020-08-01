@@ -59,7 +59,8 @@
             margin-top: 30px;
         }
 
-        #thankyou {
+        #thankyou,
+        #thankYouQhenQuizFailed {
             max-width: 600px;
             margin: 0 auto;
             margin-top: 30px;
@@ -79,6 +80,7 @@
             margin: 1em 0;
             padding: 0;
         }
+
 
         #survey {
             max-width: 1000px;
@@ -144,6 +146,12 @@
             justify-content: center;
             align-items: center;
             height: 142px;
+        }
+
+        /* Added by Zirui Wang */
+        .btn:focus {
+            outline: none;
+            box-shadow: none;
         }
 
         table {
@@ -277,7 +285,8 @@
 
 <!-- Modified by Zirui Wang on 7/5/2020 -->
 <div id="intro">
-    <H2> Instructions </H2>
+    <H2 id="introHeader"> Instructions </H2>
+    <hr>
     <div class = "introTab">
     <br>
     <p> This HIT will involve buying and selling fictitious stocks and will take
@@ -358,97 +367,190 @@
 <!--        increasing or decreasing. </p>-->
     
     <div class="introTab">
-    <p> <H4><u>Trading</u></H4>
-    <p>
-        Once you start the experiment you will be shown a screen with information, graphs and a trading interface.
-    <p> At the top of the page, the current round will be displayed along with an indication of whether the round is an
-        Observation Round or a Trading Round. Remember, the first two rounds are Observation Rounds and you cannot trade
-        during these rounds. Rounds 3 – 12 are Trading Rounds.</p>
-    <p> Your total portfolio will be held in cash and stocks. No interest will be paid on the amount you hold in cash.
-        The left graph entitled “Graph of Stock Prices in Each Round” displays the price development of all stocks.
-        Using your mouse cursor, you can investigate each stock’s price in more detail. </p>
-        <br>
-    </div>
-        <!-- The right graph entitled “Your
-        Total Trading Gains/Losses to Date” displays your total portfolio gain or loss. A total portfolio gain means the
-        value of your portfolio is now above the $1,000 you started with. A total portfolio loss means the value of your
-        portfolio is now below the $1,000 you started with. </p> -->
-    
-    <div class="introTab">
-    <p> <H4><u>Buying Shares</u></H4>
-    <p> At the bottom of your screen will see a row for each stock. If you click on the “buy” button, you will receive
-        one
-        share of the respective stock and its current price will be deducted from your cash balance.
-        You cannot buy any shares if you do not have the appropriate cash balance –– i.e., borrowing money is not
-        possible
-        in this experiment.</p>
-    <br>
-    <p> <H4><u>Selling Shares</u></H4>
-    <p> If you click on “sell,” you will sell one share of stock at the current price and the proceedings will be added
-        to your
-        cash balance.You cannot sell shares you do not own — i.e., short-selling is not allowed in this experiment.</p>
+        <p> 
+            <H4><u>Trading</u></H4>
+        <p>
+            Once you start the experiment you will be shown a screen with information, graphs and a trading interface.
+        <p> At the top of the page, the current round will be displayed along with an indication of whether the round is an
+            Observation Round or a Trading Round. Remember, the first two rounds are Observation Rounds and you cannot trade
+            during these rounds. Rounds 3 – 12 are Trading Rounds.
+        </p>
+        <p> Your total portfolio will be held in cash and stocks. No interest will be paid on the amount you hold in cash.
+            The left graph entitled “Graph of Stock Prices in Each Round” displays the price development of all stocks.
+            Using your mouse cursor, you can investigate each stock’s price in more detail.
+        </p>
         <br>
     </div>
     
     <div class="introTab">
-    <p><H4><u>Compensation</u></H4>
-    <p> For this HIT you will be paid $2 plus a bonus. A computer will randomly choose one of your 4 games and the bonus
-        will be equal to 0.1% times your <b>combined stock and cash value</b> in that game. For example, if Game #3 was randomly chosen by the 
-        computer and you finished with $1200 in stock and $300 in cash value in that game, your bonus compensation would be equal to 0.1% x $1500 = $1.50.
-        So your total compensation for the HIT would be equal to $2 + $1.50 = $3.50. You will be informed about your bonus
-        after you complete all 4 games and the questionnaire.</p>
-    <br>
-    <p> When you are content with all your trading decisions for the current round, you can click on the “Next Round”
-        button to
-        receive new prices. In period 12, the button’s label will change to “Continue.” If you click on it you will be
-        redirected to a
-        short questionnaire.</p>
-    <br>
-<!--    <p> <H4><u>Compensation</u></H4>-->
-<!--    <p>The total score you earned in this trading game will count as one of the assignments. You will participate in-->
-<!--        five iterations of these 12 trading rounds, and one of the five iterations will be randomly chosen to determine-->
-<!--        your total score. Your score will depend on the quality of decisions you make during the randomly chosen-->
-<!--        iteration. In each iteration, you will initially be endowed with $1,000. At the end of the experiment,-->
-<!--        your payoff will amount to 6 points plus 0.40% of your total assets in the randomly chosen iteration.-->
-<!--        For example, if the total value of your portfolio at the end of the randomly chosen iteration is $1,100 you-->
-<!--        will receive 6 points plus 4.40 ($1,100 x .40% = 4.40) points.</p>-->
-<!--    <br>-->
-<!--    <p>Hence, your total score for this assignment is 10.4 (out of 10).</p><br>-->
-<!--    <p>Note that the score is not capped. If you do well, you can get a score higher than 10.</p>-->
-<!--    <br>-->
-<!--    <p>-->
-<!--        Please also note that the probabilities for each of the stocks going up/down are randomly changed after each 12-->
-<!--        round iteration. That is, if a certain stock has a 60% probability of going up in one round, it will have that-->
-<!--        same 60% probability for each of the 12 rounds in that iteration. However, in the next iteration, it will be-->
-<!--        just as likely to become the stock that has a 40% likelihood of going up each round as the stock that has a-->
-<!--        45% (55%, 60%) likelihood of going up each round.</p>-->
-    <!--    <p> You will participate in five iterations of these 12 trading rounds, and one of the five iterations will be-->
-    <!--        randomly chosen to determine your compensation. Your compensation will depend on the quality of decisions-->
-    <!--        you make during the randomly chosen iteration. In each iteration, you will initially be endowed with $1,000.-->
-    <!--        At the end of the experiment, your payoff will amount to $3 plus 0.40% of your total assets in the randomly-->
-    <!--        chosen iteration, i.e., if the total value of your portfolio at the end of the randomly chosen iteration is-->
-    <!--        $1,100 you will receive a flat fee of $3 plus $4.40 ($1,100 x .40% = $4.40).  </p>-->
-    <!--    <p> Hence, you would receive $7.40 in total.</p>-->
+        <p> <H4><u>Buying Shares</u></H4>
+        <p> At the bottom of your screen will see a row for each stock. If you click on the “buy” button, you will receive
+            one
+            share of the respective stock and its current price will be deducted from your cash balance.
+            You cannot buy any shares if you do not have the appropriate cash balance –– i.e., borrowing money is not
+            possible
+            in this experiment.</p>
+        <br>
+        <p> <H4><u>Selling Shares</u></H4>
+        <p> If you click on “sell,” you will sell one share of stock at the current price and the proceedings will be added
+            to your
+            cash balance.You cannot sell shares you do not own — i.e., short-selling is not allowed in this experiment.</p>
+            <br>
+    </div>
     
-    <div style="text-align: center">
-        <!-- button was changed to be enabled at the beginning by Zirui Wang on 6/2/2020 -->
-        <button class="btn btn-primary btn-lg blue" id="start">Start Experiment</button>
+    <div class="introTab">
+        <p><H4><u>Compensation</u></H4>
+        <p> For this HIT you will be paid $2 plus a bonus. A computer will randomly choose one of your 4 games and the bonus
+            will be equal to 0.1% times your <b>combined stock and cash value</b> in that game. For example, if Game #3 was randomly chosen by the 
+            computer and you finished with $1200 in stock and $300 in cash value in that game, your bonus compensation would be equal to 0.1% x $1500 = $1.50.
+            So your total compensation for the HIT would be equal to $2 + $1.50 = $3.50. You will be informed about your bonus
+            after you complete all 4 games and the questionnaire.
+        </p>
+        <br>
     </div>
 
-    <br>
-    <p style="font-size:10px"><u>Consent to Participate in Research</u></p>
-    <p style="font-size: 10px">By answering the following questions, you are participating in a study on the cognitive
-        processes of
-        investors. By participating you are confirming that you are over 18 years of age. If you have questions about
-        this research,
-        or if you would like to receive a report of this research when it is completed please contact Joseph Engelberg
-        at
-        jengelberg@ucsd.edu. Your participation in this research is voluntary. You may decline to answer any or all of
-        the
-        following questions. You may decline further participation, at any time, without adverse consequences.
-        Your anonymity is assured; the researchers who have requested your participation will not receive any personal
-        information about you. By continuing, you are confirming that you understand these instructions and conditions
-        of participation.</p>
+    <div class="introTab">
+        <p><H4><u>Realized and Unrealized Gain/Loss Description</u></H4></p>
+        <p>
+            When trading, there is an important distinction between <b>realized</b> and <b>unrealized</b> gains and losses. In
+            general, when traders buy a stock and its value changes, they have an unrealized gain or loss as long as
+            they have not yet sold that stock. Once they sell the stock, they will have a realized gain or loss.
+        </p>
+        <p>
+            For example, if Lisa buys two shares of Stock A for $50 each and Stock A goes up in value to $56, we say
+            Lisa has an <b>unrealized gain</b> of $12 ($6 per share x 2 shares). If Lisa immediately sold her two shares of
+            Stock A for $56 each, she would <b>realize her gain</b> of $12. At that point we would say Lisa has a <b>realized
+            gain</b> of $12.
+        </p>
+        <p>
+            If John bought three shares of Stock B for $80 each and Stock B went down in value to $71, we say John
+            has an <b>unrealized loss</b> of $27 ($9 per share x 3 shares). If John immediately sold two shares of Stock B
+            for $71 each, he would have a <b>realized loss</b> of $18 ($9 per share x 2 shares). He would also have an
+            <b>unrealized loss</b> of $9 because he still has not sold 1 share of Stock B which is at a loss of $9.
+        </p>
+        <br>
+        <p>
+            Click the Start Quiz button to take an eligibility quiz. You must answer all three questions correctly to move on to 
+            the trading game (and be eligible for the bonus).
+        </p>
+    </div>
+
+    <div class="introTab">
+        <span class="required">* Required</span><br><br>
+        <div style="background-color: #f2f2f2;">
+            <br><h3>Question 1</h3>
+            <hr>
+            <p>
+                Frank purchased two shares of Stock C for $40 each and one share of Stock D for $90. Stock C went up
+                in value to $43 and Stock D went down in value to $77. Frank sold his share of Stock D but did not sell
+                any shares of Stock C.
+            </p>
+            <p>
+                Which of the following is correct?<span class="required"> *</span>
+            </p>
+            <span class="required required_alert" id="quiz_required_alert_1">This is a required question.</span>
+            <br>
+            <input type="radio" id="quiz_q1_A" name="quiz_question_1" value="A">
+            <label for="quiz_q1_A"><h5>A. Frank has an unrealized gain of $3 and a realized loss of $13</h5></label>
+            <br>
+            <input type="radio" id="quiz_q1_B" name="quiz_question_1" value="B">
+            <label for="quiz_q1_B"><h5>B. Frank has an unrealized gain of $6 and a realized loss of $13</h5></label>
+            <br>
+            <input type="radio" id="quiz_q1_C" name="quiz_question_1" value="C">
+            <label for="quiz_q1_C"><h5>C. Frank has a realized gain of $3 and an unrealized loss of $13</h5></label>
+            <br>
+            <input type="radio" id="quiz_q1_D" name="quiz_question_1" value="D">
+            <label for="quiz_q1_D"><h5>D. Frank has a realized gain of $6 and an unrealized loss of $13</h5></label>
+            <br><br>
+        </div>
+
+        <div>
+            <br><h3>Question 2</h3>
+            <hr>
+            <p>
+                Amy and Bob are two players of the stock trading game. Amy starts with $1000 cash. She buys 4 shares
+                of stock A for $100 and sells all of the shares at the price $120, creating a realized gain of $80 ($20 per
+                share x 4 shares). At the end of the game, Amy ends up with cash value of $1080 and a stock value of $0.
+            </p>
+            <p>
+                Bob starts with $1000 cash too. He buys 5 shares of stock B at the price of $80 and sells all of the them
+                at the price $60, creating a realized loss of $100 ($20 per share x 5 shares). He also buys 4 shares of
+                stock C at the price of $90 and holds them till the end of the game when the price has increased to $100,
+                creating an unrealized gain of $40 ($10 per share x 4 shares). At the end of the game, Bob ends up with
+                cash value of $540 and stock value of $400.
+            </p>
+            <p>
+                Based on the instructions you read, who will get a higher bonus according to his/her performance?<span class="required"> *</span>
+            </p>
+            <span class="required required_alert" id="quiz_required_alert_2">This is a required question.</span>
+            <br>
+            <input type="radio" id="quiz_q2_A" name="quiz_question_2" value="A">
+            <label for="quiz_q2_A"><h5>A. Amy</h5></label>
+            <br>
+            <input type="radio" id="quiz_q2_B" name="quiz_question_2" value="B">
+            <label for="quiz_q2_B"><h5>B. Bob</h5></label>
+            <br><br>
+        </div>
+
+        <div style="background-color: #f2f2f2;">
+            <br><h3>Question 3</h3>
+            <hr>
+            <p>
+                Joe starts with $1000 cash. In round 1, he purchases 5 shares of stock A for $60. In round 2, the price of
+                stock A increases to $80, and he purchases 5 additional shares for a total of 10 shares of Stock A (now
+                with an average purchase price of $70). In round 3, the price of stock A rises again to $100 per share,
+                and he sells 4 shares.
+            </p>
+            <p>
+                Which of the following is correct at the end of round 3?<span class="required"> *</span>
+            </p>
+            <span class="required required_alert" id="quiz_required_alert_3">This is a required question.</span>
+            <br>
+            <input type="radio" id="quiz_q3_A" name="quiz_question_3" value="A">
+            <label for="quiz_q3_A"><h5>A. Joe has $600 cash (which includes an unrealized gain of $120) <br>and $700 of Stock A (which
+                includes a realized gain of $180)</h5></label>
+            <br>
+            <input type="radio" id="quiz_q3_B" name="quiz_question_3" value="B">
+            <label for="quiz_q3_B"><h5>B. Joe has $700 cash (which includes a realized gain of $180) <br>and $600 of Stock A (which
+                includes an unrealized gain of $120)</h5></label>
+            <br>
+            <input type="radio" id="quiz_q3_C" name="quiz_question_3" value="C">
+            <label for="quiz_q3_C"><h5>C. Joe has $600 cash (which includes a realized gain of $180) <br>and $700 of Stock A (which
+                includes an unrealized gain of $120)</h5></label>
+            <br>
+            <input type="radio" id="quiz_q3_D" name="quiz_question_3" value="D">
+            <label for="quiz_q3_D"><h5>D. Joe has $700 cash (which includes a realized gain of $120) <br>and $600 of Stock A (which
+                includes an unrealized gain of $180)</h5></label>
+            <br><br>
+        </div>
+    </div>
+
+    <div class="introTab">
+        <p> When you are content with all your trading decisions for the current round, you can click on the “Next Round”
+            button to receive new prices. In period 12, the button’s label will change to “Continue.” If you click on it 
+            you will be redirected to a short questionnaire.
+        </p>
+        <br>
+    
+        <div style="text-align: center">
+            <!-- button was changed to be enabled at the beginning by Zirui Wang on 6/2/2020 -->
+            <button class="btn btn-primary btn-lg blue" id="start">Start Experiment</button>
+        </div>
+
+        <br>
+        <p style="font-size:10px"><u>Consent to Participate in Research</u></p>
+        <p style="font-size: 10px">By answering the following questions, you are participating in a study on the cognitive
+            processes of
+            investors. By participating you are confirming that you are over 18 years of age. If you have questions about
+            this research,
+            or if you would like to receive a report of this research when it is completed please contact Joseph Engelberg
+            at
+            jengelberg@ucsd.edu. Your participation in this research is voluntary. You may decline to answer any or all of
+            the
+            following questions. You may decline further participation, at any time, without adverse consequences.
+            Your anonymity is assured; the researchers who have requested your participation will not receive any personal
+            information about you. By continuing, you are confirming that you understand these instructions and conditions
+            of participation.</p>
     </div>
     <br>
     <div id="introButtons" style="overflow:auto;display: none;">
@@ -460,6 +562,9 @@
 
     <!-- Circles which indicates the steps of the form: -->
     <div id="introSteps" style="text-align:center;margin-top:40px;display: none;">
+        <span class="introStep"></span>
+        <span class="introStep"></span>
+        <span class="introStep"></span>
         <span class="introStep"></span>
         <span class="introStep"></span>
         <span class="introStep"></span>
@@ -509,6 +614,25 @@
             class="btn btn-primary btn-sm" role="button">Next</a>
     </div>
 </div>
+
+<!-- Added by Zirui Wang on 8/1/2020 -->
+<div id="thankYouQhenQuizFailed" style="display: none">
+    <!-- Please reload if you wanna play again(but it will no longer affect your score) -->
+    <h3> Thank you for attending the quiz! </h3>
+    <hr>
+    <br>
+    <p>  Unfortunately, you did not answer all three questions correctly and therefore will not be able to access the stock
+        trading game to gain the bonus.
+    </p>
+    
+    <p>  Click Next to receive the completion code you will need to get paid.</p>
+    <br>
+    <div style="float:right;">
+        <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320" 
+            class="btn btn-primary btn-sm" role="button">Next</a>
+    </div>
+</div>
+
 <!-- Commented by Zirui Wang on 6/14/2020 -->
 <!-- <div id="survey" style="display: none">
     <h2>Question 1</h2>
@@ -1194,16 +1318,16 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th width="7%">Stock</th>
-                        <th width="5%">Buy</th>
-                        <th width="5%">Sell</th>
+                        <th width="10%">Stock</th>
+                        <th width="7%">Buy</th>
+                        <th width="7%">Sell</th>
                         <th width="10%">Current Price</th>
-
-                        <th width="16%">Average Purchase Price</th>
-                        <th width="17.5%">Shares from Last Round</th>
-                        <th width="12.5%">Shares this Round</th>
-                        <th width="12.5%">Change in Shares</th>
-                        <th width="17.5%">Unrealized Gain/Loss</th>
+                        <th width="13%">Average Purchase Price</th>
+                        <th width="13%">Shares from Last Round</th>
+                        <th width="10%">Shares this Round</th>
+                        <th width="10%">Change in Shares</th>
+                        <th width="10%">Realized Gain/Loss</th>
+                        <th width="10%">Unrealized Gain/Loss</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -1220,9 +1344,9 @@
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
-
-                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
-                        <td><span class="UnrealizedGL">0</span></td>
+                        <!-- Modified by Zirui Wang on 7/31/2020 -->
+                        <td><span class="dollarSignRGL">$</span><span class="RealizedGL">0</span></td>
+                        <td><span class="dollarSignUGL">$</span><span class="UnrealizedGL">0</span></td>
                     </tr>
                     <tr>
                         <td class="t2">Stock B</td>
@@ -1237,8 +1361,9 @@
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
-                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
-                        <td><span class="UnrealizedGL">0</span></td>
+                        <!-- Modified by Zirui Wang on 7/31/2020 -->
+                        <td><span class="dollarSignRGL">$</span><span class="RealizedGL">0</span></td>
+                        <td><span class="dollarSignUGL">$</span><span class="UnrealizedGL">0</span></td>
                     </tr>
                     <tr>
                         <td class="t3">Stock C</td>
@@ -1253,8 +1378,9 @@
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
-                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
-                        <td><span class="UnrealizedGL">0</span></td>
+                        <!-- Modified by Zirui Wang on 7/31/2020 -->
+                        <td><span class="dollarSignRGL">$</span><span class="RealizedGL">0</span></td>
+                        <td><span class="dollarSignUGL">$</span><span class="UnrealizedGL">0</span></td>
                     </tr>
                     <tr>
                         <td class="t4">Stock D</td>
@@ -1269,8 +1395,9 @@
                         <td><span class="previousShares">0</span></td>
                         <td><span class="currentShares">0</span></td>
                         <td><span class="changeInShares">0</span></td>
-                        <!--                        <td>$<span class="RealizedGL">0</span></td>-->
-                        <td><span class="UnrealizedGL">0</span></td>
+                        <!-- Modified by Zirui Wang on 7/31/2020 -->
+                        <td><span class="dollarSignRGL">$</span><span class="RealizedGL">0</span></td>
+                        <td><span class="dollarSignUGL">$</span><span class="UnrealizedGL">0</span></td>
                     </tr>
                     </tbody>
                     <tfoot>
@@ -1281,9 +1408,10 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td style="font-size: 20px">Total:</td>
-                    <!--                    <td>$<span id="RealizedTotle">0</span></td>-->
-                    <td style="font-size: 20px"><span id="UnrealizedTotle">0</span></td>
+                    <!-- <td>$<span id="RealizedTotle">0</span></td> -->
+                    <td style="font-size: 20px"><span id="dollarSignUT">$</span><span id="UnrealizedTotle">0.00</span></td>
                     </tfoot>
 
                 </table>
@@ -1360,7 +1488,7 @@
     var bonus = 0;
 
     // Added by Zirui Wang on 7/21/2020
-    var _introCountDownComplete = [0, 0, 0, 0, 0];
+    var _introCountDownComplete = [0, 0, 0, 0, 0, 0, 0, 0];
     var _surveyCountDownComplete = [0, 0, 0, 0, 0, 0];
 
     // Added by Zirui Wang on 7/5/2020
@@ -1590,6 +1718,9 @@
         var dollarSignsC = document.getElementsByClassName("dollarSignC");
         var dollarSignsD = document.getElementsByClassName("dollarSignD");
 
+        // Added by Zirui Wang on 7/31/2020
+        var dollarSignUGL = document.getElementsByClassName("dollarSignUGL");
+
         var shares = 0;
         var unrealizedTotal = 0;
         for (var i = 0; i < sharesOwned.length; i++) {
@@ -1597,71 +1728,81 @@
             //When the current average stock price and the number of shares held are not 0, the unrealized gain and loss are recalculated.
             if (averagePrices[i].innerHTML !== "0" && sharesOwned[i].innerHTML !== "0") {
                 var ugl = (Number(sharesOwned[i].innerHTML) * Number(currentPrices[i].innerHTML))
-                    - (Number(sharesOwned[i].innerHTML) * Number(averagePrices[i].innerHTML));
-
+                - (Number(sharesOwned[i].innerHTML) * Number(averagePrices[i].innerHTML));
+            
                 var toWrite1;
+                unrealizedGL[i].innerHTML = ugl.toFixed(2);
 
                 if (ugl.toFixed(2) > 0) {
-                    toWrite1 = "<span style = 'color:#3cba9f'>$" + ugl.toFixed(2) + "</span>";
+                    // toWrite1 = "<span style = 'color:#3cba9f'>$" + ugl.toFixed(2) + "</span>";
+                    unrealizedGL[i].style.color = "#3cba9f";
+                    dollarSignUGL[i].style.color = "#3cba9f";
 
-                    currentPrices[i].style.color = "#3cba9f";
-                    averagePrices[i].style.color = "#3cba9f";
-                    preShare[i].style.color = "#3cba9f";
-                    sharesOwned[i].style.color = "#3cba9f";
-                    changeShare[i].style.color = "#3cba9f";
+                    // Commented by Zirui Wang on 7/31/2020 for the reason of adding realized gain/loss
+                    // currentPrices[i].style.color = "#3cba9f";
+                    // averagePrices[i].style.color = "#3cba9f";
+                    // preShare[i].style.color = "#3cba9f";
+                    // sharesOwned[i].style.color = "#3cba9f";
+                    // changeShare[i].style.color = "#3cba9f";
 
-                    if(i===0) {
-                        for (var j = 0; j < dollarSignsA.length; j++) {
-                            dollarSignsA[j].style.color = "#3cba9f";
-                        }
-                    }
-                    if(i===1) {
-                        for (var j = 0; j < dollarSignsB.length; j++) {
-                            dollarSignsB[j].style.color = "#3cba9f";
-                        }
-                    }
-                    if(i===2) {
-                        for (var j = 0; j < dollarSignsC.length; j++) {
-                            dollarSignsC[j].style.color = "#3cba9f";
-                        }
-                    }
-                    if(i===3) {
-                        for (var j = 0; j < dollarSignsD.length; j++) {
-                            dollarSignsD[j].style.color = "#3cba9f";
-                        }
-                    }
+                    // if(i===0) {
+                    //     for (var j = 0; j < dollarSignsA.length; j++) {
+                    //         dollarSignsA[j].style.color = "#3cba9f";
+                    //     }
+                    // }
+                    // if(i===1) {
+                    //     for (var j = 0; j < dollarSignsB.length; j++) {
+                    //         dollarSignsB[j].style.color = "#3cba9f";
+                    //     }
+                    // }
+                    // if(i===2) {
+                    //     for (var j = 0; j < dollarSignsC.length; j++) {
+                    //         dollarSignsC[j].style.color = "#3cba9f";
+                    //     }
+                    // }
+                    // if(i===3) {
+                    //     for (var j = 0; j < dollarSignsD.length; j++) {
+                    //         dollarSignsD[j].style.color = "#3cba9f";
+                    //     }
+                    // }
                 }
                 else if (ugl.toFixed(2) < 0) {
-                    toWrite1 = "<span style = 'color:#c45850'>$" + ugl.toFixed(2) + "</span>";
-
-                    currentPrices[i].style.color = "#c45850";
-                    averagePrices[i].style.color = "#c45850";
-                    preShare[i].style.color = "#c45850";
-                    sharesOwned[i].style.color = "#c45850";
-                    changeShare[i].style.color = "#c45850";
-                    if(i===0) {
-                        for (var j = 0; j < dollarSignsA.length; j++) {
-                            dollarSignsA[j].style.color = "#c45850";
-                        }
-                    }
-                    if(i===1) {
-                        for (var j = 0; j < dollarSignsB.length; j++) {
-                            dollarSignsB[j].style.color = "#c45850";
-                        }
-                    }
-                    if(i===2) {
-                        for (var j = 0; j < dollarSignsC.length; j++) {
-                            dollarSignsC[j].style.color = "#c45850";
-                        }
-                    }
-                    if(i===3) {
-                        for (var j = 0; j < dollarSignsD.length; j++) {
-                            dollarSignsD[j].style.color = "#c45850";
-                        }
-                    }
+                    //toWrite1 = "<span style = 'color:#c45850'>$" + ugl.toFixed(2) + "</span>";
+                    unrealizedGL[i].style.color = "#c45850";
+                    dollarSignUGL[i].style.color = "#c45850";
+                    
+                    // Commented by Zirui Wang on 7/31/2020 for the reason of adding realized gain/loss
+                    // currentPrices[i].style.color = "#c45850";
+                    // averagePrices[i].style.color = "#c45850";
+                    // preShare[i].style.color = "#c45850";
+                    // sharesOwned[i].style.color = "#c45850";
+                    // changeShare[i].style.color = "#c45850";
+                    // if(i===0) {
+                    //     for (var j = 0; j < dollarSignsA.length; j++) {
+                    //         dollarSignsA[j].style.color = "#c45850";
+                    //     }
+                    // }
+                    // if(i===1) {
+                    //     for (var j = 0; j < dollarSignsB.length; j++) {
+                    //         dollarSignsB[j].style.color = "#c45850";
+                    //     }
+                    // }
+                    // if(i===2) {
+                    //     for (var j = 0; j < dollarSignsC.length; j++) {
+                    //         dollarSignsC[j].style.color = "#c45850";
+                    //     }
+                    // }
+                    // if(i===3) {
+                    //     for (var j = 0; j < dollarSignsD.length; j++) {
+                    //         dollarSignsD[j].style.color = "#c45850";
+                    //     }
+                    // }
                 }
                 else{
-                    toWrite1 = "$" + ugl.toFixed(2);
+                    //toWrite1 = "$" + ugl.toFixed(2);
+                    unrealizedGL[i].style.color = "#000000";
+                    dollarSignUGL[i].style.color = "#000000";
+
                     currentPrices[i].style.color = "#000000";
                     averagePrices[i].style.color = "#000000";
                     preShare[i].style.color = "#000000";
@@ -1690,10 +1831,12 @@
                     }
                 }
 
-                unrealizedGL[i].innerHTML = toWrite1;
+                //unrealizedGL[i].innerHTML = toWrite1;
                 unrealizedTotal += ugl;
             } else {
+                //Modified by Zirui Wang on 7/31/2020
                 unrealizedGL[i].innerHTML = 0;
+                //unrealizedGL[i].innerHTML = "$0";
 
                 currentPrices[i].style.color = "#000000";
                 averagePrices[i].style.color = "#000000";
@@ -1724,7 +1867,6 @@
 
             }
 
-
         }
         _shares = shares;
         //Recalcault total assets for current period
@@ -1732,15 +1874,31 @@
         document.getElementById("Shares").innerHTML = _shares;
         document.getElementById("TotalAssets").innerHTML = _totalAssets[_currentPeriodIndex];
         unrealisedGain[_currentPeriodIndex] = unrealizedTotal.toFixed(2);
-        var toWrite;
-        if (unrealizedTotal.toFixed(2) > 0)
-            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
-        else if (unrealizedTotal.toFixed(2) < 0)
-            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2) + "</span>";
-        else
-            toWrite = "$" + unrealizedTotal.toFixed(2);
+        // var toWrite;
+        // if (unrealizedTotal.toFixed(2) > 0)
+        //     toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
+        // else if (unrealizedTotal.toFixed(2) < 0)
+        //     toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2) + "</span>";
+        // else
+        //     toWrite = "$" + unrealizedTotal.toFixed(2);
 
-        document.getElementById("UnrealizedTotle").innerHTML = toWrite;
+        // document.getElementById("UnrealizedTotle").innerHTML = toWrite;
+
+        // Modified by Zirui Wang on 7/31/2020
+        var total = document.getElementById("UnrealizedTotle");
+        var dollarSignT = document.getElementById("dollarSignUT");
+        total.innerHTML = unrealizedTotal.toFixed(2);
+
+        if (unrealizedTotal.toFixed(2) > 0) {
+            total.style.color = "#3cba9f";
+            dollarSignT.style.color = "#3cba9f";
+        } else if (unrealizedTotal.toFixed(2) < 0) {
+            total.style.color = "#c45850";
+            dollarSignT.style.color = "#c45850";
+        } else {
+            total.style.color = "#34407c";
+            dollarSignT.style.color = "#34407c";
+        }
     }
 
     function shuffle(array) {
@@ -1852,6 +2010,12 @@
     function proceedToThankyou() {
         document.getElementById("thankyou").style.display = "block";
         document.getElementById("survey").style.display = "none";
+    }
+
+    // Added by Zirui Wang on 8/1/2020
+    function proceedToThankyouWhenQuizFailed() {
+        document.getElementById("thankYouQhenQuizFailed").style.display = "block";
+        document.getElementById("intro").style.display = "none";
     }
 
     function saveData() {
@@ -2089,7 +2253,8 @@
         }
         calcAveragePrice();
         updatePreviousShares(_currentPeriodIndex);
-        freshUnrealizedTotle();
+        //freshUnrealizedTotle();
+        //freshRealizedTotle();
         if (_currentPeriodIndex <= 2)
             end();                           //to calculate time_spent during obs round
         if (_currentPeriodIndex < 14)
@@ -2165,13 +2330,20 @@
         var changeInShares = document.getElementsByClassName("changeInShares");
         var currentShares = document.getElementsByClassName("currentShares");
         var UnrealizedGL = document.getElementsByClassName("UnrealizedGL");
-        document.getElementById("UnrealizedTotle").innerHTML = 0;
+        var realizedGL = document.getElementsByClassName("RealizedGL");
+        document.getElementById("UnrealizedTotle").innerHTML = "0.00";
+        document.getElementById("UnrealizedTotle").style.color = "#34407c";
+        document.getElementById("dollarSignUT").style.color = "#34407c";
         for (var i = 0; i < 4; i++) {
             averagePrice[i].innerHTML = 0;
             previousShares[i].innerHTML = 0;
             changeInShares[i].innerHTML = 0;
             currentShares[i].innerHTML = 0;
+            //Modified by Zirui Wang on 7/31/2020
             UnrealizedGL[i].innerHTML = 0;
+            UnrealizedGL[i].style.color = "#000000";
+            realizedGL[i].innerHTML = 0;
+            realizedGL[i].style.color = "#000000";
         }
         currentAttempt++;
         document.getElementById("next_period").innerHTML = NEXT_PERIOD_KEY;
@@ -2215,6 +2387,14 @@
                 }
             }
         }
+        //Added by Zirui Wang on 7/31/2020
+        var dollarSignRGL = document.getElementsByClassName("dollarSignRGL");
+        var dollarSignUGL = document.getElementsByClassName("dollarSignUGL");
+
+        for( var i = 0; i <dollarSignRGL.length; i++) {
+            dollarSignRGL[i].style.color = "#000000";
+            dollarSignUGL[i].style.color = "#000000";
+        }
     }
 
     function updateNextPeriodButton(ROUND_KEY, NOTE_KEY) {
@@ -2234,41 +2414,6 @@
 
     function closeModalBox() {
         modal.style.display = "none";
-    }
-
-    //call this function when click the buy button
-    function buy(index) {
-        if (_currentPeriodIndex < 3) {
-            alert("You can't buy during observation round. Click next round to proceed");
-            return;
-        }
-        if (_currentPeriodIndex > 12) {
-            alert("End of Experiment");
-            return;
-        }
-        var price = _sharePrices[index][_currentPeriodIndex];
-        if (_cash < price) {
-            alert("The balance of account is insufficient.");
-            return;
-        }
-        _sharesOwned[index]++;
-        _cash = _cash - price;
-        _shares = _shares + price;
-        _sharesOwnedRound[index][_currentPeriodIndex] = _sharesOwned[index];
-
-        var averagePrices = document.getElementsByClassName("AveragePrice");
-        // if (averagePrices[index].innerHTML === "0") {
-        //     //averagePrices[index].innerHTML = price.toFixed(2);
-        //     _weightedaverageprice[index] = price.toFixed(2);
-        // } else {
-        //     var ap = Number(averagePrices[index].innerHTML);
-        //     //averagePrices[index].innerHTML = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
-        //     //calcAveragePrice();
-        //     _weightedaverageprice[index] = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
-        //
-        // }
-        //Cash, Shares, Shares Owned, Average Price has been changed.
-        initializationHtml(true);
     }
 
     function calcAveragePrice() {
@@ -2303,6 +2448,84 @@
 
     }
 
+    //Modified by Zirui Wang on 7/30/2020
+    //call this function when click the buy button
+    function buy(index) {
+        if (_currentPeriodIndex < 3) {
+            alert("You can't buy during observation round. Click next round to proceed");
+            return;
+        }
+        if (_currentPeriodIndex > 12) {
+            alert("End of Experiment");
+            return;
+        }
+        var price = _sharePrices[index][_currentPeriodIndex];
+        if (_cash < price) {
+            alert("The balance of account is insufficient.");
+            return;
+        }
+        _sharesOwned[index]++;
+        _cash = _cash - price;
+        _shares = _shares + price;
+        _sharesOwnedRound[index][_currentPeriodIndex] = _sharesOwned[index];
+
+        
+        var changeInShares = document.getElementsByClassName("changeInShares");
+
+        if( Number( changeInShares[index].innerHTML ) < 0) {
+            var averagePrices = document.getElementsByClassName("AveragePrice");
+            var realizedGLs = document.getElementsByClassName("RealizedGL");
+            var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+            var dollarSign = document.getElementsByClassName("dollarSignRGL");
+            var dollarSignUGLs = document.getElementsByClassName("dollarSignUGL");
+
+            var rgl = Number(realizedGLs[index].innerHTML) - (price - Number(averagePrices[index].innerHTML));
+            var updatedUnrealizedGL = Number( unrealizedGLs[index].innerHTML ) + (price - Number(averagePrices[index].innerHTML));
+            
+            realizedGLs[index].innerHTML = rgl.toFixed(2);
+            unrealizedGLs[index].innerHTML = updatedUnrealizedGL.toFixed(2);
+
+            if (updatedUnrealizedGL == 0) {
+                unrealizedGLs[index].style.color = "#000000";
+                dollarSignUGLs[index].style.color = "#000000";
+            } else if ( updatedUnrealizedGL > 0 ) {
+                unrealizedGLs[index].style.color = "#3cba9f";
+                dollarSignUGLs[index].style.color = "#3cba9f";
+            } else if ( updatedUnrealizedGL < 0 ) {
+                unrealizedGLs[index].style.color = "#c45850";
+                dollarSignUGLs[index].style.color = "#c45850";
+            }
+
+            if( rgl.toFixed(2) < 0 ) {
+                realizedGLs[index].style.color = "#c45850";
+                dollarSign[index].style.color = "#c45850";
+
+            } else if ( rgl.toFixed(2) > 0 ) {
+                realizedGLs[index].style.color = "#3cba9f";
+                dollarSign[index].style.color = "#3cba9f";
+
+            } else {
+                realizedGLs[index].style.color = "#000000";
+                dollarSign[index].style.color = "#000000";
+
+            }
+        }
+        // if (averagePrices[index].innerHTML === "0") {
+        //     //averagePrices[index].innerHTML = price.toFixed(2);
+        //     _weightedaverageprice[index] = price.toFixed(2);
+        // } else {
+        //     var ap = Number(averagePrices[index].innerHTML);
+        //     //averagePrices[index].innerHTML = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
+        //     //calcAveragePrice();
+        //     _weightedaverageprice[index] = ((ap * (_sharesOwned[index] - 1) + price) / _sharesOwned[index]).toFixed(2);
+        //
+        // }
+        //Cash, Shares, Shares Owned, Average Price has been changed.
+        initializationHtml(true);
+        refreshUnrealizedGLTotal();
+    }
+
+    //Modified by Zirui Wang on 7/30/2020
     //call this function when click the Sell button
     function sell(index) {
         if (_currentPeriodIndex < 3) {
@@ -2321,17 +2544,72 @@
         _shares = _shares - price;
         _sharesOwned[index]--;
         _sharesOwnedRound[index][_currentPeriodIndex] = _sharesOwned[index];
-        var averagePrices = document.getElementsByClassName("AveragePrice");
-        //var realizedGLs = document.getElementsByClassName("RealizedGL");
-        var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
-        //var rgl = Number(realizedGLs[index].innerHTML) + (price - Number(averagePrices[index].innerHTML));
-        var ugl = (_sharesOwned[index] * price) - (_sharesOwned[index] * Number(averagePrices[index].innerHTML));
-        var modal = document.getElementById("myModal");
-        //realizedGLs[index].innerHTML = rgl.toFixed(2);
-        _unrealisedListGlobal[index] = ugl.toFixed(2);
+
+        if( Number(document.getElementsByClassName("changeInShares")[index].innerHTML) <= 0) {
+            var averagePrices = document.getElementsByClassName("AveragePrice");
+            var realizedGLs = document.getElementsByClassName("RealizedGL");
+            var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+            var dollarSign = document.getElementsByClassName("dollarSignRGL");
+            var dollarSignUGLs = document.getElementsByClassName("dollarSignUGL");
+
+            var rgl = Number(realizedGLs[index].innerHTML) + (price - Number(averagePrices[index].innerHTML));
+            var updateUnrealizedGL = Number(unrealizedGLs[index].innerHTML) - (price - Number(averagePrices[index].innerHTML));
+            //var ugl = (_sharesOwned[index] * price) - (_sharesOwned[index] * Number(averagePrices[index].innerHTML));
+            
+            unrealizedGLs[index].innerHTML = updateUnrealizedGL.toFixed(2);
+            realizedGLs[index].innerHTML = rgl.toFixed(2);
+
+            if( updateUnrealizedGL == 0 ) {
+                unrealizedGLs[index].style.color = "#000000";
+                dollarSignUGLs[index].style.color = "#000000";
+            } else if ( updateUnrealizedGL > 0 ) {
+                unrealizedGLs[index].style.color = "#3cba9f";
+                dollarSignUGLs[index].style.color = "#3cba9f";
+            } else if ( updateUnrealizedGL < 0 ) {
+                unrealizedGLs[index].style.color = "#c45850";
+                dollarSignUGLs[index].style.color = "#c45850";
+            }
+            
+            if(rgl.toFixed(2) > 0) {
+                realizedGLs[index].style.color = "#3cba9f";
+                dollarSign[index].style.color = "#3cba9f";
+            } else if( rgl.toFixed(2) < 0 ) {
+                realizedGLs[index].style.color = "#c45850";
+                dollarSign[index].style.color = "#c45850";
+            } else {
+                realizedGLs[index].style.color = "#000000";
+                dollarSign[index].style.color = "#000000";
+            }
+        }
+        //_unrealisedListGlobal[index] = ugl.toFixed(2);
         //freshRealizedTotle();
         //freshUnrealizedTotle();
         initializationHtml(true);
+        refreshUnrealizedGLTotal();
+    }
+
+    function refreshUnrealizedGLTotal() {
+        var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+        var unrealizedGLTotal = document.getElementById("UnrealizedTotle");
+        var dollarSignUT = document.getElementById("dollarSignUT");
+        var newTotal = 0;
+
+        for( i = 0; i < unrealizedGLs.length; i ++ ) {
+            newTotal += Number(unrealizedGLs[i].innerHTML);
+        }
+
+        unrealizedGLTotal.innerHTML = newTotal.toFixed(2);
+
+        if (newTotal > 0) {
+            unrealizedGLTotal.style.color = "#3cba9f";
+            dollarSignUT.style.color = "#3cba9f";
+        } else if (newTotal < 0) {
+            unrealizedGLTotal.style.color = "#c45850";
+            dollarSignUT.style.color = "#c45850";
+        } else {
+            unrealizedGLTotal.style.color = "#34407c";
+            dollarSignUT.style.color = "#34407c";
+        }
     }
 
     //refresh realized gain and Loss
@@ -2342,33 +2620,36 @@
     //         realizedTotal += Number(realizedGLs[i].innerHTML);
     //     document.getElementById("RealizedTotle").innerHTML = realizedTotal.toFixed(2);
     // }
+
     //refresh unrealized gain and Los
-    function freshUnrealizedTotle() {
+    // function freshUnrealizedTotle() {
+    //     alert(_unrealisedListGlobal[0]);
+    //     var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
 
-        var unrealizedGLs = document.getElementsByClassName("UnrealizedGL");
+    //     for (i = 0; i < _unrealisedListGlobal.length; i++) {
+    //         unrealizedGLs.innerHTML = _unrealisedListGlobal[i];
+    //     }
+    //     alert("test[0]");
 
-        for (i = 0; i < _unrealisedListGlobal.length; i++) {
-            unrealizedGLs.innerHTML = _unrealisedListGlobal[i];
-        }
-        var unrealizedTotal = 0;
-        for (var i = 0; i < unrealizedGLs.length; i++)
-            unrealizedTotal += Number(unrealizedGLs[i].innerHTML);
+    //     var unrealizedTotal = 0;
+    //     for (var i = 0; i < unrealizedGLs.length; i++)
+    //         unrealizedTotal += Number(unrealizedGLs[i].innerHTML);
 
-        unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
-        var toWrite;
+    //     unrealisedGain[_currentPeriodIndex] = unrealizedTotal;
+    //     var toWrite;
 
-        if (unrealizedTotal.toFixed(2) < 0){
-            toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
-        }
-        else if (unrealizedTotal.toFixed(2) > 0) {
-            toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2)+ "</span>";
-        }
-        else {
-            toWrite = "$" + unrealizedTotal.toFixed(2);
-        }
+    //     if (unrealizedTotal.toFixed(2) < 0){
+    //         toWrite = "<span style = 'color:#3cba9f'>$" + unrealizedTotal.toFixed(2) + "</span>";
+    //     }
+    //     else if (unrealizedTotal.toFixed(2) > 0) {
+    //         toWrite = "<span style = 'color:#c45850'>$" + unrealizedTotal.toFixed(2)+ "</span>";
+    //     }
+    //     else {
+    //         toWrite = "$" + unrealizedTotal.toFixed(2);
+    //     }
 
-        document.getElementById("UnrealizedTotle").innerHTML = toWrite;
-    }
+    //     document.getElementById("UnrealizedTotle").innerHTML = toWrite;
+    // }
 
     function freshAveragePrice() {
         var averagePrices = document.getElementsByClassName("AveragePrice");
@@ -2405,17 +2686,61 @@
         } else {
             document.getElementById("introPrevBtn").style.display = "inline";
         }
+
         if (n === (x.length - 1)) {
             document.getElementById("introNextBtn").style.display = "none";
-        } else {
-            document.getElementById("introNextBtn").style.display = "inline";
-        }
+            document.getElementById("introPrevBtn").style.display = "none";
+        } 
         // ... and run a function that displays the correct step indicator:
         fixIntroStepIndicator(n)
     }
-
+    // Added by Zirui Wang on 8/1/2020
+    function adjustButtonContent() {
+        if (currentIntroTab == 5) {
+            document.getElementById("introNextBtn").innerHTML = "Start Quiz";
+        }
+        if (currentIntroTab == 6) {
+            document.getElementById("introNextBtn").innerHTML = "Submit Quiz";
+        }
+    }
     // Added by Zirui Wang on 7/5/2020. Refer to w3schools
+    // Modified by Zirui Wang on 8/1/2020
     function introNextPrev(n) {
+        
+        if (currentIntroTab == 4 && n == 1) {
+            document.getElementById("introNextBtn").innerHTML = "Start Quiz";
+        }
+        if (currentIntroTab == 5 && n == 1) {
+            document.getElementById("introHeader").innerHTML = "Eligibility Quiz";
+            document.getElementById("introNextBtn").innerHTML = "Submit Quiz";
+        }
+        if (currentIntroTab == 5 && n == -1) {
+            document.getElementById("introNextBtn").innerHTML = "Next";
+        }
+        if (currentIntroTab == 6 && n == -1) {
+            document.getElementById("introHeader").innerHTML = "Instructions";
+            document.getElementById("introNextBtn").innerHTML = "Continue Quiz";
+        }
+        if (currentIntroTab == 6 && n == 1) {
+
+            if ( !validateQuiz() ) {
+                return false;
+            }
+
+            var quizAnswer1 = getValueByName('quiz_question_1');
+            var quizAnswer2 = getValueByName('quiz_question_2');
+            var quizAnswer3 = getValueByName('quiz_question_3');
+
+            if (quizAnswer1 == "B" && quizAnswer2 == "A" && quizAnswer3 == "D") {
+                document.getElementById("introHeader").innerHTML = "You answered all questions correctly!";
+            } else {
+                proceedToThankyouWhenQuizFailed();
+            }
+        }
+        if (currentIntroTab == 7 && n == -1) {
+            document.getElementById("introHeader").innerHTML = "Eligibility Quiz";
+        }
+
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("introTab");
         // Hide the current tab:
@@ -2431,6 +2756,25 @@
         // Otherwise, display the correct tab:
         showIntroTab(currentIntroTab);
         topFunction();
+    }
+
+    function validateQuiz() {
+        var valid = true;
+
+        if(getValueByName("quiz_question_1")==undefined){
+            valid = false;
+            document.getElementById("quiz_required_alert_1").style = "display:inline;";
+        }
+        if(getValueByName("quiz_question_2")==undefined){
+            valid = false;
+            document.getElementById("quiz_required_alert_2").style = "display:inline;";
+        }
+        if(getValueByName("quiz_question_3")==undefined){
+            valid = false;
+            document.getElementById("quiz_required_alert_3").style = "display:inline;";
+        }
+
+        return valid;
     }
 
     // Added by Zirui Wang on 7/5/2020. Refer to w3schools
@@ -2624,7 +2968,7 @@
         // Get refreence to span and button
         var btn = document.getElementById(buttonName);
 
-        if(buttonName=="introNextBtn" && currentIntroTab == 4) {
+        if(buttonName=="introNextBtn" && currentIntroTab == 7) {
             btn = document.getElementById("start");
             buttonContent = "Start Experiment"
         }
@@ -2636,7 +2980,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 10;     // Set count
+        var count = 2;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
@@ -2654,6 +2998,8 @@
                 
                 if(buttonName=="introNextBtn") {
                     document.getElementById('introPrevBtn').removeAttribute("disabled");
+                                
+                    adjustButtonContent();
                 }
                 if(buttonName=="nextBtn") {
                     document.getElementById('prevBtn').removeAttribute("disabled");
