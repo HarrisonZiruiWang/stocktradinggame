@@ -378,7 +378,8 @@
     </div>
 
     <div class="introTab">
-        <span class="required">* Required</span><br><br>
+        <span class="required">* Required</span><br>
+        <span class="required">* You may only submit your quiz answers once.  Users who submit quiz answers submitted more than once will not have their HIT approved.</span><br><br>
         <div style="background-color: #f2f2f2;">
             <br><h3>Question 1</h3>
             <hr>
@@ -619,6 +620,7 @@
 <div id="thankyou" style="display: none">
     <!-- Please reload if you wanna play again(but it will no longer affect your score) -->
     <h3> Thank you for completing all 4 games and answering the questionnaire! </h3>
+    <hr>
     <br>
     <!-- Added by Zirui Wang on 07/05/2020 -->
     <p> To compute your bonus payment, Game <input disabled id="numRandomGame" value="#X" type="text"> was 
@@ -3022,7 +3024,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 0;     // Set count
+        var count = 2;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
