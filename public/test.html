@@ -1512,6 +1512,9 @@
     var _introCountDownComplete = [0, 0, 0, 0, 0, 0, 0, 0];
     var _surveyCountDownComplete = [0, 0, 0, 0, 0, 0];
 
+    // Added by Zirui Wang on 8/4/2020
+    var isQuizPassed = "Failed";
+
     // Added by Zirui Wang on 7/5/2020
     showIntroTab(currentIntroTab);
     //proceedToSurvey();
@@ -2155,6 +2158,7 @@
         }
 
         let bonus_payment = bonus;
+        let is_quiz_passed = isQuizPassed;
 
         var json =
             {
@@ -2201,7 +2205,8 @@
                 "question_15_homeowner" : q15_homeowner,    // 20
                 "question_15_zipcode" : q15_residence,      // 21
                 "bonus" : bonus_payment,                     // 22
-                "assignment_id" : assignment_id
+                "assignment_id" : assignment_id,
+                "is_quiz_passed" : is_quiz_passed   
             };
         let xhr = new XMLHttpRequest();
         let url = urlg + "postSavedData";
@@ -2767,7 +2772,10 @@
 
             if (quizAnswer1 == "B" && quizAnswer2 == "B" && quizAnswer3 == "D") {
                 document.getElementById("introHeader").innerHTML = "You answered all questions correctly!";
+                isQuizPassed = "Passed";
+                saveData();
             } else {
+                saveData();
                 proceedToThankyouWhenQuizFailed();
             }
         }
@@ -3014,7 +3022,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 2;     // Set count
+        var count = 0;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
