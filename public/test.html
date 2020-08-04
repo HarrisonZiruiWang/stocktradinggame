@@ -624,7 +624,7 @@
     <br>
     <!-- Added by Zirui Wang on 07/05/2020 -->
     <p> To compute your bonus payment, Game <input disabled id="numRandomGame" value="#X" type="text"> was 
-        chosen and you finished with <input disabled id="totalAssetthisRound" value="#Y" type="text"> in this game, 
+        chosen and you finished with $<input disabled id="totalAssetthisRound" value="#Y" type="text"> in this game, 
         so you will be paid a bonus of <input disabled id="formula" value=".3% x $Y = $Z" type="text">. </p>
     <br>
     <p>If your HIT is approved, your total compensation (including fixed payment and bonus) will be paid within the next <b>3 business days</b>.</p>
@@ -3024,7 +3024,7 @@
         btn.setAttribute('disabled','disabled');
         btn.innerHTML= "Disabled (<span id='tempSpn'></span>)";
         var spn = document.getElementById('tempSpn');
-        var count = 2;     // Set count
+        var count = 0;     // Set count
         var timer = null;  // For referencing the timer
 
         (function countDown(){
