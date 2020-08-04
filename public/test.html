@@ -1513,7 +1513,7 @@
     var _surveyCountDownComplete = [0, 0, 0, 0, 0, 0];
 
     // Added by Zirui Wang on 8/4/2020
-    var isQuizPassed = "Failed";
+    var isQuizPassed = false;
 
     // Added by Zirui Wang on 7/5/2020
     showIntroTab(currentIntroTab);
@@ -2772,7 +2772,7 @@
 
             if (quizAnswer1 == "B" && quizAnswer2 == "B" && quizAnswer3 == "D") {
                 document.getElementById("introHeader").innerHTML = "You answered all questions correctly!";
-                isQuizPassed = "Passed";
+                isQuizPassed = true;
                 saveData();
             } else {
                 saveData();
