@@ -476,7 +476,8 @@
             buttons at the bottom of your
             screen.
         </p>
-        <p >You will play the 12-round stock trading game a total of <b> 4 times</b>. A timer requires you spend at least ten seconds on each page.</p>
+        <p >You will play the 12-round stock trading game a total of <b> 4 times</b>.</p>
+        <!--  A timer requires you spend at least ten seconds on each page. -->
         <br>
     
     </div>
@@ -1305,7 +1306,8 @@
         <!-- Edited by Zirui Wang  on 7/12/2020 -->
         <div class="row">
             <div class="col-xs-12" style="height: 35px;">
-                <span id = "note_label" style="font-size: 20px;"><u>Note</u>: </span><span id="note">You are now in an Observation Round. You may begin trading in Round 3. After ten seconds, you will be able to click the Next Round button at the bottom to proceed.</span>
+                <span id = "note_label" style="font-size: 20px;"><u>Note</u>: </span><span id="note">You are now in an Observation Round. You may begin trading in Round 3. Click the Next Round button at the bottom to proceed to the next round.</span>
+                <!-- After ten seconds, you will be able to click the Next Round button at the bottom to proceed. -->
             </div>
             <!-- <div class="col-xs-4 btns" style="height: 100px;">
                 <button class="btn btn-primary btn-lg blue" onclick="nextPeriod()" id="next_period">Next Round</button>
@@ -2375,7 +2377,7 @@
         }
         currentAttempt++;
         document.getElementById("next_period").innerHTML = NEXT_PERIOD_KEY;
-        updateNextPeriodButton(ROUND_OBSERVATION, NOTE_OBSERVATION_KEY_FIRST_ROUND);
+        updateNextPeriodButton(ROUND_OBSERVATION, NOTE_OBSERVATION_KEY);
 
         // the rest of method added by Zirui Wang on 5/9/2020
         // reset text&numbers color at each attempt's beginning
