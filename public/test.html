@@ -634,8 +634,10 @@
     <br>
     <!-- Added by Zirui Wang on 06/24/2020 -->
     <div style="float:right;">
-        <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320" 
-            class="btn btn-primary btn-sm" role="button">Next</a>
+        <!-- <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320" 
+            class="btn btn-primary btn-sm" role="button">Next</a> -->
+
+        <button id="completeButton1" onclick="redirectCompletionCode();" class="btn btn-primary btn-sm" >Next</button>
     </div>
 </div>
 
@@ -652,8 +654,12 @@
     <p>  Click Next to receive the completion code you will need to get paid.</p>
     <br>
     <div style="float:right;">
-        <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320" 
-            class="btn btn-primary btn-sm" role="button">Next</a>
+        <!-- <a href="https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320"
+            class="btn btn-primary btn-sm" role="button">Next
+        </a> -->
+
+        <button id="completeButton2" onclick="redirectCompletionCode();" class="btn btn-primary btn-sm" >Next</button>
+
     </div>
 </div>
 
@@ -3390,5 +3396,14 @@
 
     // When the user clicks anywhere outside of the modal, close it
 
+</script>
+<!-- Added by Zirui Wang on 8/14/2020 -->
+<script type="text/javascript">
+
+    function redirectCompletionCode() {
+        addr = "https://turkgate.warrington.ufl.edu/codes/generate.php?stamp=10746320&bonus=" + bonus;
+        location.href = addr;
+    }
+    
 </script>
 </html>
