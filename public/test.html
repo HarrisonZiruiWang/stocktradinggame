@@ -1608,20 +1608,21 @@
     //added by Zirui Wang on 5/31/2020
     var gainlossPopRandom = Math.random();
 
-    var treatmentNum = 0;
-    var trtStr = "";
-    if (gainlossPopRandom>=0.67) {
-        treatmentNum = 1;
-        trtStr = "Pop-up window displays in between rounds when there is " + "an unrealized gain.";
-    } else if (gainlossPopRandom>=0.34 && gainlossPopRandom<0.67) {
-        treatmentNum = 2;
-        trtStr = "Pop-up window displays in between rounds when there is " + "an unrealized loss.";
-    } else if (gainlossPopRandom < 0.34){
-        treatmentNum = 3;
-        trtStr = "Pop-up window always displays in between rounds.";
-    }
-    prompt("This pop-up window is for testing only.\nRandom variable = " + gainlossPopRandom + ".\n"
-    + "This is treatment #" + treatmentNum + ": " + trtStr);
+    // For testing only, added by Zirui Wang
+    // var treatmentNum = 0;
+    // var trtStr = "";
+    // if (gainlossPopRandom>=0.67) {
+    //     treatmentNum = 1;
+    //     trtStr = "Pop-up window displays in between rounds when there is " + "an unrealized gain.";
+    // } else if (gainlossPopRandom>=0.34 && gainlossPopRandom<0.67) {
+    //     treatmentNum = 2;
+    //     trtStr = "Pop-up window displays in between rounds when there is " + "an unrealized loss.";
+    // } else if (gainlossPopRandom < 0.34){
+    //     treatmentNum = 3;
+    //     trtStr = "Pop-up window always displays in between rounds.";
+    // }
+    // prompt("This pop-up window is for testing only.\nRandom variable = " + gainlossPopRandom + ".\n"
+    // + "This is treatment #" + treatmentNum + ": " + trtStr);
 
     //added by Zirui Wang on 6/24/2020
     const urlParams = new URLSearchParams(window.location.search);
