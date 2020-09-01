@@ -1369,13 +1369,21 @@
             <div class="portfolio" style="text-align: center;display:none">
                 Your portfolio has <span id="changeType"></span> from the last round.
             </div>
-            <div id="gainlossdiv" class="portfolio" style="text-align: center">
+            <!-- <div id="gainlossdiv" class="portfolio" style="text-align: center">
                 Your stock portfolio has an unrealized <span id="a"></span><span id="gainlossType"></span><span
                     id="gainloss">10000</span>.
             </div>
             <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
                 Your stock portfolio is breaking even.
+            </div> -->
+            <!-- Added by Zirui Wang on 8/31/2020 -->
+            <div id="gainlossdiv2" class="portfolio" style="text-align: center">
+                Your portfolio has a total <span id="gainlossType2"></span><span id="gainloss2">10000</span>.
             </div>
+            <div id="nochangediv2" class="portfolio" style="text-align:center; display:none">
+                Your portfolio is breaking even.
+            </div>
+
             <br>
             <div style="text-align: center">
                 <button class="btn btn-primary btn-lg blue" id="confirm">OK</button>
@@ -1779,40 +1787,67 @@
         //   //  $('#changeType').css('color', '#000000').text("not changed");
         //    // $('#changeAssets').text("");
         // 
-        document.getElementById("gainlossdiv").style.display = "block";
-        document.getElementById("nochangediv").style.display = "none";
+
+        // Temporarily commented by Zirui Wang on 8/31/2020
+        // Three treatements depend on the random variable
+        // document.getElementById("gainlossdiv").style.display = "block";
+        // document.getElementById("nochangediv").style.display = "none";
+
+        // // Modified by Zirui Wang on 6/16/2020
+        // changeInAssests[0] = _cash + _shares - 1000;
+        // // document.getElementById("gainloss").innerHTML = " is $" + Math.abs(changeInAssests[0]);
+        // document.getElementById("gainloss").innerHTML = " of $" +  Math.abs(unrealisedGain[_currentPeriodIndex]);
+
+        
+        // //document.getElementById("a").innerHTML = " a ";
+        // let gainlossType = document.getElementById("gainlossType");
+        // if (gainlossPopRandom>=0.67) {
+        //     if(unrealisedGain[_currentPeriodIndex] > 0) {
+        //         gainlossType.innerHTML = "<span style='color: #3cba9f'>gain</span>";
+        //         openModalBox();
+        //     }
+        // } else if (gainlossPopRandom>=0.34 && gainlossPopRandom<0.67) {
+        //     if(unrealisedGain[_currentPeriodIndex] < 0) {
+        //         gainlossType.innerHTML = "<span style='color: #c45850'>loss</span>";
+        //         openModalBox();
+        //     } 
+        // } else if (gainlossPopRandom < 0.34){
+        //     if(unrealisedGain[_currentPeriodIndex] > 0) {
+        //         gainlossType.innerHTML = "<span style='color: #3cba9f'>gain</span>";
+        //     }
+        //     if(unrealisedGain[_currentPeriodIndex] < 0) {
+        //         gainlossType.innerHTML = "<span style='color: #c45850'>loss</span>";
+        //     } 
+        //     if(unrealisedGain[_currentPeriodIndex] == 0) {
+        //         document.getElementById("gainlossdiv").style.display = "none";
+        //         document.getElementById("nochangediv").style.display = "block";
+        //     } 
+        //     openModalBox();
+        // }
+
+        // Added by Zirui Wang on 8/31/2020
+        // Always pop up to tell the portfolio gain or loss
+        document.getElementById("gainlossdiv2").style.display = "block";
+        document.getElementById("nochangediv2").style.display = "none";
 
         // Modified by Zirui Wang on 6/16/2020
         changeInAssests[0] = _cash + _shares - 1000;
-        // document.getElementById("gainloss").innerHTML = " is $" + Math.abs(changeInAssests[0]);
-        document.getElementById("gainloss").innerHTML = " of $" +  Math.abs(unrealisedGain[_currentPeriodIndex]);
+        document.getElementById("gainloss2").innerHTML = " of $" +  Math.abs(changeInAssests[0]);
 
+        let gainlossType2 = document.getElementById("gainlossType2");
         
-        //document.getElementById("a").innerHTML = " a ";
-        let gainlossType = document.getElementById("gainlossType");
-        if (gainlossPopRandom>=0.67) {
-            if(unrealisedGain[_currentPeriodIndex] > 0) {
-                gainlossType.innerHTML = "<span style='color: #3cba9f'>gain</span>";
-                openModalBox();
-            }
-        } else if (gainlossPopRandom>=0.34 && gainlossPopRandom<0.67) {
-            if(unrealisedGain[_currentPeriodIndex] < 0) {
-                gainlossType.innerHTML = "<span style='color: #c45850'>loss</span>";
-                openModalBox();
-            } 
-        } else if (gainlossPopRandom < 0.34){
-            if(unrealisedGain[_currentPeriodIndex] > 0) {
-                gainlossType.innerHTML = "<span style='color: #3cba9f'>gain</span>";
-            }
-            if(unrealisedGain[_currentPeriodIndex] < 0) {
-                gainlossType.innerHTML = "<span style='color: #c45850'>loss</span>";
-            } 
-            if(unrealisedGain[_currentPeriodIndex] == 0) {
-                document.getElementById("gainlossdiv").style.display = "none";
-                document.getElementById("nochangediv").style.display = "block";
-            } 
-            openModalBox();
+        if(changeInAssests[0] > 0) {
+            gainlossType2.innerHTML = "<span style='color: #3cba9f'>gain</span>";
         }
+        if(changeInAssests[0] < 0) {
+            gainlossType2.innerHTML = "<span style='color: #c45850'>loss</span>";
+        } 
+        if(changeInAssests[0] == 0) {
+            document.getElementById("gainlossdiv2").style.display = "none";
+            document.getElementById("nochangediv2").style.display = "block";
+        } 
+        openModalBox();
+
         // var chartData = myChart2.data.datasets[0];
         // if (changeInAssests[0] < 0) {
         //     backgroundColors[0] = "#3cba9f";
