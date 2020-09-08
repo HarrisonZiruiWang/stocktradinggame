@@ -24,7 +24,7 @@
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
+            /* overflow: auto; Enable scroll if needed */
             background-color: rgb(0, 0, 0); /* Fallback color */
             background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
         }
@@ -32,7 +32,7 @@
         /* Modal Content/Box */
         .modal-content {
             background-color: #fefefe;
-            margin: 15% auto; /* 15% from the top and centered */
+            margin: 10% auto; /* 15% from the top and centered */
             padding: 20px;
             border: 1px solid #888;
             width: 80%; /* Could be more or less, depending on screen size */
@@ -1377,12 +1377,22 @@
                 Your stock portfolio is breaking even.
             </div> -->
             <!-- Added by Zirui Wang on 8/31/2020 -->
-            <div id="gainlossdiv2" class="portfolio" style="text-align: center">
+            <!-- <div id="gainlossdiv2" class="portfolio" style="text-align: center">
                 Your portfolio has a total <span id="gainlossType2"></span><span id="gainloss2">10000</span>.
             </div>
             <div id="nochangediv2" class="portfolio" style="text-align:center; display:none">
                 Your portfolio is breaking even.
+            </div> -->
+
+            <div id="gainlossdiv3" class="portfolio" style="text-align: center">
+                You have the following unrealized gains/losses in the 4 stocks: <br>
+                <br>
+                Stock A: <span id="gainlossType3_1"></span><span id="gainloss3_1">10000</span><br>
+                Stock B: <span id="gainlossType3_2"></span><span id="gainloss3_2">10000</span><br>
+                Stock C: <span id="gainlossType3_3"></span><span id="gainloss3_3">10000</span><br>
+                Stock D: <span id="gainlossType3_4"></span><span id="gainloss3_4">10000</span><br>
             </div>
+            
 
             <br>
             <div style="text-align: center">
@@ -1772,6 +1782,9 @@
         //     printIndex = _currentPeriodIndex - 1;
         document.getElementById("round").innerHTML = printIndex;
 
+        changeInAssests[0] = _cash + _shares - 1000;
+
+
         //commented by Zirui Wang on 5/31/2020
         // let changeType = document.getElementById("changeType");
         // if (change > 0) {
@@ -1827,25 +1840,49 @@
 
         // Added by Zirui Wang on 8/31/2020
         // Always pop up to tell the portfolio gain or loss
-        document.getElementById("gainlossdiv2").style.display = "block";
-        document.getElementById("nochangediv2").style.display = "none";
+        // document.getElementById("gainlossdiv2").style.display = "block";
+        // document.getElementById("nochangediv2").style.display = "none";
 
-        // Modified by Zirui Wang on 6/16/2020
-        changeInAssests[0] = _cash + _shares - 1000;
-        document.getElementById("gainloss2").innerHTML = " of $" +  Math.abs(changeInAssests[0]);
+        // changeInAssests[0] = _cash + _shares - 1000;
+        // document.getElementById("gainloss2").innerHTML = " of $" +  Math.abs(changeInAssests[0]);
 
-        let gainlossType2 = document.getElementById("gainlossType2");
+        // let gainlossType2 = document.getElementById("gainlossType2");
         
-        if(changeInAssests[0] > 0) {
-            gainlossType2.innerHTML = "<span style='color: #3cba9f'>gain</span>";
+        // if(changeInAssests[0] > 0) {
+        //     gainlossType2.innerHTML = "<span style='color: #3cba9f'>gain</span>";
+        // }
+        // if(changeInAssests[0] < 0) {
+        //     gainlossType2.innerHTML = "<span style='color: #c45850'>loss</span>";
+        // } 
+        // if(changeInAssests[0] == 0) {
+        //     document.getElementById("gainlossdiv2").style.display = "none";
+        //     document.getElementById("nochangediv2").style.display = "block";
+        // } 
+        // openModalBox();
+
+
+        // Added by Zirui Wang on 9/7/2020
+        var unrealizedSGL = document.getElementsByClassName("UnrealizedGL");
+
+        for (var i = 0; i < unrealizedSGL.length; i++) {
+            tmpId = "gainloss3_"+ (i+1);
+            document.getElementById(tmpId).style.display = "inline";
+            document.getElementById(tmpId).innerHTML = " of $" +  Math.abs(Number(unrealizedSGL[i].innerHTML));
+
+            let gainlossType3 = document.getElementById("gainlossType3_" + (i+1) );
+
+            if(Number(unrealizedSGL[i].innerHTML) > 0) {
+                gainlossType3.innerHTML = "<span style='color: #3cba9f'>Gain</span>";
+            }
+            if(Number(unrealizedSGL[i].innerHTML) < 0) {
+                gainlossType3.innerHTML = "<span style='color: #c45850'>Loss</span>";
+            } 
+            if(Number(unrealizedSGL[i].innerHTML) == 0) {
+                gainlossType3.innerHTML = "None";
+                document.getElementById(tmpId).style.display = "none";
+            } 
         }
-        if(changeInAssests[0] < 0) {
-            gainlossType2.innerHTML = "<span style='color: #c45850'>loss</span>";
-        } 
-        if(changeInAssests[0] == 0) {
-            document.getElementById("gainlossdiv2").style.display = "none";
-            document.getElementById("nochangediv2").style.display = "block";
-        } 
+        
         openModalBox();
 
         // var chartData = myChart2.data.datasets[0];
