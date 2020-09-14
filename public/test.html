@@ -1899,11 +1899,11 @@
 
         var chartDataLabels = myChart2.data.labels;
         if (changeInAssests[0] < 0) {
-            backgroundColors[0] = "#3cba9f";
+            backgroundColors[0] = "#c45850";
             chartDataLabels[0] = "Total Realized Loss";
 
         } else if (changeInAssests[0] > 0) {
-            backgroundColors[0] = "#c45850";
+            backgroundColors[0] = "#3cba9f";
             chartDataLabels[0] = "Total Realized Gain";
 
         } else if (changeInAssests[0] == 0) {
@@ -1911,11 +1911,11 @@
         }
 
         if (changeInAssests[1] < 0) {
-            backgroundColors[1] = "#3cba9f";
+            backgroundColors[1] = "#c45850";
             chartDataLabels[1] = "Total Unrealized Loss";
 
         } else if (changeInAssests[1] > 0) {
-            backgroundColors[1] = "#c45850";
+            backgroundColors[1] = "#3cba9f";
             chartDataLabels[1] = "Total Unrealized Gain";
 
         } else if (changeInAssests[1] == 0) {
@@ -3457,6 +3457,28 @@
             title: {
                 display: true,
                 text: 'Total Realized and Unrealized Gain/Loss'
+            },
+            animation: {
+                duration: 1,
+                onComplete: function () {
+                    var chartInstance = this.chart;
+                    var ctx = chartInstance.ctx;
+                    ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+
+                    this.data.datasets.forEach(function (dataset, i) {
+                        var meta = chartInstance.controller.getDatasetMeta(i);
+                        meta.data.forEach(function (bar, index) {
+                            var data = dataset.data[index];
+                            if (data < 0) {
+                                ctx.fillText(data, bar._model.x, bar._model.y + 15);
+                            } else {
+                                ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                            }
+                        });
+                    });
+                }
             }
         }
     });
