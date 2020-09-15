@@ -1567,8 +1567,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td style="font-size: 20px; display: none"><span id="dollarSignRT">$</span><span id="RealizedTotal">0.00</span></td>
                     <td style="font-size: 20px">Total:</td>
-                    <td style="font-size: 20px"><span id="dollarSignRT">$</span><span id="RealizedTotal">0.00</span></td>
                     <td style="font-size: 20px"><span id="dollarSignUT">$</span><span id="UnrealizedTotle">0.00</span></td>
                     </tfoot>
 
@@ -1894,33 +1895,49 @@
 
     // Added by Zirui Wang on 9/13/2020 to manage chart2
     function updateChartTwo() {
-        changeInAssests[0] = Number(document.getElementById("RealizedTotal").innerHTML);
-        changeInAssests[1] = Number(document.getElementById("UnrealizedTotle").innerHTML);
+        // changeInAssests[0] = Number(document.getElementById("RealizedTotal").innerHTML);
+        changeInAssests[0] = Number(document.getElementById("UnrealizedTotle").innerHTML);
 
-        var chartDataLabels = myChart2.data.labels;
+        
         if (changeInAssests[0] < 0) {
             backgroundColors[0] = "#c45850";
-            chartDataLabels[0] = "Total Realized Loss";
+            myChart2.options.title.text = "Total Unrealized Loss";
+            myChart2.data.datasets[0].label = "Loss of $" + Math.abs(changeInAssests[0]);
 
         } else if (changeInAssests[0] > 0) {
             backgroundColors[0] = "#3cba9f";
-            chartDataLabels[0] = "Total Realized Gain";
+            myChart2.options.title.text = "Total Unrealized Gain";
+            myChart2.data.datasets[0].label = "Gain of $" + Math.abs(changeInAssests[0]);
 
         } else if (changeInAssests[0] == 0) {
-            chartDataLabels[0] = "Total Realized Gain/Loss";
+            myChart2.options.title.text = "Total Unrealized Gain/Loss";
+            myChart2.data.datasets[0].label = "";
         }
+        
+        // var chartDataLabels = myChart2.data.labels;
+        // if (changeInAssests[0] < 0) {
+        //     backgroundColors[0] = "#c45850";
+        //     chartDataLabels[0] = "Total Realized Loss";
 
-        if (changeInAssests[1] < 0) {
-            backgroundColors[1] = "#c45850";
-            chartDataLabels[1] = "Total Unrealized Loss";
+        // } else if (changeInAssests[0] > 0) {
+        //     backgroundColors[0] = "#3cba9f";
+        //     chartDataLabels[0] = "Total Realized Gain";
 
-        } else if (changeInAssests[1] > 0) {
-            backgroundColors[1] = "#3cba9f";
-            chartDataLabels[1] = "Total Unrealized Gain";
+        // } else if (changeInAssests[0] == 0) {
+        //     chartDataLabels[0] = "Total Realized Gain/Loss";
+        // }
 
-        } else if (changeInAssests[1] == 0) {
-            chartDataLabels[1] = "Total Unrealized Gain/Loss";
-        }
+        // if (changeInAssests[1] < 0) {
+        //     backgroundColors[1] = "#c45850";
+        //     chartDataLabels[1] = "Total Unrealized Loss";
+
+        // } else if (changeInAssests[1] > 0) {
+        //     backgroundColors[1] = "#3cba9f";
+        //     chartDataLabels[1] = "Total Unrealized Gain";
+
+        // } else if (changeInAssests[1] == 0) {
+        //     chartDataLabels[1] = "Total Unrealized Gain/Loss";
+        // }
         myChart2.update();
     }
 
@@ -2601,10 +2618,12 @@
         }
         myChart.update();
         // Added by Zirui Wang on 9/13/2020 to update chart2
+        myChart2.options.title.text = "Total Unrealized Gain/Loss";
+        myChart2.data.datasets[0].label = "";
         changeInAssests[0] = 0;
-        changeInAssests[1] = 0;
-        myChart2.data.labels[0] = "Total Realized Gain/Loss";
-        myChart2.data.labels[1] = "Total Unrealized Gain/Loss";
+        //changeInAssests[1] = 0;
+        // myChart2.data.labels[0] = "Total Realized Gain/Loss";
+        //myChart2.data.labels[1] = "Total Unrealized Gain/Loss";
         myChart2.update();
 
         var averagePrice = document.getElementsByClassName("AveragePrice");
@@ -3428,7 +3447,8 @@
     var myChart2 = new Chart(ctx2, {
         type: 'bar',
         data: {
-            labels: ['Total Realized Gain/Loss','Total Unrealized Gain/Loss'],
+            // labels: ['Total Realized Gain/Loss','Total Unrealized Gain/Loss'],
+            labels: [''],
             datasets: [
                 {
                     barThickness: 'flex',
@@ -3451,12 +3471,12 @@
                     }
                 }],
                 xAxes: [{
-                    barPercentage: 0.3
+                    barPercentage: 0.15
                 }]
             },
             title: {
                 display: true,
-                text: 'Total Realized and Unrealized Gain/Loss'
+                text: 'Total Unrealized Gain/Loss'
             },
             animation: {
                 duration: 1,
