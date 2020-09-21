@@ -6,6 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">-->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <title>Welcome to StockTrading Game</title>
     <style type="text/css">
@@ -1569,8 +1570,8 @@
                     <td></td>
                     <td></td>
                     <td style="font-size: 20px; display: none"><span id="dollarSignRT">$</span><span id="RealizedTotal">0.00</span></td>
-                    <td style="font-size: 20px">Total:</td>
-                    <td style="font-size: 20px"><span id="dollarSignUT">$</span><span id="UnrealizedTotle">0.00</span></td>
+                    <td style="font-size: 20px" id="urt">Total:</td>
+                    <td style="font-size: 20px" id="urtv"><span id="dollarSignUT">$</span><span id="UnrealizedTotle">0.00</span></td>
                     </tfoot>
 
                 </table>
@@ -3529,9 +3530,20 @@
     });
 
     // this line of code added by Zirui Wang on 5/9/2020 to remove chart2
+    // Modified by Zirui Wang on 9/20/2020
     if( gainlossPopRandom < 0.5 || 0.75 <= gainlossPopRandom) {
         document.getElementById("myChart2").style.display = "none";
         document.getElementById("myChart").className += " col-md-offset-6";
+    }
+
+    // Added by Zirui Wang on 9/21/2020
+    if( 0.75 <= gainlossPopRandom && gainlossPopRandom < 1 ) {
+        var total = document.getElementById("urt");
+        var value = document.getElementById("urtv");
+
+        total.style = "box-shadow: 2px 2px gainsboro;border-bottom-left-radius: 25px;border-top-left-radius: 25px;background-color:#fffaf0;font-size:35px";
+        value.style = "box-shadow: 2px 2px gainsboro;border-bottom-right-radius: 25px;border-top-right-radius: 25px;background-color:#fffaf0;font-size:35px";
+
     }
 
     // for(i=0;i<chartData.data.length;i++){
