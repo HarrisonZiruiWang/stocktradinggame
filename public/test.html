@@ -1366,16 +1366,16 @@
             <div class="text-center top"><span id = "roundModalLabel">Round</span> <span id="round">
         </span><span id = "totalModalLabel">of 12</span></div>
             <br>
-            <div class="portfolio" style="text-align: center;display:none">
+            <!-- <div class="portfolio" style="text-align: center;display:none">
                 Your portfolio has <span id="changeType"></span> from the last round.
-            </div>
-            <!-- <div id="gainlossdiv" class="portfolio" style="text-align: center">
+            </div> -->
+            <div id="gainlossdiv" class="portfolio" style="text-align: center">
                 Your stock portfolio has an unrealized <span id="a"></span><span id="gainlossType"></span><span
                     id="gainloss">10000</span>.
             </div>
             <div id="nochangediv" class="portfolio" style="text-align:center; display:none">
                 Your stock portfolio is breaking even.
-            </div> -->
+            </div>
             <!-- Added by Zirui Wang on 8/31/2020 -->
             <!-- <div id="gainlossdiv2" class="portfolio" style="text-align: center">
                 Your portfolio has a total <span id="gainlossType2"></span><span id="gainloss2">10000</span>.
@@ -1384,14 +1384,14 @@
                 Your portfolio is breaking even.
             </div> -->
 
-            <div id="gainlossdiv3" class="portfolio" style="text-align: center">
+            <!-- <div id="gainlossdiv3" class="portfolio" style="text-align: center">
                 You have the following unrealized gains/losses in the 4 stocks: <br>
                 <br>
                 Stock A: <span id="gainlossType3_1"></span><span id="gainloss3_1">10000</span><br>
                 Stock B: <span id="gainlossType3_2"></span><span id="gainloss3_2">10000</span><br>
                 Stock C: <span id="gainlossType3_3"></span><span id="gainloss3_3">10000</span><br>
                 Stock D: <span id="gainlossType3_4"></span><span id="gainloss3_4">10000</span><br>
-            </div>
+            </div> -->
             
 
             <br>
@@ -1633,18 +1633,22 @@
     // For testing only, added by Zirui Wang
     // var treatmentNum = 0;
     // var trtStr = "";
-    // if (gainlossPopRandom>=0.67) {
-    //     treatmentNum = 1;
-    //     trtStr = "Pop-up window displays in between rounds when there is " + "an unrealized gain.";
-    // } else if (gainlossPopRandom>=0.34 && gainlossPopRandom<0.67) {
-    //     treatmentNum = 2;
-    //     trtStr = "Pop-up window displays in between rounds when there is " + "an unrealized loss.";
-    // } else if (gainlossPopRandom < 0.34){
-    //     treatmentNum = 3;
-    //     trtStr = "Pop-up window always displays in between rounds.";
-    // }
-    // prompt("This pop-up window is for testing only.\nRandom variable = " + gainlossPopRandom + ".\n"
-    // + "This is treatment #" + treatmentNum + ": " + trtStr);
+    if (gainlossPopRandom<0.25) {
+        treatmentNum = 1;
+        trtStr = "Never treatment";
+    
+    } else if (gainlossPopRandom>=0.25 && gainlossPopRandom<0.5) {
+        treatmentNum = 2;
+        trtStr = "Always pop-up";
+    } else if (gainlossPopRandom >= 0.5 && gainlossPopRandom<0.75){
+        treatmentNum = 3;
+        trtStr = "bar chart";
+    } else if (gainlossPopRandom >= 0.75 && gainlossPopRandom<1){
+        treatmentNum = 4;
+        trtStr = "Change Font.";
+    }
+    prompt("This pop-up window is for testing only.\nRandom variable = " + gainlossPopRandom + ".\n" 
+        + "This is treatment #" + treatmentNum + ": " + trtStr);
 
     //added by Zirui Wang on 6/24/2020
     const urlParams = new URLSearchParams(window.location.search);
@@ -1866,28 +1870,49 @@
 
 
         // Added by Zirui Wang on 9/7/2020
-        var unrealizedSGL = document.getElementsByClassName("UnrealizedGL");
+        // var unrealizedSGL = document.getElementsByClassName("UnrealizedGL");
 
-        for (var i = 0; i < unrealizedSGL.length; i++) {
-            tmpId = "gainloss3_"+ (i+1);
-            document.getElementById(tmpId).style.display = "inline";
-            document.getElementById(tmpId).innerHTML = " of $" +  Math.abs(Number(unrealizedSGL[i].innerHTML));
+        // for (var i = 0; i < unrealizedSGL.length; i++) {
+        //     tmpId = "gainloss3_"+ (i+1);
+        //     document.getElementById(tmpId).style.display = "inline";
+        //     document.getElementById(tmpId).innerHTML = " of $" +  Math.abs(Number(unrealizedSGL[i].innerHTML));
 
-            let gainlossType3 = document.getElementById("gainlossType3_" + (i+1) );
+        //     let gainlossType3 = document.getElementById("gainlossType3_" + (i+1) );
 
-            if(Number(unrealizedSGL[i].innerHTML) > 0) {
-                gainlossType3.innerHTML = "<span style='color: #3cba9f'>Gain</span>";
-            }
-            if(Number(unrealizedSGL[i].innerHTML) < 0) {
-                gainlossType3.innerHTML = "<span style='color: #c45850'>Loss</span>";
-            } 
-            if(Number(unrealizedSGL[i].innerHTML) == 0) {
-                gainlossType3.innerHTML = "None";
-                document.getElementById(tmpId).style.display = "none";
-            } 
-        }
+        //     if(Number(unrealizedSGL[i].innerHTML) > 0) {
+        //         gainlossType3.innerHTML = "<span style='color: #3cba9f'>Gain</span>";
+        //     }
+        //     if(Number(unrealizedSGL[i].innerHTML) < 0) {
+        //         gainlossType3.innerHTML = "<span style='color: #c45850'>Loss</span>";
+        //     } 
+        //     if(Number(unrealizedSGL[i].innerHTML) == 0) {
+        //         gainlossType3.innerHTML = "None";
+        //         document.getElementById(tmpId).style.display = "none";
+        //     } 
+        // }
         //Removed by Zirui Wang on 9/13/2020 to remove the pop-up window
         //openModalBox();
+
+        document.getElementById("gainlossdiv").style.display = "block";
+        document.getElementById("nochangediv").style.display = "none";
+        document.getElementById("gainloss").innerHTML = " of $" +  Math.abs(unrealisedGain[_currentPeriodIndex]);
+        
+        let gainlossType = document.getElementById("gainlossType");
+        
+        if(unrealisedGain[_currentPeriodIndex] > 0) {
+            gainlossType.innerHTML = "<span style='color: #3cba9f'>gain</span>";
+        }
+        if(unrealisedGain[_currentPeriodIndex] < 0) {
+            gainlossType.innerHTML = "<span style='color: #c45850'>loss</span>";
+        } 
+        if(unrealisedGain[_currentPeriodIndex] == 0) {
+            document.getElementById("gainlossdiv").style.display = "none";
+            document.getElementById("nochangediv").style.display = "block";
+        } 
+        if(0.25<=gainlossPopRandom && gainlossPopRandom<0.5) {
+            openModalBox();
+        }
+    
 
         
         // updateStockPrice();
@@ -3504,7 +3529,10 @@
     });
 
     // this line of code added by Zirui Wang on 5/9/2020 to remove chart2
-    //document.getElementById("myChart2").style.display = "none";
+    if( gainlossPopRandom < 0.5 || 0.75 <= gainlossPopRandom) {
+        document.getElementById("myChart2").style.display = "none";
+        document.getElementById("myChart").className += " col-md-offset-6";
+    }
 
     // for(i=0;i<chartData.data.length;i++){
     //     if(chartData.data[i] >= 0){
