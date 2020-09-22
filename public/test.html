@@ -1634,22 +1634,22 @@
     // For testing only, added by Zirui Wang
     // var treatmentNum = 0;
     // var trtStr = "";
-    if (gainlossPopRandom<0.25) {
-        treatmentNum = 1;
-        trtStr = "Never treatment";
+    // if (gainlossPopRandom<0.25) {
+    //     treatmentNum = 1;
+    //     trtStr = "Never treatment";
     
-    } else if (gainlossPopRandom>=0.25 && gainlossPopRandom<0.5) {
-        treatmentNum = 2;
-        trtStr = "Always pop-up";
-    } else if (gainlossPopRandom >= 0.5 && gainlossPopRandom<0.75){
-        treatmentNum = 3;
-        trtStr = "bar chart";
-    } else if (gainlossPopRandom >= 0.75 && gainlossPopRandom<1){
-        treatmentNum = 4;
-        trtStr = "Change Font.";
-    }
-    prompt("This pop-up window is for testing only.\nRandom variable = " + gainlossPopRandom + ".\n" 
-        + "This is treatment #" + treatmentNum + ": " + trtStr);
+    // } else if (gainlossPopRandom>=0.25 && gainlossPopRandom<0.5) {
+    //     treatmentNum = 2;
+    //     trtStr = "Always pop-up";
+    // } else if (gainlossPopRandom >= 0.5 && gainlossPopRandom<0.75){
+    //     treatmentNum = 3;
+    //     trtStr = "bar chart";
+    // } else if (gainlossPopRandom >= 0.75 && gainlossPopRandom<1){
+    //     treatmentNum = 4;
+    //     trtStr = "Change Font.";
+    // }
+    // prompt("This pop-up window is for testing only.\nRandom variable = " + gainlossPopRandom + ".\n" 
+    //     + "This is treatment #" + treatmentNum + ": " + trtStr);
 
     //added by Zirui Wang on 6/24/2020
     const urlParams = new URLSearchParams(window.location.search);
